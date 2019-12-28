@@ -48,6 +48,7 @@ SRCS_libft = ft_atoi.c \
        ft_lstsize.c \
        ft_lstmap.c \
        get_next_line.c \
+       ft_strdel.C \
 
 FLAGS = -Wall -Wextra -Werror -g3
 

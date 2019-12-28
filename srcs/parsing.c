@@ -15,11 +15,51 @@ int     ft_ifspace(char *line, int *i)
 		(*i)++;
 }
 
+int		ft_bufmap(t_all *all, char *line)
+{
+	int		len;
+	char	*newline;
 
-int     ft_mur(t_all *all, unsigned int *adr, char *line, int *i)
+	if (!(newline = ft_strtrim(line, " ")))
+		return (0);
+	len = ft_strlen(newline);
+	if (all->info.mapleny == 0)
+	{
+		if (!(all->info.bufmap = ft_strdup(newline)))
+			return (0);
+	}
+	else
+	{
+		if (!(all->info.bufmap = ft_strjoin(all->info.bufmap, "\n", 1)))
+			return (0);
+		if (!(all->info.bufmap = ft_strjoin(all->info.bufmap, newline, 1)))
+			return (0);
+	}
+	ft_strdel(&newline);
+	all->info.maplenx[all->info.mapleny] = len;
+	all->info.mapleny += 1;
+	return (1);
+}
+
+int	ft_mlx_get_data_addr(unsigned int **atext, void *img)
+{
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+
+	*atext = (unsigned int *)mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian);
+	free(img);
+
+	return (*atext == 0 ? 0 : 1);
+}
+
+int     ft_mur(t_all *all, unsigned int **atext, char *line, int *i)
 {
 	char	*str;
 	int		j;
+	int		width;
+	int		height;
+	void	*img;
 
 	(*i) += 2;
 	ft_ifspace(line, i);
@@ -33,7 +73,9 @@ int     ft_mur(t_all *all, unsigned int *adr, char *line, int *i)
 	while (line[*i] != ' ' && line[*i] != '\0')
 		str[j++] = line[(*i)++];
 	str[j] = '\0';
-    return(1);
+	img = mlx_xpm_file_to_image(all->mlx.ptr, str, &width, &height);
+	free(line);
+    return(ft_mlx_get_data_addr(atext, img));
 }
 
 int     ft_sol(int *str, char *line)
@@ -78,8 +120,6 @@ int     ft_res(t_all *all, char *line)
     return (1);
 }
 
-int		ft_map(t_all *all, char *line, int i)
-
 int     ft_parsing_line(t_all *all, char *line)
 {
 	int		i;
@@ -101,7 +141,7 @@ int     ft_parsing_line(t_all *all, char *line)
         return (0);
 	else if ((line[i] == 'C' && line[i + 1] == ' ') && !ft_sol(&all->info.c, line))
         return (0);
-	else if ((line[i] == '1' && line[i + 1] == ' ') && !ft_map(all, line, &i))
+	else if ((line[i] == '1' && line[i + 1] == ' ') && !ft_bufmap(all, line))
         return (0);
     return (1);
 }
@@ -113,17 +153,15 @@ int     ft_parsing(int argc, char **argv, t_all *all)
     int         fd;
 
     if (argc == 0 || argc > 3)
-		return (ft_exit(NULL, "Error : argc != 1 || 2"));
+		return (ft_exit(NULL, "Error\nargc != 1 || 2"));
 	if (!(fd = open(argv[1], O_RDONLY)))
-		return (ft_exit(NULL, "Error : fd error"));
-	if (!t_info_init(*all, argc, argv))
-		return (ft_exit(NULL, "Error : argv[2] not valid"));
+		return (ft_exit(NULL, "Error\nfd error"));
 	line = NULL;
 	ret = 1;
-	while ((ret = get_next_line(argv, &line)) == 1)
+	while ((ret = get_next_line(argc, &line)) == 1)
 	{
-		if (!ft_parsing_line(all->info, line))
-			return (ft_exit(all->info, "Error : Parsing error"));
+		if (!ft_parsing_line(all, line))
+			return (ft_exit(all->info.bufmap, "Error\nParsing error"));
 		ft_strdel(&line);
 	}
 	close(fd);
