@@ -13,13 +13,34 @@
 typedef struct	s_mlx
 {
 	void			*ptr;
+    void			*winptr;
+    void			*imgptr;
+    int             bits_per_pixel;
+    int             size_line;
+    int             endian;
+    int             get_data;
 }				t_mlx;
+
+typedef struct		s_cam
+{
+// sur quelle case est la caméra
+    int                 posX;
+    int                 posY;
+// quelle est l'orientation de la caméra
+    int                 oriX;
+    int                 oriY;
+// est ce que la cam est définie
+    int                 isit
+}                   t_cam;
+
+typedef struct	s_depart
+{
+	int             	x;
+	int             	y;
+}				t_depart;
 
 typedef struct		s_algo
 {
-    // sur quelle case est la caméra
-    int                 mapX;
-    int                 mapY;
     // longueur du rayon
     int                 longX;
     int                 longY;
@@ -44,13 +65,13 @@ typedef struct		s_algo
 
 typedef struct		s_info
 {
-    int                 n;
-    int                 s;
-    int                 e;
-    int                 w;
-    int                 i;
-    int                 c;
-    int                 f;
+    unsigned int                 *n;
+    unsigned int                 *s;
+    unsigned int                 *e;
+    unsigned int                 *w;
+    unsigned int                 *i;
+    unsigned int                 c;
+    unsigned int                 f;
     int                 resx;
     int                 resy;
     int                 *maplenx;
@@ -63,6 +84,7 @@ typedef struct		s_all
     t_algo          algo;
     t_info          info;
     t_mlx           mlx;
+    t_cam           cam;
 }                   t_all;
 
 int		main(int argc, char **argv);
@@ -74,9 +96,13 @@ int     ft_res(t_all *all, char *line);
 int     ft_sol(int *str, char *line);
 int     ft_mur(t_all *all, unsigned int **atext, char *line, int *i);
 
+int		verify_map(t_all *all);
+int     ft_checkline(char *line, int j, t_all *all);
+
 int		initmlx(t_all *all);
 void	initall(t_all all);
 void    initallsuite(t_all all);
+void    initcam(t_all all);
 
 int     ft_ifspace(char *line, int *i);
 int     ft_exit(char *s, char *str);

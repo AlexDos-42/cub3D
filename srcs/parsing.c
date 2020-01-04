@@ -30,8 +30,8 @@ int		ft_bufmap(t_all *all, char *line)
 	}
 	else
 	{
-		if (!(all->info.bufmap = ft_strjoin(all->info.bufmap, "\n", 1)))
-			return (0);
+	//	if (!(all->info.bufmap = ft_strjoin(all->info.bufmap, "\n", 1)))
+	//		return (0);
 		if (!(all->info.bufmap = ft_strjoin(all->info.bufmap, newline, 1)))
 			return (0);
 	}
@@ -41,13 +41,9 @@ int		ft_bufmap(t_all *all, char *line)
 	return (1);
 }
 
-int	ft_mlx_get_data_addr(unsigned int **atext, void *img)
+int	ft_mlx_get_data_addr(unsigned int **atext, void *img, t_all *all)
 {
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-
-	*atext = (unsigned int *)mlx_get_data_addr(img, &bits_per_pixel, &size_line, &endian);
+	*atext = (unsigned int *)mlx_get_data_addr(img, &all->mlx.bits_per_pixel, &all->mlx.size_line, &all->mlx.endian);
 	free(img);
 
 	return (*atext == 0 ? 0 : 1);
@@ -75,7 +71,7 @@ int     ft_mur(t_all *all, unsigned int **atext, char *line, int *i)
 	str[j] = '\0';
 	img = mlx_xpm_file_to_image(all->mlx.ptr, str, &width, &height);
 	free(line);
-    return(ft_mlx_get_data_addr(atext, img));
+    return(ft_mlx_get_data_addr(atext, img, all));
 }
 
 int     ft_sol(int *str, char *line)
@@ -165,5 +161,7 @@ int     ft_parsing(int argc, char **argv, t_all *all)
 		ft_strdel(&line);
 	}
 	close(fd);
+	if (!(verify_map(all)))
+		return (ft_exit(NULL, "Error\nmap error"));
 	return (1);
 }
