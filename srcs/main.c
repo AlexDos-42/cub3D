@@ -8,7 +8,7 @@ int		main(int argc, char **argv)
 	if (!(ft_parsing(argc, argv, &all)))
 			return (-1);
 //	if (!(build_map(&all)))
-//		return (ft_exit(NULL, "Error\nMap is not valid\n"));
+//		return (ft_exit(all, "Error\nMap is not valid\n"));
 	if (!(initmlx(&all)))
 		return (-1);
 	return (0);

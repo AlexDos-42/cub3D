@@ -2,8 +2,8 @@
 
 void		posdepart(t_all *all, int x, int y, char dir)
 {
-	all->cam.posX = x + 0.5;
-	all->cam.posY = y + 0.5;
+	all->cam.posX = x;
+	all->cam.posY = y;
 	if (dir == 'E')
 	{
 		all->cam.oriX = 1;
@@ -33,14 +33,17 @@ int     ft_checkline(char *line, int j, t_all *all)
 	int			i;
 	int			k;
 
-	i = 0;
-	while (++i < all->info.maplenx)
+	i = -1;
+	while (all->info.maplenx[++i])
 	{
-		k = i + (j * all->info.maplenx);
+		k = i + (j * all->info.maplenx[i]);
 		if (line[k] == 'N' || line[k] == 'S' || line[k] == 'W' || line[k] == 'E')
-			posdepart(all, i, j, line[k])
+			posdepart(all, i, j, line[k]);
 		else if (line[k] == '2')
-			;//decider quoi faire quand 2
+		{
+			all->info.blocx[l] = i;
+			all->info.blocy[l++] = j;
+		}
 		else if (line[k] != '1' && line[k] != '0')
 			return (0);
 	}
@@ -59,7 +62,5 @@ int		verify_map(t_all *all)
 		if (!(ft_checkline(tmp, j, all)) || all->cam.isit != 1)
 			return (0);
 	}
-	if (!(all->cam.isit != 1))
-		return (0);
 	return (1);
 }

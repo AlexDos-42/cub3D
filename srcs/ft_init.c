@@ -8,8 +8,8 @@ int		initmlx(t_all *all)
 		return (ft_exit(NULL, "Error\nmlx_new_window"));
     if (!(all->mlx.imgptr = mlx_new_image(all->mlx.ptr, all->info.resx, all->info.resy)))
         return (ft_exit(NULL, "Error\nmlx_new_image"));
-    if (!(all->mlx.get_data = (int*)mlx_get_data_addr(all->mlx.imgptr, &all->mlx.bits_per_pixel, all->mlx.size_line, &all->mlx.endian)))
-        return (ft_exit(NULL, "Error\nmlx_get_data_addr"));
+ //  if (!(all->mlx.get_data = (int*)mlx_get_data_addr(all->mlx.imgptr, &all->mlx.bits_per_pixel, all->mlx.size_line, &all->mlx.endian)))
+//        return (ft_exit(NULL, "Error\nmlx_get_data_addr"));
 }
 
 void initcam(t_all all)
@@ -41,6 +41,8 @@ void initallsuite(t_all all)
     algo.hauteurLigne = 0;
     algo.pStart = 0;
     algo.pEnd = 0;
+    all.info.blocx = NULL;
+    all.info.blocx = NULL;
     initcam(all);
 }
 

@@ -30,14 +30,14 @@ typedef struct		s_cam
     int                 oriX;
     int                 oriY;
 // est ce que la cam est définie
-    int                 isit
+    int                 isit;
 }                   t_cam;
 
-typedef struct	s_depart
+typedef struct	s_coor
 {
 	int             	x;
 	int             	y;
-}				t_depart;
+}				t_coor;
 
 typedef struct		s_algo
 {
@@ -77,6 +77,8 @@ typedef struct		s_info
     int                 *maplenx;
     int                 mapleny;
     char                *bufmap;
+    int                 *blocx;
+    int                 *blocy;
 }                   t_info;
 
 typedef struct		s_all
@@ -105,6 +107,6 @@ void    initallsuite(t_all all);
 void    initcam(t_all all);
 
 int     ft_ifspace(char *line, int *i);
-int     ft_exit(char *s, char *str);
+int     ft_exit(t_all *all, char *str);
 
 #endif

@@ -1,10 +1,10 @@
 # include "../include/cub3D.h"
 
-int     ft_exit(char *s, char *str)
+int     ft_exit(t_all *all, char *str)
 {
     ft_printf("%s\n", str);
-    if (s)
-        free(s);
+	if (all->info.bufmap)
+		free(all->info.bufmap);
     return(-1);
 }
 
@@ -149,19 +149,21 @@ int     ft_parsing(int argc, char **argv, t_all *all)
     int         fd;
 
     if (argc == 0 || argc > 3)
-		return (ft_exit(NULL, "Error\nargc != 1 || 2"));
+		return (ft_exit(all, "Error\nargc != 1 || 2"));
 	if (!(fd = open(argv[1], O_RDONLY)))
-		return (ft_exit(NULL, "Error\nfd error"));
+		return (ft_exit(all, "Error\nfd error"));
 	line = NULL;
 	ret = 1;
 	while ((ret = get_next_line(argc, &line)) == 1)
 	{
 		if (!ft_parsing_line(all, line))
-			return (ft_exit(all->info.bufmap, "Error\nParsing error"));
+			return (ft_exit(all, "Error\nParsing error"));
 		ft_strdel(&line);
 	}
 	close(fd);
 	if (!(verify_map(all)))
-		return (ft_exit(NULL, "Error\nmap error"));
+		return (ft_exit(all, "Error\nmap error"));
+	if (!(all->cam.isit != 1))
+		return (ft_exit(all, "Error\nno player on map"));
 	return (1);
 }
