@@ -1,32 +1,47 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: alesanto <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/01/09 17:02:25 by alesanto          #+#    #+#              #
+#    Updated: 2020/01/09 18:09:13 by alesanto         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = cub3D.a
 
-SRC =		main.c \ 
-			parsing.c \
+SRC =		main.c \
+		parsing.c \
+		verifmap.c \
+		ft_init.c 
 
 PATHSRCS = srcs
 
 PATHTMP = tmp
 
-HEADERS	= ./include
+HEADERS = ./include
 
-FLAGS = -Wall -Wextra -Werror
+// FLAGS = -Wall -Wextra -Werror
 
 SRCS = $(addprefix $(PATHSRCS)/,$(SRC))
 OBJS = $(addprefix $(PATHTMP)/,$(SRC:.c=.o))
+LIBS = -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "Compilation de ft_printf..."
-	@(make -C libft/)
-	@(cp libft/libft.a ./$(NAME))
-	@(ar rc $(NAME) $(OBJS))
-	@(ranlib $(NAME))
+	@echo "Compilation..."
+	make -C libft/
+	cp libft/libft.a ./$(NAME)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 	@echo "Compilation terminée"
 
 $(PATHTMP)/%.o: $(PATHSRCS)/%.c
 	@(mkdir -p tmp)
-	@(gcc $(FLAGS) -I $(HEADERS) -o $@ -c $<)
+	@(gcc $(FLAGS) -I $(HEADERS) -o $@ -c $< $(LIBS))
 
 clean:
 	@echo "Clean"

@@ -2,6 +2,7 @@
 # define CUB3D_H
 # include "../libft/libft.h"
 # include "../minilibx_opengl/mlx.h"
+# include "../minilibx_mms/mlx.h"
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -9,6 +10,7 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <mlx.h>
 
 typedef struct	s_mlx
 {
@@ -95,18 +97,19 @@ int     ft_parsing(int argc, char **argv, t_all *all);
 int     ft_parsing_line(t_all *all, char *line);
 int		ft_bufmap(t_all *all, char *line);
 int     ft_res(t_all *all, char *line);
-int     ft_sol(int *str, char *line);
+int     ft_sol(unsigned int *str, char *line);
 int     ft_mur(t_all *all, unsigned int **atext, char *line, int *i);
 
 int		verify_map(t_all *all);
 int     ft_checkline(char *line, int j, t_all *all);
 
 int		initmlx(t_all *all);
-void	initall(t_all all);
-void    initallsuite(t_all all);
-void    initcam(t_all all);
+void	initall(t_all *all);
+void    initallsuite(t_all *all);
+void    initcam(t_all *all);
+void	initinfo(t_all *all);
 
-int     ft_ifspace(char *line, int *i);
+void    ft_ifspace(char *line, int *i);
 int     ft_exit(t_all *all, char *str);
 
 #endif
