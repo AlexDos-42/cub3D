@@ -2,13 +2,13 @@
 
 int     ft_exit(t_all *all, char *str)
 {
-    ft_printf("%s\n", str);
+    printf("%s\n", str);
 	if (all->info.bufmap)
 		free(all->info.bufmap);
     return(-1);
 }
 
-int     ft_ifspace(char *line, int *i)
+void     ft_ifspace(char *line, int *i)
 {
     while ((line[*i] == ' ' || line[*i] == '\t' || line[*i] == '\n')
 	|| (line[*i] == '\r' || line[*i] == '\v' || line[*i] == '\f'))
@@ -53,10 +53,12 @@ int     ft_mur(t_all *all, unsigned int **atext, char *line, int *i)
 {
 	char	*str;
 	int		j;
-	int		width;
-	int		height;
-	void	*img;
+//	int		width;
+//	int		height;
+//	void	*img;
 
+	(void)all;
+	(void)atext; 
 	(*i) += 2;
 	ft_ifspace(line, i);
 	j = *i;
@@ -69,27 +71,28 @@ int     ft_mur(t_all *all, unsigned int **atext, char *line, int *i)
 	while (line[*i] != ' ' && line[*i] != '\0')
 		str[j++] = line[(*i)++];
 	str[j] = '\0';
-	img = mlx_xpm_file_to_image(all->mlx.ptr, str, &width, &height);
+//	img = mlx_xpm_file_to_image(all->mlx.ptr, str, &width, &height);
 	free(line);
-    return(ft_mlx_get_data_addr(atext, img, all));
+//    return(ft_mlx_get_data_addr(atext, img, all));
+	return (1);
 }
 
-int     ft_sol(int *str, char *line)
+int     ft_sol(unsigned int *str, char *line)
 {
     int i;
 
     i = 0;
     ft_ifspace(line, &i);
 	i++;
-	*str = ft_atoi(line) * 256 * 256;
-    while (ft_isdigit)
+	*str = ft_atoi(&line[i]) * 256 * 256;
+    while (ft_isdigit(line[i]))
         i++;
 	i++;
-	*str += ft_atoi(line) * 256;
-    while (ft_isdigit)
+	*str += ft_atoi(&line[i]) * 256;
+    while (ft_isdigit(line[i]))
         i++;
 	i++;
-	*str += ft_atoi(line);
+	*str += ft_atoi(&line[i]);
     if (!*str)
         return (0);
     return(1);
@@ -104,7 +107,7 @@ int     ft_res(t_all *all, char *line)
     ft_ifspace(line, &i);
 	i++;
 	all->info.resx = ft_atoi(&line[i]);
-    while (ft_isdigit)
+    while (ft_isdigit(line[i]))
         i++;
 	all->info.resy = ft_atoi(&line[i]);
 	if (all->info.resx > 2560)

@@ -4,7 +4,7 @@ int		main(int argc, char **argv)
 {
 	t_all	all;
 
-	initall(all);
+	initall(&all);
 	if (!(ft_parsing(argc, argv, &all)))
 			return (-1);
 //	if (!(build_map(&all)))
