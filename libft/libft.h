@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 12:51:23 by alesanto          #+#    #+#             */
-/*   Updated: 2019/11/10 11:15:46 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/10 17:02:34 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,7 @@ void					ft_putchar(char c);
 void					ft_putstr(char const *s);
 int						get_next_line(int fd, char **line);
 void					ft_strdel(char **str);
+char					*ft_suprspace(char *str);
+char	 				*ft_cjoin(char const *s1, char c, int f);
 
 #endif

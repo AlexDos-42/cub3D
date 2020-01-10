@@ -45,6 +45,8 @@ SRCS = ft_atoi.c \
        ft_lstmap.c \
        get_next_line.c \
        ft_strdel.c \
+       ft_suprspace.c \
+       ft_cjoin.c \
 
 FLAGS = -Wall -Wextra -Werror -g3
 

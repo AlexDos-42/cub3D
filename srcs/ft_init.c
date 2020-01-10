@@ -1,16 +1,32 @@
 # include "../include/cub3D.h"
 
-int		initmlx(t_all *all)
+void	initmlx(t_all *all)
 {
 	if (!(all->mlx.ptr = mlx_init()))
-		return (ft_exit(NULL, "Error\nmlx_init"));
+	{
+		printf("Error\nmlx_init");
+		ft_exit(all);
+	}
 	if (!(all->mlx.winptr = mlx_new_window(all->mlx.ptr, all->info.resx, all->info.resy, "cub3D")))
-		return (ft_exit(NULL, "Error\nmlx_new_window"));
+	{
+		printf("Error\nmlx_new_window");
+		ft_exit(all);
+	}
 	if (!(all->mlx.imgptr = mlx_new_image(all->mlx.ptr, all->info.resx, all->info.resy)))
-		return (ft_exit(NULL, "Error\nmlx_new_image"));
+	{
+		printf("Error\nmlx_new_image");
+		ft_exit(all);
+	}
+	mlx_string_put (all->mlx.ptr, all->mlx.winptr, 400, 300, all->info.c, "bonjour");
+//	mlx_put_image_to_window (all->mlx.ptr, all->mlx.win->ptr,  all->mlx.img_ptr, 0, 0);
 	if (!(all->mlx.get_data = (int)mlx_get_data_addr(all->mlx.imgptr, &all->mlx.bits_per_pixel, &all->mlx.size_line, &all->mlx.endian)))
-		return (ft_exit(NULL, "Error\nmlx_get_data_addr"));
-	return (1);
+	{
+		printf("mlx_get_data_addr");
+		ft_exit(all);
+	}
+//	expose_hook(param);
+//  key_hook(keycode, param)
+	mlx_loop(all->mlx.ptr);
 }
 
 void initcam(t_all *all)
@@ -63,6 +79,7 @@ void initinfo(t_all *all)
 	info.bufmap = NULL;
 	info.blocx = NULL;
 	info.blocx = NULL;
+	info.nbbloc = 0;
 	all->info = info;
 }
 void	initall(t_all *all)
