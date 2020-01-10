@@ -22,6 +22,7 @@ int		ft_bufmap(t_all *all, char *line)
 
 	if (!(newline = ft_strtrim(line, " ")))
 		return (0);
+	newline = ft_suprspace(newline);
 	len = ft_strlen(newline);
 	if (all->info.mapleny == 0)
 	{
@@ -36,7 +37,7 @@ int		ft_bufmap(t_all *all, char *line)
 			return (0);
 	}
 	ft_strdel(&newline);
-	all->info.maplenx[all->info.mapleny] = len;
+	all->info.maplenx++;
 	all->info.mapleny += 1;
 	return (1);
 }
@@ -72,7 +73,6 @@ int     ft_mur(t_all *all, unsigned int **atext, char *line, int *i)
 		str[j++] = line[(*i)++];
 	str[j] = '\0';
 //	img = mlx_xpm_file_to_image(all->mlx.ptr, str, &width, &height);
-	free(line);
 //    return(ft_mlx_get_data_addr(atext, img, all));
 	return (1);
 }
@@ -112,9 +112,9 @@ int     ft_res(t_all *all, char *line)
 	all->info.resy = ft_atoi(&line[i]);
 	if (all->info.resx > 2560)
 		all->info.resx = 2560;
-	if (all->info.resy > 1400)
-		all->info.resy = 1400;
-    if (!all->info.resx || all->info.resy)
+	if (all->info.resy > 1440)
+		all->info.resy = 1440;
+    if (!all->info.resx || !all->info.resy)
         return (0);
     return (1);
 }
@@ -123,6 +123,7 @@ int     ft_parsing_line(t_all *all, char *line)
 {
 	int		i;
 
+	i = 0;
 	ft_ifspace(line, &i);
 	if ((line[i] == 'R' && line[i + 1] == ' ') && !ft_res(all, line))
         return (0);
@@ -157,13 +158,14 @@ int     ft_parsing(int argc, char **argv, t_all *all)
 		return (ft_exit(all, "Error\nfd error"));
 	line = NULL;
 	ret = 1;
-	while ((ret = get_next_line(argc, &line)) == 1)
+	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		if (!ft_parsing_line(all, line))
 			return (ft_exit(all, "Error\nParsing error"));
 		ft_strdel(&line);
 	}
 	close(fd);
+	printf("test4\n");
 	if (!(verify_map(all)))
 		return (ft_exit(all, "Error\nmap error"));
 	if (!(all->cam.isit != 1))

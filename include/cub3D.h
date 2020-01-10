@@ -76,7 +76,7 @@ typedef struct		s_info
     unsigned int                 f;
     int                 resx;
     int                 resy;
-    int                 *maplenx;
+    int                 maplenx;
     int                 mapleny;
     char                *bufmap;
     int                 *blocx;

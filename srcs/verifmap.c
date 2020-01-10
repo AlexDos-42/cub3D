@@ -34,9 +34,12 @@ int     ft_checkline(char *line, int j, t_all *all)
 	int			k;
 
 	i = -1;
-	while (all->info.maplenx[++i])
+	while (++i < all->info.maplenx)
 	{
-		k = i + (j * all->info.maplenx[i]);
+		k = i + (j * all->info.maplenx);
+	printf("i %d\nj %d\nk %d\n", i, j,k);
+	printf("line[k]  %c\n", line[k]);
+	printf("line  %s\n", line);
 		if (line[k] == 'N' || line[k] == 'S' || line[k] == 'W' || line[k] == 'E')
 			posdepart(all, i, j, line[k]);
 		else if (line[k] == '2')
@@ -46,8 +49,26 @@ int     ft_checkline(char *line, int j, t_all *all)
 		}
 		else if (line[k] != '1' && line[k] != '0')
 			return (0);
+	printf("testb\n");
 	}
 	return (1);
+}
+
+int ft_suprspace(cha *str)
+{
+	int i;
+	char tmp;
+
+	i = 0;
+	tmp = ft_calloc(1, 1);
+	while (str)
+	{
+		if (str[i] == ' ')
+			i++;
+		tmp[j] = strjoin(tmp, &str[i], 1)
+	}
+	free(str);
+	str = tmp;
 }
 
 int		verify_map(t_all *all)
@@ -55,12 +76,15 @@ int		verify_map(t_all *all)
     int		j;
     char *tmp;
 
-    j = 0;
-    tmp = all->info.bufmap;
+    j = -1;
+	ft_suprspace(all);
+	tmp = all->info.bufmap;
+	ft_suprspace(all);
     while (++j < all->info.mapleny)
 	{
 		if (!(ft_checkline(tmp, j, all)) || all->cam.isit != 1)
 			return (0);
+	printf("test2\n");
 	}
 	return (1);
 }

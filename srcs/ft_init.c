@@ -58,7 +58,7 @@ void initinfo(t_all *all)
 	info.f = 0;
 	info.resy = 0;
 	info.resy = 0;
-	info.maplenx = NULL;
+	info.maplenx = 0;
 	info.mapleny = 0;
 	info.bufmap = NULL;
 	info.blocx = NULL;
