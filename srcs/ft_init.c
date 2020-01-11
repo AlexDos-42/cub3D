@@ -80,6 +80,11 @@ void initinfo(t_all *all)
 	info.blocx = NULL;
 	info.blocx = NULL;
 	info.nbbloc = 0;
+	info.north_texture = NULL;
+	info.south_texture = NULL;
+	info.west_texture = NULL;
+	info.east_texture = NULL;
+	info.sprite_texture = NULL;
 	all->info = info;
 }
 void	initall(t_all *all)
