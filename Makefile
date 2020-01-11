@@ -6,7 +6,7 @@
 #    By: alesanto <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/09 17:02:25 by alesanto          #+#    #+#              #
-#    Updated: 2020/01/10 14:47:44 by alesanto         ###   ########.fr        #
+#    Updated: 2020/01/11 20:12:33 by alesanto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = cub3D
 SRC =		main.c \
 		parsing.c \
 		verifmap.c \
-		ft_init.c 
+		ft_init.c \
+		ft_rendu.c \
 
 PATHSRCS = srcs
 
@@ -31,7 +32,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "Compilation..."
-	@(make -C libft/)
+	@(make re -C libft/)
 	@(gcc $(FLAGS) $(SRCS) $(LIBS))
 	@(echo "Compilation terminée")
 

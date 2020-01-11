@@ -17,21 +17,23 @@ void	initmlx(t_all *all)
 		printf("Error\nmlx_new_image");
 		ft_exit(all);
 	}
-	mlx_string_put (all->mlx.ptr, all->mlx.winptr, 400, 300, all->info.c, "bonjour");
-//	mlx_put_image_to_window (all->mlx.ptr, all->mlx.winptr,  all->mlx.imgptr, 0, 0);
+	ft_reycasting(all);
+//	mlx_pixel_put( all->mlx.ptr, all->mlx.winptr, int x, int y, int color );
+	mlx_string_put(all->mlx.ptr, all->mlx.winptr, 400, 300, all->info.c, "bonjour");
+	//	mlx_put_image_to_window (all->mlx.ptr, all->mlx.winptr,  all->mlx.imgptr, 0, 0);
 	if (!(all->mlx.get_data = (int)mlx_get_data_addr(all->mlx.imgptr, &all->mlx.bits_per_pixel, &all->mlx.size_line, &all->mlx.endian)))
 	{
 		printf("mlx_get_data_addr");
 		ft_exit(all);
 	}
-//	expose_hook(param);
-//  key_hook(keycode, param)
+	//	expose_hook(param);
+	//  key_hook(keycode, param)
 	mlx_loop(all->mlx.ptr);
 }
 
 void	initall(t_all *all)
 {
-	
-	all->info.notext.bpp = 56;
 	ft_memset(all, 0, sizeof(t_all));
+	all->algo.planeX = 0;
+	all->algo.planeY = 1;
 }

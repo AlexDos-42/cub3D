@@ -126,15 +126,15 @@ void     ft_res(t_all *all, char *line)
     while (ft_isdigit(line[i]))
         i++;
 	all->info.resy = ft_atoi(&line[i]);
-	if (all->info.resx > 2560)
-		all->info.resx = 2560;
-	if (all->info.resy > 1440)
-		all->info.resy = 1440;
     if (!all->info.resx || !all->info.resy)
 	{
 	   	printf(ERROR_RES, all->info.resx, all->info.resy);
 		ft_exit(all);
 	}
+	if (all->info.resx > 2560)
+		all->info.resx = 2560;
+	if (all->info.resy > 1440)
+		all->info.resy = 1440;
 }
 
 void     ft_parsing_line(t_all *all, char *line)
