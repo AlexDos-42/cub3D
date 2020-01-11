@@ -64,6 +64,15 @@ typedef struct		s_algo
     int                 pEnd;
 }                   t_algo;
 
+typedef struct	s_texture
+{
+	void		*ptr;
+	int		*data;
+	int		bpp;
+	int		line_size;
+	int		endian;
+}		t_texture;
+
 typedef struct		s_info
 {
     unsigned int                 *n;
@@ -80,9 +89,12 @@ typedef struct		s_info
     char                *bufmap;
     int                 *blocx;
     int                 *blocy;
-	int 				nbbloc;
-	int					colorC;
-	int					colorF;
+	int 		nbbloc;
+	t_texture	notext;
+	t_texture	sotext;
+	t_texture	etext;
+	t_texture	wtext;
+	t_texture	stext;
 }                   t_info;
 
 typedef struct		s_all
