@@ -11,11 +11,23 @@
 # include <mlx.h>
 # include "error.h"
 
+typedef struct	s_coor
+{
+	int             	x;
+	int             	y;
+}				t_coor;
+
+typedef struct	s_dcoor
+{
+	double             	x;
+	double             	y;
+}				t_dcoor;
+
 typedef struct	s_mlx
 {
-	void			*ptr;
-	void			*winptr;
-	void			*imgptr;
+	void		*ptr;
+	void		*winptr;
+	void		*imgptr;
 	int             bits_per_pixel;
 	int             size_line;
 	int             endian;
@@ -25,38 +37,25 @@ typedef struct	s_mlx
 typedef struct		s_cam
 {
 	// sur quelle case est la caméra
-	int                 posX;
-	int                 posY;
+	t_coor                 pos;
 	// quelle case on regarde
-	int                 mapX;
-	int                 mapY;
+	t_coor                 map;
 	// quelle est l'orientation de la caméra
-	int                 oriX;
-	int                 oriY;
+	t_coor                 ori;
 	// direction du rayon
-	double                 rayDirX;
-	double                 rayDirY;
+	t_dcoor                 rayDir;
 	// est ce que la cam est définie
 	int                 isit;
 }                   t_cam;
 
-typedef struct	s_coor
-{
-	int             	x;
-	int             	y;
-}				t_coor;
-
 typedef struct		s_algo
 {
 	// longueur du rayon
-	int                 longX;
-	int                 longY;
+	t_coor              long;
 	// longueur du rayon entre chaque intersection
-	double                 deltaX;
-	double                 deltaY;
+	t_dcoor             delta;
 	// direction du vecteur sur X et Y (+1 ou -1)
-	int                 dirX;
-	int                 dirY;
+	t_coor              dir;
 	//le rayon touche un mur ou pas
 	int                 hit;
 	//quelle orientation à le mur (nord/sud ou est/ouest) dans la map
@@ -66,8 +65,7 @@ typedef struct		s_algo
 	//la hauteur de la ligne à tracer
 	int                 hauteurLigne;
 	// vecteur du plan de projection
-	int					planeX;
-	int					planeY;
+	t_coor			plane;
 	// position de la colonne par rapport au centre de l’écran
 	int					colX;
 	//les pixels max haut et max bas de la colonne à tracer
@@ -76,18 +74,18 @@ typedef struct		s_algo
 	// Calcule la distance corrigée pour la projection
 	double				pDist;
 	//Calcule les pixels max haut et max bas de la colonne à tracer
-	int					drawstart;
-	int					drawend;
+	int		drawstart;
+	int		drawend;
 }                   t_algo;
 
 typedef struct	s_texture
 {
 	void		*ptr;
-	int			*data;
-	int			bpp;
-	int			line_size;
-	int			endian;
-}				t_texture;
+	int		*data;
+	int		bpp;
+	int		line_size;
+	int		endian;
+}		t_texture;
 
 typedef struct		s_info
 {
@@ -98,13 +96,10 @@ typedef struct		s_info
 	unsigned int	*i;
 	unsigned int	c;
 	unsigned int	f;
-	int				resx;
-	int                 resy;
-	int                 maplenx;
-	int                 mapleny;
+	t_coor		res;
+	t_coor          maplen;
 	char                *bufmap;
-	int                 *blocx;
-	int                 *blocy;
+	t_coor               *bloc;
 	int 		nbbloc;
 	t_texture	notext;
 	t_texture	sotext;
