@@ -7,12 +7,12 @@ void	initmlx(t_all *all)
 		printf("Error\nmlx_init");
 		ft_exit(all);
 	}
-	if (!(all->mlx.winptr = mlx_new_window(all->mlx.ptr, all->info.resx, all->info.resy, "cub3D")))
+	if (!(all->mlx.winptr = mlx_new_window(all->mlx.ptr, all->info.res.x, all->info.res.y, "cub3D")))
 	{
 		printf("Error\nmlx_new_window");
 		ft_exit(all);
 	}
-	if (!(all->mlx.imgptr = mlx_new_image(all->mlx.ptr, all->info.resx, all->info.resy)))
+	if (!(all->mlx.imgptr = mlx_new_image(all->mlx.ptr, all->info.res.x, all->info.res.y)))
 	{
 		printf("Error\nmlx_new_image");
 		ft_exit(all);
