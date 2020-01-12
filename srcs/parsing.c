@@ -24,9 +24,9 @@ void	ft_bufmap(t_all *all, char *line)
 			ft_exit(all);
 		}
 	newline = ft_suprspace(newline);
-	if (all->info.mapleny == 0)
+	if (all->info.maplen.y == 0)
 	{
-		all->info.maplenx = ft_strlen(newline);
+		all->info.maplen.x = ft_strlen(newline);
 		if (!(all->info.bufmap = ft_strdup(newline)))
 		{
 			printf(ERROR_MALLOC, "info.bufmap in ft_strdup");
@@ -35,9 +35,9 @@ void	ft_bufmap(t_all *all, char *line)
 	}
 	else
 	{
-		if (all->info.maplenx != ft_strlen(newline))
+		if (all->info.maplen.x != ft_strlen(newline))
 		{
-			printf(ERROR_LENLINE, all->info.maplenx, ++all->info.mapleny,ft_strlen(newline));
+			printf(ERROR_LENLINE, all->info.maplen.x, ++all->info.maplen.y, ft_strlen(newline));
 			ft_exit(all);
 		}
 	//	if (!(all->info.bufmap = ft_strjoin(all->info.bufmap, "\n", 1)))
@@ -49,7 +49,7 @@ void	ft_bufmap(t_all *all, char *line)
 		}
 	}
 	ft_strdel(&newline);
-	all->info.mapleny += 1;
+	all->info.maplen.y += 1;
 }
 
 void	ft_mlx_get_data_addr(unsigned int **atext, void *img, t_all *all)
@@ -122,19 +122,19 @@ void     ft_res(t_all *all, char *line)
     i = 0;
     ft_ifspace(line, &i);
 	i++;
-	all->info.resx = ft_atoi(&line[i]);
+	all->info.res.x = ft_atoi(&line[i]);
     while (ft_isdigit(line[i]))
         i++;
-	all->info.resy = ft_atoi(&line[i]);
-    if (!all->info.resx || !all->info.resy)
+	all->info.res.y = ft_atoi(&line[i]);
+    if (!all->info.res.x || !all->info.res.y)
 	{
-	   	printf(ERROR_RES, all->info.resx, all->info.resy);
+	   	printf(ERROR_RES, all->info.res.x, all->info.res.y);
 		ft_exit(all);
 	}
-	if (all->info.resx > 2560)
-		all->info.resx = 2560;
-	if (all->info.resy > 1440)
-		all->info.resy = 1440;
+	if (all->info.res.x > 2560)
+		all->info.res.x = 2560;
+	if (all->info.res.y > 1440)
+		all->info.res.y = 1440;
 }
 
 void     ft_parsing_line(t_all *all, char *line)

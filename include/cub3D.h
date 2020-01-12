@@ -51,7 +51,7 @@ typedef struct		s_cam
 typedef struct		s_algo
 {
 	// longueur du rayon
-	t_coor              long;
+	t_coor              len;
 	// longueur du rayon entre chaque intersection
 	t_dcoor             delta;
 	// direction du vecteur sur X et Y (+1 ou -1)
@@ -96,16 +96,16 @@ typedef struct		s_info
 	unsigned int	*i;
 	unsigned int	c;
 	unsigned int	f;
-	t_coor		res;
+	t_coor			res;
 	t_coor          maplen;
-	char                *bufmap;
-	t_coor               *bloc;
-	int 		nbbloc;
-	t_texture	notext;
-	t_texture	sotext;
-	t_texture	etext;
-	t_texture	wtext;
-	t_texture	stext;
+	char            *bufmap;
+	t_coor          *bloc;
+	int 			nbbloc;
+	t_texture		notext;
+	t_texture		sotext;
+	t_texture		etext;
+	t_texture		wtext;
+	t_texture		stext;
 }                   t_info;
 
 typedef struct		s_all

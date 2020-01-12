@@ -2,27 +2,27 @@
 
 void		posdepart(t_all *all, int x, int y, char dir)
 {
-	all->cam.posX = x;
-	all->cam.posY = y;
+	all->cam.pos.x = x;
+	all->cam.pos.y = y;
 	if (dir == 'E')
 	{
-		all->cam.oriX = 1;
-		all->cam.oriY = 0;
+		all->cam.ori.x = 1;
+		all->cam.ori.y = 0;
 	}
 	else if (dir == 'S')
 	{
-		all->cam.oriX = 0;
-		all->cam.oriY = 1;
+		all->cam.ori.x = 0;
+		all->cam.ori.y = 1;
 	}
 	else if (dir == 'W')
 	{
-		all->cam.oriX = -1;
-		all->cam.oriY = 0;
+		all->cam.ori.x = -1;
+		all->cam.ori.y = 0;
 	}
 	else
 	{
-		all->cam.oriX = 0;
-		all->cam.oriY = -1;
+		all->cam.ori.x = 0;
+		all->cam.ori.y = -1;
 	}
 	all->cam.isit++;
 }
@@ -33,9 +33,9 @@ void     ft_checkline(char *line, int j, t_all *all)
 	int			k;
 
 	i = -1;
-	while (++i < all->info.maplenx)
+	while (++i < all->info.maplen.x)
 	{
-		k = i + (j * all->info.maplenx);
+		k = i + (j * all->info.maplen.x);
 		if (line[k] == 'N' || line[k] == 'S' || line[k] == 'W' || line[k] == 'E')
 			posdepart(all, i, j, line[k]);
 		else if (line[k] == '2')
@@ -55,6 +55,6 @@ void	verify_map(t_all *all)
 
     j = -1;
 	tmp = all->info.bufmap;
-    while (++j < all->info.mapleny)
+    while (++j < all->info.maplen.y)
 		ft_checkline(tmp, j, all);
 }
