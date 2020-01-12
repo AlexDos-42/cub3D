@@ -24,6 +24,8 @@ void		posdepart(t_all *all, int x, int y, char dir)
 		all->cam.ori.x = 0;
 		all->cam.ori.y = -1;
 	}
+	all->algo.plane.x = all->cam.ori.y;
+	all->algo.plane.y = -all->cam.ori.x;
 	all->cam.isit++;
 }
 

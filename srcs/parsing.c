@@ -40,8 +40,6 @@ void	ft_bufmap(t_all *all, char *line)
 			printf(ERROR_LENLINE, all->info.maplen.x, ++all->info.maplen.y, ft_strlen(newline));
 			ft_exit(all);
 		}
-	//	if (!(all->info.bufmap = ft_strjoin(all->info.bufmap, "\n", 1)))
-	//		return (0);
 		if (!(all->info.bufmap = ft_strjoin(all->info.bufmap, newline, 1)))
 		{
 			printf(ERROR_MALLOC, "info.bufmap in ft_strjoin");
@@ -84,7 +82,7 @@ void     ft_mur(t_all *all, unsigned int **atext, char *line, int *i)
 			ft_exit(all);
 		}
 	*i = j;
-	j = 0;
+j = 0;
 	while (line[*i] != ' ' && line[*i] != '\0')
 		str[j++] = line[(*i)++];
 	str[j] = '\0';
@@ -123,6 +121,7 @@ void     ft_res(t_all *all, char *line)
     ft_ifspace(line, &i);
 	i++;
 	all->info.res.x = ft_atoi(&line[i]);
+	i++;
     while (ft_isdigit(line[i]))
         i++;
 	all->info.res.y = ft_atoi(&line[i]);
@@ -187,6 +186,7 @@ void     ft_parsing(int argc, char **argv, t_all *all)
 		ft_strdel(&line);
 	}
 	close(fd);
+	printf("all->info.bufmap %s\n", all->info.bufmap);
 	verify_map(all);
 	if ((all->cam.isit != 1))
 	{

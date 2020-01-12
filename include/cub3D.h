@@ -38,12 +38,12 @@ typedef struct		s_cam
 {
 	// sur quelle case est la caméra
 	t_coor			pos;
-// position de départ du rayon
+	// position de départ du rayon
 	t_coor			raypos;
 	// quelle case on regarde
 	t_coor			map;
 	// quelle est l'orientation de la caméra
-	t_coor			ori;
+	t_dcoor			ori;
 	// direction du rayon
 	t_dcoor			rayDir;
 	// est ce que la cam est définie
@@ -53,31 +53,28 @@ typedef struct		s_cam
 typedef struct		s_algo
 {
 	// longueur du rayon
-	t_coor			len;
+	t_dcoor			len;
 	// longueur du rayon entre chaque intersection
 	t_dcoor			delta;
 	// direction du vecteur sur X et Y (+1 ou -1)
-	t_coor			dir;
+	t_dcoor			dir;
 	//le rayon touche un mur ou pas
 	int				hit;
 	//quelle orientation à le mur (nord/sud ou est/ouest) dans la map
 	int				NSEO;
 	// distance corrigée du rayon
-	int				newlong;
+	double			newlong;
 	//la hauteur de la ligne à tracer
-	int				hauteurLigne;
+	double			hauteurLigne;
 	// vecteur du plan de projection
-	t_coor			plane;
+	t_dcoor			plane;
 	// position de la colonne par rapport au centre de l’écran
-	int				colX;
-	//les pixels max haut et max bas de la colonne à tracer
-	int				pStart;
-	int				pEnd;
+	double			colX;
 	// Calcule la distance corrigée pour la projection
 	double			pDist;
 	//Calcule les pixels max haut et max bas de la colonne à tracer
-	int				drawstart;
-	int				drawend;
+	double			drawstart;
+	double			drawend;
 }					t_algo;
 
 typedef struct		s_texture
