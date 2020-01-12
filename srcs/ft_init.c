@@ -34,6 +34,6 @@ void	initmlx(t_all *all)
 void	initall(t_all *all)
 {
 	ft_memset(all, 0, sizeof(t_all));
-	all->algo.planeX = 0;
-	all->algo.planeY = 1;
+	all->algo.plane.x = 0;
+	all->algo.plane.y = 1;
 }
