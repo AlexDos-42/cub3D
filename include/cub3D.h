@@ -28,63 +28,65 @@ typedef struct	s_mlx
 	void		*ptr;
 	void		*winptr;
 	void		*imgptr;
-	int             bits_per_pixel;
-	int             size_line;
-	int             endian;
-	int             get_data;
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+	int			get_data;
 }				t_mlx;
 
 typedef struct		s_cam
 {
 	// sur quelle case est la caméra
-	t_coor                 pos;
+	t_coor			pos;
+// position de départ du rayon
+	t_coor			raypos;
 	// quelle case on regarde
-	t_coor                 map;
+	t_coor			map;
 	// quelle est l'orientation de la caméra
-	t_coor                 ori;
+	t_coor			ori;
 	// direction du rayon
-	t_dcoor                 rayDir;
+	t_dcoor			rayDir;
 	// est ce que la cam est définie
-	int                 isit;
-}                   t_cam;
+	int				isit;
+}					t_cam;
 
 typedef struct		s_algo
 {
 	// longueur du rayon
-	t_coor              len;
+	t_coor			len;
 	// longueur du rayon entre chaque intersection
-	t_dcoor             delta;
+	t_dcoor			delta;
 	// direction du vecteur sur X et Y (+1 ou -1)
-	t_coor              dir;
+	t_coor			dir;
 	//le rayon touche un mur ou pas
-	int                 hit;
+	int				hit;
 	//quelle orientation à le mur (nord/sud ou est/ouest) dans la map
-	int                 NSEO;
+	int				NSEO;
 	// distance corrigée du rayon
-	int                 newlong;
+	int				newlong;
 	//la hauteur de la ligne à tracer
-	int                 hauteurLigne;
+	int				hauteurLigne;
 	// vecteur du plan de projection
 	t_coor			plane;
 	// position de la colonne par rapport au centre de l’écran
-	int					colX;
+	int				colX;
 	//les pixels max haut et max bas de la colonne à tracer
-	int                 pStart;
-	int                 pEnd;
+	int				pStart;
+	int				pEnd;
 	// Calcule la distance corrigée pour la projection
-	double				pDist;
+	double			pDist;
 	//Calcule les pixels max haut et max bas de la colonne à tracer
-	int		drawstart;
-	int		drawend;
-}                   t_algo;
+	int				drawstart;
+	int				drawend;
+}					t_algo;
 
-typedef struct	s_texture
+typedef struct		s_texture
 {
-	void		*ptr;
-	int		*data;
-	int		bpp;
-	int		line_size;
-	int		endian;
+	void			*ptr;
+	int				*data;
+	int				bpp;
+	int				line_size;
+	int				endian;
 }		t_texture;
 
 typedef struct		s_info
