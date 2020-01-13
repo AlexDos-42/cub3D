@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:33:50 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/12 21:59:44 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/13 22:02:06 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void ft_reycasting(t_all *all)
 		printf("all->info.res.x %d\n", all->info.res.x);
 		all->algo.hit = 0;
 		printf("all->info.maplen.x %d\n", all->info.maplen.x );
-		all->algo.colX = ((2.0 * x / all->info.res.x) - 1);
+		all->algo.colX = 2.0 * x / (double)all->info.res.x - 1;
 		printf("all->algo.colX %f\n", all->algo.colX );
 		all->cam.raypos.x = all->cam.pos.x;
 		all->cam.raypos.y = all->cam.pos.y;
@@ -38,8 +38,8 @@ void ft_reycasting(t_all *all)
 		all->cam.rayDir.y = all->cam.ori.y + all->algo.plane.y * all->algo.colX;
 		all->cam.map.x = (int)(all->cam.raypos.x);
 		all->cam.map.y = (int)(all->cam.raypos.y);
-		all->algo.delta.x = sqrt(1 + (all->cam.rayDir.y * all->cam.rayDir.y) / (all->cam.rayDir.x * all->cam.rayDir.x));
-		all->algo.delta.y = sqrt(1 + (all->cam.rayDir.x * all->cam.rayDir.x) / (all->cam.rayDir.y * all->cam.rayDir.y));
+		all->algo.delta.x = fabs(1 / all->cam.rayDir.x);
+		all->algo.delta.y = fabs(1 / all->cam.rayDir.y);
 		printf("all->algo.delta.x %f\n", all->algo.delta.x);
 		printf("all->algo.delta.y %f\n", all->algo.delta.y);
 		printf("all->cam.rayDir.x %f\n",all->cam.rayDir.x );
@@ -56,7 +56,6 @@ void ft_reycasting(t_all *all)
 				all->algo.len.x = (all->cam.map.x + 1.0 - all->cam.raypos.x ) * all->algo.delta.x;
 		}
 		printf("all->algo.len.x %f\n", all->algo.len.x);
-		printf("all->cam.rayDir.y %f\n", all->cam.rayDir.y);
 		if (all->cam.rayDir.y < 0)
 		{
 				all->algo.dir.y = -1;
@@ -67,38 +66,47 @@ void ft_reycasting(t_all *all)
 				all->algo.dir.y = 1;
 				all->algo.len.y = (all->cam.map.y + 1.0 - all->cam.raypos.y) * all->algo.delta.y;
 		}
-		printf("all->algo.len.y %f\n", all->algo.len.y);
+			printf("case %c\n", all->info.bufmap[all->cam.map.y + (all->cam.map.x * all->info.maplen.x)]);
 		while (all->algo.hit == 0)
 	   	{
 			if (all->algo.len.x < all->algo.len.y)
 		   	{
+		printf("all->algo.len.x %f\n", all->algo.len.x);
 				all->algo.len.x += all->algo.delta.x;
 				all->cam.map.x += all->algo.dir.x;
 				all->algo.NSEO = 0;
+		printf("all->algo.len.x %f\n", all->algo.len.x);
 			}
 	  	 	else
 	  	 	{
+		printf("all->algo.len.y %f\n", all->algo.len.y);
 				all->algo.len.y += all->algo.delta.y;
 				all->cam.map.y += all->algo.dir.y;
 				all->algo.NSEO = 1;
+		printf("all->algo.len.y %f\n", all->algo.len.y);
 			}
 			printf("case %c\n", all->info.bufmap[all->cam.map.y + (all->cam.map.x * all->info.maplen.x)]);
+			printf("map y : %d | x : %d | maplen.x : %d\n", all->cam.map.y, all->cam.map.x, all->info.maplen.x);
 			printf("all->algo.hit 1  %d\n", all->algo.hit);
-			if (all->info.bufmap[all->cam.map.x + (all->cam.map.y * all->info.maplen.x)] != '0')
+			if (all->info.bufmap[all->cam.map.x + (all->cam.map.y * all->info.maplen.x)] == '1')
 				all->algo.hit = 1;  
 			printf("all->algo.hit 2 %d\n", all->algo.hit);
 		}
-		printf("all->algo.dir.x %f\n", all->algo.dir.x);
-		printf("all->algo.dir.y %f\n", all->algo.dir.y);
+		printf("all->algo.dir.x %d\n", all->algo.dir.x);
+		printf("NSEO %d\n", all->algo.NSEO);
+		printf("all->cam.raypos.y %d\n", all->cam.raypos.y);
+		printf("all->cam.map.y %d\n", all->cam.map.y);
+		printf("all->algo.dir.y %d\n", all->algo.dir.y);
+		printf("all->cam.rayDir.y %f\n", all->cam.rayDir.y);
 		if (all->algo.NSEO == 0)
-			all->algo.pDist = fabs((all->cam.map.x - all->cam.raypos.x + (1 - all->algo.dir.x) / 2) / all->cam.rayDir.x);
+			all->algo.pDist = (all->cam.map.x - all->cam.raypos.x + (1 - all->algo.dir.x) / 2) / all->cam.rayDir.x;
 		else
-			all->algo.pDist = fabs((all->cam.map.y - all->cam.raypos.y + (1 - all->algo.dir.y) / 2) / all->cam.rayDir.y);
+			all->algo.pDist = (all->cam.map.y - all->cam.raypos.y + (1 - all->algo.dir.y) / 2) / all->cam.rayDir.y;
 		printf("all->algo.pDist %f\n", all->algo.pDist);
-		all->algo.hauteurLigne = abs((int)(all->info.res.y / all->algo.pDist));
+		all->algo.hauteurLigne = ((int)(all->info.res.y / all->algo.pDist));
 		printf("all->algo.hauteurLigne %f\n", all->algo.hauteurLigne);
-		all->algo.drawstart = (int)(-all->algo.hauteurLigne / 2 + all->info.res.y / 2);
-		all->algo.drawend = (int)(all->algo.hauteurLigne / 2 + all->info.res.y / 2);
+		all->algo.drawstart = (-all->algo.hauteurLigne / 2 + all->info.res.y / 2);
+		all->algo.drawend = (all->algo.hauteurLigne / 2 + all->info.res.y / 2);
 		printf("all->algo.drawstart %f\n", all->algo.drawstart);
 		printf("all->algo.drawend %f\n", all->algo.drawend);
 		if (all->algo.drawstart < 0)
@@ -126,8 +134,9 @@ void ft_reycasting(t_all *all)
 		}
 		printf("len end %f\n", all->algo.len.x);
 //		if (all->algo.hauteurLigne >= 680 )
-		if (x == all->info.res.x / 2)
-			break;
+//		if (x == (all->info.res.x / 2) + 1)
+//		if (x == 5)
+//			break;
 		x++;
 	}
 }
