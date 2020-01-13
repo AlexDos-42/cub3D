@@ -61,49 +61,47 @@ void	ft_mlx_get_data_addr(unsigned int **atext, void *img, t_all *all)
 	}
 }
 
-void     ft_mur(t_all *all, unsigned int **atext, char *line, int *i)
+void     ft_mur(t_all *all, unsigned int **atext, char *line)
 {
-	char	*str;
 	int		j;
+	char	**s;
 //	int		width;
 //	int		height;
 //	void	*img;
 
-	(void)all;
-	(void)atext; 
-	(*i) += 2;
-	ft_ifspace(line, i);
-	j = *i;
-	while (line[*i] != ' ' && line[*i] != '\0')
-		(*i)++;
-		if (!(str = ft_calloc(sizeof(char), (*i - j + 1))))
-		{
-			printf(ERROR_MALLOC, "str in ft_mur");
-			ft_exit(all);
-		}
-	*i = j;
-j = 0;
-	while (line[*i] != ' ' && line[*i] != '\0')
-		str[j++] = line[(*i)++];
-	str[j] = '\0';
+	s = ft_split(line, ' ');
+	{
+	   	printf(ERROR_MALLOC);
+		ft_exit(all);
+	}
+	if (!(atext = ft_strdup(s[2]))
+	{
+		printf(ERROR_MALLOC, "str in ft_mur");
+		ft_exit(all);
+	}
+	j = 0;
+	while (s[j])
+	    free(s[j]++);
+	free(s[j]);   
+	free(s);
 //	img = mlx_xpm_file_to_image(all->mlx.ptr, str, &width, &height);
 //    return(ft_mlx_get_data_addr(atext, img, all));
 }
 
 void     ft_sol(unsigned int *str, char *line, t_all *all)
 {
-    int i;
+	int i;
 
-    i = 0;
-    ft_ifspace(line, &i);
+	i = 0;
+	    ft_ifspace(line, &i);
 	i++;
 	*str = ft_atoi(&line[i]) * 256 * 256;
-    while (ft_isdigit(line[i]))
-        i++;
+	while (ft_isdigit(line[i]))
+        	i++;
 	i++;
 	*str += ft_atoi(&line[i]) * 256;
-    while (ft_isdigit(line[i]))
-        i++;
+	while (ft_isdigit(line[i]))
+		i++;
 	i++;
 	*str += ft_atoi(&line[i]);
 	if (!*str)
@@ -145,15 +143,15 @@ void     ft_parsing_line(t_all *all, char *line)
 	if (line[i] == 'R' && line[i + 1] == ' ')
 		ft_res(all, line);
 	else if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
-		ft_mur(all, &all->info.n, line, &i);
+		ft_mur(all, &all->info.n, line);
 	else if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
-		ft_mur(all, &all->info.s, line, &i);
+		ft_mur(all, &all->info.s, line);
 	else if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
-		ft_mur(all, &all->info.w, line, &i);
+		ft_mur(all, &all->info.w, line);
 	else if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-		ft_mur(all, &all->info.e, line, &i);
+		ft_mur(all, &all->info.e, line);
 	else if (line[i] == 'S' && line[i + 1] == ' ')
-		ft_mur(all, &all->info.i, line, &i);
+		ft_mur(all, &all->info.i, line);
 	else if (line[i] == 'F' && line[i + 1] == ' ')
 		ft_sol(&all->info.f, line, all);
 	else if (line[i] == 'C' && line[i + 1] == ' ')
