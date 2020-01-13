@@ -17,7 +17,7 @@ void	ft_puttexture(t_image *texture, char *texture_path)
 	}
 }
 
-void	init_textures(t_all all)
+void	ft_textures(t_all all)
 {
 	ft_puttexture(all->info.notext, all->info.n);
 	ft_puttexture(all->info.sotext, all->info.s);
