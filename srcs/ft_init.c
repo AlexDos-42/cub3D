@@ -12,6 +12,7 @@ void	initmlx(t_all *all)
 		printf("Error\nmlx_new_window");
 		ft_exit(all);
 	}
+	init_textures(all);
 	if (!(all->mlx.imgptr = mlx_new_image(all->mlx.ptr, all->info.res.x, all->info.res.y)))
 	{
 		printf("Error\nmlx_new_image");
