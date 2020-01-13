@@ -1,12 +1,12 @@
 void	ft_puttexture(t_image *texture, char *texture_path)
 {	
-  int h;
-  int w;
+ 	int h;
+ 	int w;
   
-  h = 64;
-  w = 64;
+  	h = 64;
+  	w = 64;
 	if (!(texture->ptr = mlx_xpm_file_to_image(all->mlx.ptr, texture_path, &h, &w)))
-  {
+  	{
 		printf("Error\nmlx_new_window");
 		ft_exit(all);
 	}
