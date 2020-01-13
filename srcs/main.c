@@ -16,6 +16,11 @@ int		main(int argc, char **argv)
 {
 	t_all	all;
 
+	if (argc < 2 || argc > 3)
+	{
+		printf(ERROR_ARGC, argc);
+		ft_exit(all);
+	}
 	initall(&all);
 	ft_parsing(argc, argv, &all);
 	initmlx(&all);
