@@ -185,7 +185,6 @@ void     ft_parsing(int argc, char **argv, t_all *all)
 		ft_strdel(&line);
 	}
 	close(fd);
-	printf("all->info.bufmap %s\n", all->info.bufmap);
 	verify_map(all);
 	if ((all->cam.isit != 1))
 	{
