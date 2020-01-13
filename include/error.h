@@ -22,5 +22,6 @@
 # define ERROR_MALLOC "Error\nMalloc of %s didn't work\n"
 # define ERROR_LENLINE "Error\nFirst line has %d squares, %d line has %d squares\n"
 # define ERROR_MAP "Error\nMap error : %c isn't valide\n"
+# define ERROR_PARS "Error\n%c isn't a correct information\n"
 
 #endif
