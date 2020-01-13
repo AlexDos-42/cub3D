@@ -130,8 +130,12 @@ void     ft_res(t_all *all, char *line)
 	}
 	if (all->info.res.x > 2560)
 		all->info.res.x = 2560;
+	else if (all->info.res.x < 100)
+		all->info.res.x = 100;
 	if (all->info.res.y > 1440)
 		all->info.res.y = 1440;
+	else if (all->info.res.y < 100)
+		all->info.res.y = 100;
 }
 
 void     ft_parsing_line(t_all *all, char *line)
