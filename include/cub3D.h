@@ -139,4 +139,7 @@ void    ft_exit(t_all *all);
 
 void	ft_reycasting(t_all *all);
 
+void	ft_textures(t_all all);
+void	ft_puttexture(t_image *texture, char *texture_path);
+
 #endif
