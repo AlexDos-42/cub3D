@@ -160,6 +160,11 @@ void     ft_parsing_line(t_all *all, char *line)
 		ft_sol(&all->info.c, line, all);
 	else if (line[i] == '1' && line[i + 1] == ' ')
 		ft_bufmap(all, line);
+	else if(line[i] != '\0')
+	{
+	   	printf(ERROR_PARS, line[i]);
+		ft_exit(all);
+	}
 }
 
 void     ft_parsing(int argc, char **argv, t_all *all)
