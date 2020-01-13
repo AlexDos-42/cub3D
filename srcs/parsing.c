@@ -123,7 +123,7 @@ void     ft_res(t_all *all, char *line)
     while (ft_isdigit(line[i]))
         i++;
 	all->info.res.y = ft_atoi(&line[i]);
-    if (!all->info.res.x || !all->info.res.y)
+    if (all->info.res.xi == 0 || all->info.res.y == 0)
 	{
 	   	printf(ERROR_RES, all->info.res.x, all->info.res.y);
 		ft_exit(all);
