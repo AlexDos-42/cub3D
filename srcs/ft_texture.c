@@ -10,7 +10,7 @@ void	ft_puttexture(t_image *texture, char *texture_path)
 		printf("Error\nmlx_new_window");
 		ft_exit(all);
 	}
-	if (!(texture->data = (int *)mlx_get_data_addr(texture->ptr, &texture->bpp,	&texture->line_size, &texture->endian)))
+	if (!(texture->data = (int *)mlx_get_data_addr(texture->ptr, &texture->bpp, &texture->line_size, &texture->endian)))
 	{
 		printf("Error\nmlx_new_window");
 		ft_exit(all);
