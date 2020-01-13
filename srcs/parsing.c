@@ -171,11 +171,7 @@ void     ft_parsing(int argc, char **argv, t_all *all)
     char        *line;
     int         fd;
 
-    if (argc == 0 || argc > 3)
-	{
-		printf(ERROR_ARGC, argc);
-		ft_exit(all);
-	}
+   
 	if (!(fd = open(argv[1], O_RDONLY)))
 	{
 	   	printf(ERROR_FD);
