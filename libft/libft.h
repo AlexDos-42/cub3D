@@ -29,6 +29,18 @@ typedef struct			s_list
 	struct s_list		*next;
 }						t_list;
 
+typedef struct		s_parsing
+{
+	int				flagstiret;
+	int				precision;
+	char			*aff;
+	int				flags0;
+	int				c;
+	int				w;
+	int				z;
+	int				neg;
+}					t_parsing;
+
 char					*ft_strtrim(char const *str, char const *set);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
 char					*ft_strmapi(char const *s,
