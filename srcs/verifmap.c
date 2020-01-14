@@ -5,25 +5,13 @@ void		posdepart(t_all *all, int x, int y, char dir)
 	all->cam.pos.x = x + 0.5;
 	all->cam.pos.y = y + 0.5;
 	if (dir == 'E')
-	{
-		all->cam.ori.x = 1;
-		all->cam.ori.y = 0;
-	}
+		all->cam.ori = (t_dcoor){1, 0};
 	else if (dir == 'S')
-	{
-		all->cam.ori.x = 0;
-		all->cam.ori.y = 1;
-	}
+		all->cam.ori = (t_dcoor){0, 1};
 	else if (dir == 'W')
-	{
-		all->cam.ori.x = -1;
-		all->cam.ori.y = 0;
-	}
+		all->cam.ori = (t_dcoor){-1, 0};
 	else
-	{
-		all->cam.ori.x = 0;
-		all->cam.ori.y = -1;
-	}
+		all->cam.ori = (t_dcoor){0, -1};
 	all->algo.plane.x = -0.66 * all->cam.ori.y;
 	all->algo.plane.y = 0.66 * all->cam.ori.x;
 	all->cam.isit++;

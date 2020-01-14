@@ -37,9 +37,9 @@ typedef struct	s_mlx
 typedef struct		s_cam
 {
 	// sur quelle case est la caméra
-	t_coor			pos;
+	t_dcoor			pos;
 	// position de départ du rayon
-	t_coor			raypos;
+	t_dcoor			raypos;
 	// quelle case on regarde
 	t_coor			map;
 	// quelle est l'orientation de la caméra
@@ -48,6 +48,7 @@ typedef struct		s_cam
 	t_dcoor			rayDir;
 	// est ce que la cam est définie
 	int				isit;
+	double			speed;
 }					t_cam;
 
 typedef struct		s_algo
@@ -136,6 +137,10 @@ void	initinfo(t_all *all);
 
 void    ft_ifspace(char *line, int *i);
 void    ft_exit(t_all *all);
+t_dcoor ft_dcoor(double x, double y);
+t_coor  ft_coor(int x, int y);
+
+int		ft_keys(int key, t_all *all);
 
 void	ft_reycasting(t_all *all);
 

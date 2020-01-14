@@ -1,6 +1,6 @@
 # include "../include/cub3D.h"
 
-t_dcoor ft_dcoor(double x, double y, t_all *all)
+t_dcoor ft_dcoor(double x, double y)
 {
 	t_dcoor dcoor;
 	
@@ -9,7 +9,7 @@ t_dcoor ft_dcoor(double x, double y, t_all *all)
 	return (dcoor);
 }
 
-t_coor	ft_coor(int x, int y, t_all *all)
+t_coor	ft_coor(int x, int y)
 {
 	t_coor	coor;
 

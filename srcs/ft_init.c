@@ -26,12 +26,13 @@ void	initmlx(t_all *all)
 		ft_exit(all);
 	}
 	ft_reycasting(all);
+	ft_keys(-1, all);
+	mlx_hook(all->mlx.winptr, 2, 1, ft_keys, 0);
 	//	expose_hook(param);
-	//  key_hook(keycode, param)
-	mlx_loop(all->mlx.ptr);
 }
 
 void	initall(t_all *all)
 {
 	ft_memset(all, 0, sizeof(t_all));
+	all->cam.speed = 0.2;
 }
