@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:11:46 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/10 20:21:26 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/13 21:20:00 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 # define ERROR_MALLOC "Error\nMalloc of %s didn't work\n"
 # define ERROR_LENLINE "Error\nFirst line has %d squares, %d line has %d squares\n"
 # define ERROR_MAP "Error\nMap error : %c isn't valide\n"
+# define ERROR_PARS "Error\n%c isn't a correct information\n"
 
 #endif

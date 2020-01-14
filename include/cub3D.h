@@ -37,9 +37,9 @@ typedef struct	s_mlx
 typedef struct		s_cam
 {
 	// sur quelle case est la caméra
-	t_coor			pos;
+	t_dcoor			pos;
 	// position de départ du rayon
-	t_coor			raypos;
+	t_dcoor			raypos;
 	// quelle case on regarde
 	t_coor			map;
 	// quelle est l'orientation de la caméra
@@ -48,6 +48,7 @@ typedef struct		s_cam
 	t_dcoor			rayDir;
 	// est ce que la cam est définie
 	int				isit;
+	double			speed;
 }					t_cam;
 
 typedef struct		s_algo
@@ -57,7 +58,7 @@ typedef struct		s_algo
 	// longueur du rayon entre chaque intersection
 	t_dcoor			delta;
 	// direction du vecteur sur X et Y (+1 ou -1)
-	t_dcoor			dir;
+	t_coor			dir;
 	//le rayon touche un mur ou pas
 	int				hit;
 	//quelle orientation à le mur (nord/sud ou est/ouest) dans la map
@@ -88,11 +89,11 @@ typedef struct		s_texture
 
 typedef struct		s_info
 {
-	unsigned int	*n;
-	unsigned int	*s;
-	unsigned int	*e;
-	unsigned int	*w;
-	unsigned int	*i;
+	char	*n;
+	char	*s;
+	char	*e;
+	char	*w;
+	char	*i;
 	unsigned int	c;
 	unsigned int	f;
 	t_coor			res;
@@ -117,12 +118,12 @@ typedef struct		s_all
 
 int		main(int argc, char **argv);
 
-void    ft_parsing(int argc, char **argv, t_all *all);
+void    ft_parsing(char **argv, t_all *all);
 void    ft_parsing_line(t_all *all, char *line);
 void	ft_bufmap(t_all *all, char *line);
 void    ft_res(t_all *all, char *line);
 void    ft_sol(unsigned int *str, char *line, t_all *all);
-void    ft_mur(t_all *all, unsigned int **atext, char *line, int *i);
+void    ft_mur(t_all *all, char **atext, char *line);
 
 void	verify_map(t_all *all);
 void    ft_checkline(char *line, int j, t_all *all);
@@ -136,7 +137,14 @@ void	initinfo(t_all *all);
 
 void    ft_ifspace(char *line, int *i);
 void    ft_exit(t_all *all);
+t_dcoor ft_dcoor(double x, double y);
+t_coor  ft_coor(int x, int y);
+
+int		ft_keys(int key, t_all *all);
 
 void	ft_reycasting(t_all *all);
+
+void	ft_textures(t_all *all);
+void	ft_puttexture(t_texture *texture, char *texture_path);
 
 #endif

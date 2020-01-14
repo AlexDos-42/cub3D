@@ -6,7 +6,7 @@
 #    By: alesanto <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/09 17:02:25 by alesanto          #+#    #+#              #
-#    Updated: 2020/01/12 16:55:38 by alesanto         ###   ########.fr        #
+#    Updated: 2020/01/14 20:23:15 by alesanto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRC =		main.c \
 		verifmap.c \
 		ft_init.c \
 		ft_rendu.c \
+		ft_keys.c \
 
 PATHSRCS = srcs
 

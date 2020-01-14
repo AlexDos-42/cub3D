@@ -47,6 +47,10 @@ SRCS = ft_atoi.c \
        ft_strdel.c \
        ft_suprspace.c \
        ft_cjoin.c \
+       ft_printf/ft_utile.c \
+       ft_printf/ft_printf.c \
+       ft_printf/ft_parsing.c \
+       ft_printf/application.c \
 
 FLAGS = -Wall -Wextra -Werror -g3
 

@@ -1,5 +1,23 @@
 # include "../include/cub3D.h"
 
+t_dcoor ft_dcoor(double x, double y)
+{
+	t_dcoor dcoor;
+	
+	dcoor.x = x;
+	dcoor.y = y;
+	return (dcoor);
+}
+
+t_coor	ft_coor(int x, int y)
+{
+	t_coor	coor;
+
+	coor.x = x;
+	coor.y = y;
+	return (coor);
+}
+
 void     ft_exit(t_all *all)
 {
 	if (all->info.bufmap)
@@ -9,8 +27,8 @@ void     ft_exit(t_all *all)
 
 void     ft_ifspace(char *line, int *i)
 {
-    while ((line[*i] == ' ' || line[*i] == '\t' || line[*i] == '\n')
-	|| (line[*i] == '\r' || line[*i] == '\v' || line[*i] == '\f'))
+	while ((line[*i] == ' ' || line[*i] == '\t' || line[*i] == '\n')
+			|| (line[*i] == '\r' || line[*i] == '\v' || line[*i] == '\f'))
 		(*i)++;
 }
 
@@ -19,10 +37,10 @@ void	ft_bufmap(t_all *all, char *line)
 	char	*newline;
 
 	if (!(newline = ft_strtrim(line, " ")))
-		{
-			printf(ERROR_MALLOC, "newline in ft_strtrim");
-			ft_exit(all);
-		}
+	{
+		printf(ERROR_MALLOC, "newline in ft_strtrim");
+		ft_exit(all);
+	}
 	newline = ft_suprspace(newline);
 	if (all->info.maplen.y == 0)
 	{
@@ -56,84 +74,88 @@ void	ft_mlx_get_data_addr(unsigned int **atext, void *img, t_all *all)
 	free(img);
 	if (*atext == 0)
 	{
-	   	printf(ERROR_TEXTURE);
+		printf(ERROR_TEXTURE);
 		ft_exit(all);
 	}
 }
 
-void     ft_mur(t_all *all, unsigned int **atext, char *line, int *i)
+void     ft_mur(t_all *all, char **atext, char *line)
 {
-	char	*str;
 	int		j;
-//	int		width;
-//	int		height;
-//	void	*img;
+	char	**s;
+	//	int		width;
+	//	int		height;
+	//	void	*img;
 
-	(void)all;
-	(void)atext; 
-	(*i) += 2;
-	ft_ifspace(line, i);
-	j = *i;
-	while (line[*i] != ' ' && line[*i] != '\0')
-		(*i)++;
-		if (!(str = ft_calloc(sizeof(char), (*i - j + 1))))
-		{
-			printf(ERROR_MALLOC, "str in ft_mur");
-			ft_exit(all);
-		}
-	*i = j;
-j = 0;
-	while (line[*i] != ' ' && line[*i] != '\0')
-		str[j++] = line[(*i)++];
-	str[j] = '\0';
-//	img = mlx_xpm_file_to_image(all->mlx.ptr, str, &width, &height);
-//    return(ft_mlx_get_data_addr(atext, img, all));
+	if(!(s = ft_split(line, ' ')))
+	{
+		printf(ERROR_MALLOC, "s in ft_split in ft_mur");
+		ft_exit(all);
+	}
+	if (!(*atext = ft_strdup(s[1])))
+	{
+		printf(ERROR_MALLOC, "str in ft_mur");
+		ft_exit(all);
+	}
+	j = 0;
+	while (s[j])
+		free(s[j++]);
+	free(s[j]);
+	free(s[j]);   
+	//	img = mlx_xpm_file_to_image(all->mlx.ptr, str, &width, &height);
+	//    return(ft_mlx_get_data_addr(atext, img, all));
 }
 
 void     ft_sol(unsigned int *str, char *line, t_all *all)
 {
-    int i;
+	int i;
 
-    i = 0;
-    ft_ifspace(line, &i);
+	printf("test2\n");
+	i = 0;
+	ft_ifspace(line, &i);
 	i++;
 	*str = ft_atoi(&line[i]) * 256 * 256;
-    while (ft_isdigit(line[i]))
-        i++;
+	while (ft_isdigit(line[i]))
+		i++;
 	i++;
 	*str += ft_atoi(&line[i]) * 256;
-    while (ft_isdigit(line[i]))
-        i++;
+	while (ft_isdigit(line[i]))
+		i++;
 	i++;
 	*str += ft_atoi(&line[i]);
 	if (!*str)
 	{
-	   	printf(ERROR_COLOR);
+		printf(ERROR_COLOR);
 		ft_exit(all);
 	}
 }
 
 void     ft_res(t_all *all, char *line)
 {
-    int i;
+	int i;
 
-    i = 0;
-    ft_ifspace(line, &i);
+	printf("test3\n");
+	i = 0;
+	ft_ifspace(line, &i);
 	i++;
 	all->info.res.x = ft_atoi(&line[i]);
 	i++;
-    while (ft_isdigit(line[i]))
-        i++;
+	while (ft_isdigit(line[i]))
+		i++;
 	all->info.res.y = ft_atoi(&line[i]);
-    if (!all->info.res.x || !all->info.res.y)
+	if (all->info.res.x == 0 || all->info.res.y == 0)
 	{
-	   	printf(ERROR_RES, all->info.res.x, all->info.res.y);
+		printf(ERROR_RES, all->info.res.x, all->info.res.y);
 		ft_exit(all);
 	}
 	if (all->info.res.x > 2560)
 		all->info.res.x = 2560;
+	else if (all->info.res.x < 100)
+		all->info.res.x = 100;
 	if (all->info.res.y > 1440)
 		all->info.res.y = 1440;
+	else if (all->info.res.y < 100)
+		all->info.res.y = 100;
 }
 
 void     ft_parsing_line(t_all *all, char *line)
@@ -145,37 +167,38 @@ void     ft_parsing_line(t_all *all, char *line)
 	if (line[i] == 'R' && line[i + 1] == ' ')
 		ft_res(all, line);
 	else if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
-		ft_mur(all, &all->info.n, line, &i);
+		ft_mur(all, &all->info.n, line);
 	else if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
-		ft_mur(all, &all->info.s, line, &i);
+		ft_mur(all, &all->info.s, line);
 	else if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
-		ft_mur(all, &all->info.w, line, &i);
+		ft_mur(all, &all->info.w, line);
 	else if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-		ft_mur(all, &all->info.e, line, &i);
+		ft_mur(all, &all->info.e, line);
 	else if (line[i] == 'S' && line[i + 1] == ' ')
-		ft_mur(all, &all->info.i, line, &i);
+		ft_mur(all, &all->info.i, line);
 	else if (line[i] == 'F' && line[i + 1] == ' ')
 		ft_sol(&all->info.f, line, all);
 	else if (line[i] == 'C' && line[i + 1] == ' ')
 		ft_sol(&all->info.c, line, all);
 	else if (line[i] == '1' && line[i + 1] == ' ')
 		ft_bufmap(all, line);
-}
-
-void     ft_parsing(int argc, char **argv, t_all *all)
-{
-    int         ret;
-    char        *line;
-    int         fd;
-
-    if (argc == 0 || argc > 3)
+	else if(line[i] != '\0')
 	{
-		printf(ERROR_ARGC, argc);
+		printf(ERROR_PARS, line[i]);
 		ft_exit(all);
 	}
+}
+
+void     ft_parsing(char **argv, t_all *all)
+{
+	int         ret;
+	char        *line;
+	int         fd;
+
+
 	if (!(fd = open(argv[1], O_RDONLY)))
 	{
-	   	printf(ERROR_FD);
+		printf(ERROR_FD);
 		ft_exit(all);
 	}
 	line = NULL;
@@ -186,7 +209,6 @@ void     ft_parsing(int argc, char **argv, t_all *all)
 		ft_strdel(&line);
 	}
 	close(fd);
-	printf("all->info.bufmap %s\n", all->info.bufmap);
 	verify_map(all);
 	if ((all->cam.isit != 1))
 	{

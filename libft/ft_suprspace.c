@@ -27,7 +27,8 @@ char *ft_suprspace(char *str)
 			i++;
 		j++;
 	}
-	tmp = ft_calloc(i, sizeof(char));
+	if (!(tmp = ft_calloc(i, sizeof(char))))
+		return (NULL)
 	j = 0;
 	k = -1;
 	while (str[++k] && j <= k)
