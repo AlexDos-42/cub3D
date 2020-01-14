@@ -86,4 +86,32 @@ void					ft_strdel(char **str);
 char					*ft_suprspace(char *str);
 char	 				*ft_cjoin(char const *s1, char c, int f);
 
+/*
+** ft_printf
+*/
+
+int				ft_printf(const char *format, ...);
+int				ft_boucle(char *arg, va_list *va);
+int				ft_parsing(char *arg, va_list *va, t_parsing *parsing);
+void				ft_init_parsing(t_parsing *parsing);
+void				ft_init_parsing(t_parsing *parsing);
+
+int				ft_flags(char *arg, t_parsing *parsing);
+int				ft_width(char *arg, va_list *va, t_parsing *parsing);
+int				ft_width2(char *arg, t_parsing *parsing, int i);
+int				ft_precision(char *arg, va_list *va, t_parsing *parsing);
+int				ft_lenght(char *arg, t_parsing *parsing);
+
+void				ft_flagsapp(t_parsing *parsing, char arg);
+void				ft_s_precisionapp(char arg, t_parsing *parsing);
+void				ft_precisionappnbr(t_parsing *parsing);
+void				ft_app(char arg, t_parsing *parsing);
+void				ft_exception(t_parsing *parsing, char arg);
+
+char				*ft_ptoa_base(unsigned long long int nbr, char *base);
+char				*ft_itoa_base(unsigned nbr, char *base);
+char				*ft_strjoin_c(char const *s1, char c);
+char				*ft_cdup(int c);
+void				ft_flagsapp0(t_parsing *parsing, char arg);
+
 #endif
