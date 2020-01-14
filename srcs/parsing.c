@@ -35,7 +35,6 @@ void     ft_ifspace(char *line, int *i)
 void	ft_bufmap(t_all *all, char *line)
 {
 	char	*newline;
-	printf("test0\n");
 
 	if (!(newline = ft_strtrim(line, " ")))
 	{
