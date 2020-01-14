@@ -109,11 +109,14 @@ void ft_reycasting(t_all *all)
 		all->algo.drawend = (all->algo.hauteurLigne / 2 + all->info.res.y / 2);
 		printf("all->algo.drawstart %f\n", all->algo.drawstart);
 		printf("all->algo.drawend %f\n", all->algo.drawend);
+		y = all->algo.drawstart;
 		if (all->algo.drawstart < 0)
+		{
+			y = -all->algo.drawstart;
 			all->algo.drawstart = 0;
+		}
 		if (all->algo.drawend >= all->info.res.y)
 			all->algo.drawend = all->info.res.y - 1;
-		y = all->algo.drawstart;
 		printf("y %d\n" , y);
 		while (y < all->algo.drawend)
 	   	{
