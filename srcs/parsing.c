@@ -38,7 +38,7 @@ void	ft_bufmap(t_all *all, char *line)
 
 	if (!(newline = ft_strtrim(line, " ")))
 	{
-		printf(ERROR_MALLOC, "newline in ft_strtrim");
+		ft_printf(ERROR_MALLOC, "newline in ft_strtrim");
 		ft_exit(all);
 	}
 	newline = ft_suprspace(newline);
@@ -47,7 +47,7 @@ void	ft_bufmap(t_all *all, char *line)
 		all->info.maplen.x = ft_strlen(newline);
 		if (!(all->info.bufmap = ft_strdup(newline)))
 		{
-			printf(ERROR_MALLOC, "info.bufmap in ft_strdup");
+			ft_printf(ERROR_MALLOC, "info.bufmap in ft_strdup");
 			ft_exit(all);
 		}
 	}
@@ -55,12 +55,12 @@ void	ft_bufmap(t_all *all, char *line)
 	{
 		if (all->info.maplen.x != ft_strlen(newline))
 		{
-			printf(ERROR_LENLINE, all->info.maplen.x, ++all->info.maplen.y, ft_strlen(newline));
+			ft_printf(ERROR_LENLINE, all->info.maplen.x, ++all->info.maplen.y, ft_strlen(newline));
 			ft_exit(all);
 		}
 		if (!(all->info.bufmap = ft_strjoin(all->info.bufmap, newline, 1)))
 		{
-			printf(ERROR_MALLOC, "info.bufmap in ft_strjoin");
+			ft_printf(ERROR_MALLOC, "info.bufmap in ft_strjoin");
 			ft_exit(all);
 		}
 	}
@@ -74,7 +74,7 @@ void	ft_mlx_get_data_addr(unsigned int **atext, void *img, t_all *all)
 	free(img);
 	if (*atext == 0)
 	{
-		printf(ERROR_TEXTURE);
+		ft_printf(ERROR_TEXTURE);
 		ft_exit(all);
 	}
 }
@@ -89,12 +89,12 @@ void     ft_mur(t_all *all, char **atext, char *line)
 
 	if(!(s = ft_split(line, ' ')))
 	{
-		printf(ERROR_MALLOC, "s in ft_split in ft_mur");
+		ft_printf(ERROR_MALLOC, "s in ft_split in ft_mur");
 		ft_exit(all);
 	}
 	if (!(*atext = ft_strdup(s[1])))
 	{
-		printf(ERROR_MALLOC, "str in ft_mur");
+		ft_printf(ERROR_MALLOC, "str in ft_mur");
 		ft_exit(all);
 	}
 	j = 0;
@@ -125,7 +125,7 @@ void     ft_sol(unsigned int *str, char *line, t_all *all)
 	*str += ft_atoi(&line[i]);
 	if (!*str)
 	{
-		printf(ERROR_COLOR);
+		ft_printf(ERROR_COLOR);
 		ft_exit(all);
 	}
 }
@@ -145,7 +145,7 @@ void     ft_res(t_all *all, char *line)
 	all->info.res.y = ft_atoi(&line[i]);
 	if (all->info.res.x == 0 || all->info.res.y == 0)
 	{
-		printf(ERROR_RES, all->info.res.x, all->info.res.y);
+		ft_printf(ERROR_RES, all->info.res.x, all->info.res.y);
 		ft_exit(all);
 	}
 	if (all->info.res.x > 2560)
@@ -184,7 +184,7 @@ void     ft_parsing_line(t_all *all, char *line)
 		ft_bufmap(all, line);
 	else if(line[i] != '\0')
 	{
-		printf(ERROR_PARS, line[i]);
+		ft_printf(ERROR_PARS, line[i]);
 		ft_exit(all);
 	}
 }
@@ -198,7 +198,7 @@ void     ft_parsing(char **argv, t_all *all)
 
 	if (!(fd = open(argv[1], O_RDONLY)))
 	{
-		printf(ERROR_FD);
+		ft_printf(ERROR_FD);
 		ft_exit(all);
 	}
 	line = NULL;
@@ -212,7 +212,7 @@ void     ft_parsing(char **argv, t_all *all)
 	verify_map(all);
 	if ((all->cam.isit != 1))
 	{
-		printf(ERROR_PLAYER, all->cam.isit);
+		ft_printf(ERROR_PLAYER, all->cam.isit);
 		ft_exit(all);
 	}
 }

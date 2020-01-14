@@ -127,4 +127,6 @@ char				*ft_strjoin_c(char const *s1, char c);
 char				*ft_cdup(int c);
 void				ft_flagsapp0(t_parsing *parsing, char arg);
 
+int				ft_putstr_pf(char *str, int fd);
+
 #endif

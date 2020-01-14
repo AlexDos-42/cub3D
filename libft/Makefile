@@ -51,19 +51,25 @@ SRCS = ft_atoi.c \
        ft_printf/ft_printf.c \
        ft_printf/ft_parsing.c \
        ft_printf/application.c \
+       ft_printf/ft_putstr_pf.c \
+
+OBJS = $(SRCS:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror -g3
 
-all: ${NAME}
+all: $(NAME)
 
-$(NAME): 
+.c.o : $(SRCS)
+	@(gcc -c $(FLAGS) -I . $^ -o $(^:.c=.o))
+
+$(NAME): $(OBJS) 
 	@echo "Compilation de la Libft..."
-	@(gcc $(FLAGS) -c $(SRCS) -I .)
-	@(ar rc $(NAME) $(SRCS:.c=.o) $^)
+	@(ar rc $(NAME) $(OBJS))
 	@(ranlib $(NAME))
 
 clean:
-	@(rm -rf $(SRCS:.c=.o))
+	@(rm -rf *.o)
+	@(rm -rf ft_printf/*.o)
 
 fclean:	clean
 	@(rm -rf $(NAME))
