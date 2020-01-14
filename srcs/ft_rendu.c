@@ -18,7 +18,7 @@ void ft_reycasting(t_all *all)
 	int y;
 
 	x = 0;
-	while (x <= all->info.res.x)
+	while (x < all->info.res.x)
 	{
 		printf("x %d\n", x);
 		printf("all->info.res.x %d\n", all->info.res.x);
