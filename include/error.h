@@ -23,5 +23,6 @@
 # define ERROR_LENLINE "Error\nFirst line has %d squares, %d line has %d squares\n"
 # define ERROR_MAP "Error\nMap error : %c isn't valide\n"
 # define ERROR_PARS "Error\n%c isn't a correct information\n"
+# define ERROR_GNL "Error\n%retour du GNL = %d"
 
 #endif
