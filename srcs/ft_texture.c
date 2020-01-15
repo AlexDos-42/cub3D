@@ -7,12 +7,12 @@ void	ft_puttexture(t_texture *texture, char *texture_path)
   	w = 64;
 	if (!(texture->ptr = mlx_xpm_file_to_image(all->mlx.ptr, texture_path, &h, &w)))
   	{
-		printf("Error\nmlx_new_window");
+		ft_printf("Error\nmlx_new_window");
 		ft_exit(all);
 	}
 	if (!(texture->data = (int *)mlx_get_data_addr(texture->ptr, &texture->bpp, &texture->line_size, &texture->endian)))
 	{
-		printf("Error\nmlx_new_window");
+		ft_printf("Error\nmlx_new_window");
 		ft_exit(all);
 	}
 }
