@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:33:50 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/14 19:32:51 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/15 21:22:42 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ void ft_reycasting(t_all *all)
 		y = all->algo.drawend;
 		while (y < all->info.res.y)
 		{  
-			mlx_pixel_put(all->mlx.ptr, all->mlx.winptr, x, y, 0x006666);
-			mlx_pixel_put(all->mlx.ptr, all->mlx.winptr, x, all->info.res.y - y - 1, 0x006666);
+			mlx_pixel_put(all->mlx.ptr, all->mlx.winptr, x, y, all->info.c);
+			mlx_pixel_put(all->mlx.ptr, all->mlx.winptr, x, all->info.res.y - y - 1, all->info.f);
 			y++;
 		}
 		x++;

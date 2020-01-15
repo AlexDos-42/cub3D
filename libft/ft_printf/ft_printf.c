@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 18:19:00 by alesanto          #+#    #+#             */
-/*   Updated: 2019/12/17 16:40:51 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/15 11:42:00 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		ft_init_parsing(t_parsing *parsing)
 	parsing->neg = 0;
 }
 
-int			ft_parsing(char *arg, va_list *va, t_parsing *parsing)
+int			ft_parsingpf(char *arg, va_list *va, t_parsing *parsing)
 {
 	int i;
 
@@ -80,7 +80,7 @@ int			ft_boucle(char *arg, va_list *va)
 		if (*arg == '%')
 		{
 			arg++;
-			arg += ft_parsing(arg, va, &parsing);
+			arg += ft_parsingpf(arg, va, &parsing);
 			if (parsing.aff || parsing.c)
 				len = len + ft_putstr_pf(parsing.aff, parsing.c);
 		}

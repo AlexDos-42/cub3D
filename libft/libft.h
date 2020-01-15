@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 12:51:23 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/10 17:02:34 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/15 11:41:28 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char	 				*ft_cjoin(char const *s1, char c, int f);
 
 int				ft_printf(const char *format, ...);
 int				ft_boucle(char *arg, va_list *va);
-int				ft_parsing(char *arg, va_list *va, t_parsing *parsing);
+int				ft_parsingpf(char *arg, va_list *va, t_parsing *parsing);
 void				ft_init_parsing(t_parsing *parsing);
 void				ft_init_parsing(t_parsing *parsing);
 

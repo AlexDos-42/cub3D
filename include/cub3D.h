@@ -34,6 +34,13 @@ typedef struct	s_mlx
 	int			get_data;
 }				t_mlx;
 
+typedef struct	s_mvt
+{
+	t_coor			up;
+	t_coor			side;
+	t_coor			rot;
+}				t_mvt;
+
 typedef struct		s_cam
 {
 	// sur quelle case est la caméra
@@ -114,6 +121,7 @@ typedef struct		s_all
 	t_info          info;
 	t_mlx           mlx;
 	t_cam           cam;
+	t_mvt			mvt;
 }                   t_all;
 
 int		main(int argc, char **argv);
@@ -140,7 +148,9 @@ void    ft_exit(t_all *all);
 t_dcoor ft_dcoor(double x, double y);
 t_coor  ft_coor(int x, int y);
 
-int		ft_keys(int key, t_all *all);
+int		ft_push(int key, t_all *all);
+int		ft_depush(int key, t_all *all);
+int		ft_keys(t_all *all);
 
 void	ft_reycasting(t_all *all);
 

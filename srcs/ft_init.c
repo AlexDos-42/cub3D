@@ -26,9 +26,14 @@ void	initmlx(t_all *all)
 		ft_exit(all);
 	}
 	ft_reycasting(all);
-	ft_keys(-1, all);
-	mlx_hook(all->mlx.winptr, 2, 1, ft_keys, 0);
-	//	expose_hook(param);
+
+	mlx_hook(all->mlx.winptr, 2, 0, &ft_push, &all);
+	ft_printf("test1\n");
+	mlx_hook(all->mlx.winptr, 3, 0, &ft_depush, &all);
+	ft_printf("test2\n");
+	mlx_hook(all->mlx.winptr, 2, 1,  &ft_keys, &all);
+	ft_printf("test3\n");
+	mlx_loop(all->mlx.ptr);
 }
 
 void	initall(t_all *all)
