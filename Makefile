@@ -18,6 +18,7 @@ SRC =		main.c \
 		ft_init.c \
 		ft_rendu.c \
 		ft_keys.c \
+		ft_utiles.c \
 
 PATHSRCS = srcs
 
