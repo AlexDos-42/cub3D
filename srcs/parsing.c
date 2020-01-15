@@ -110,7 +110,6 @@ void     ft_sol(unsigned int *str, char *line, t_all *all)
 {
 	int i;
 
-	printf("test2\n");
 	i = 0;
 	ft_ifspace(line, &i);
 	i++;
@@ -134,7 +133,6 @@ void     ft_res(t_all *all, char *line)
 {
 	int i;
 
-	printf("test3\n");
 	i = 0;
 	ft_ifspace(line, &i);
 	i++;
@@ -182,7 +180,7 @@ void     ft_parsing_line(t_all *all, char *line)
 		ft_sol(&all->info.c, line, all);
 	else if (line[i] == '1' && line[i + 1] == ' ')
 		ft_bufmap(all, line);
-	else if(line[i] != '\0')
+	else if(*line != '\0')
 	{
 		ft_printf(ERROR_PARS, line[i]);
 		ft_exit(all);
@@ -205,14 +203,14 @@ void     ft_parsing(char **argv, t_all *all)
 	ret = 1;
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
+		if (ret == -1)
+		{
+			ft_printf(ERROR_GNL, ret);
+			ft_exit(all);
+		}
 		ft_parsing_line(all, line);
 		ft_strdel(&line);
 	}
 	close(fd);
 	verify_map(all);
-	if ((all->cam.isit != 1))
-	{
-		ft_printf(ERROR_PLAYER, all->cam.isit);
-		ft_exit(all);
-	}
 }
