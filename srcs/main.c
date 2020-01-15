@@ -23,6 +23,11 @@ int		main(int argc, char **argv)
 	}
 	initall(&all);
 	ft_parsing(argv, &all);
+	if ((all->cam.isit != 1))
+	{
+		ft_printf(ERROR_PLAYER, all.cam.isit);
+		ft_exit(all);
+	}
 	initmlx(&all);
 	mlx_loop(all.mlx.ptr);
 	return (0);
