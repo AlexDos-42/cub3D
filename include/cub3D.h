@@ -31,7 +31,7 @@ typedef struct	s_mlx
 	int			bits_per_pixel;
 	int			size_line;
 	int			endian;
-	int			get_data;
+	int			*get_data;
 }				t_mlx;
 
 typedef struct	s_mvt

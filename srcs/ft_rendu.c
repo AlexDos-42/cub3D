@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:33:50 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/15 21:22:42 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/16 18:01:25 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void ft_reycasting(t_all *all)
 	int x;
 	int y;
 	x = 0;
+
 	while (x < all->info.res.x)
 	{
 		all->algo.hit = 0;
@@ -94,21 +95,23 @@ void ft_reycasting(t_all *all)
 			all->algo.drawend = all->info.res.y - 1;
 		while (y < all->algo.drawend)
 	   	{
-		 	int color = 0xff0000;// couleur du pixel pour un mur Nord/Sud
+		 	int color = 0xff0000;
 			if (all->algo.NSEO == 1)
-				color = 0x0000ff;// couleur du pixel pour un mur Est/Ouest
-		mlx_pixel_put( all->mlx.ptr, all->mlx.winptr, x, y, color);
-			y++;// incrémente la position Y du prochain pixel à tracer
+				color = 0x0000ff;
+			all->mlx.get_data[x + y * all->info.res.x] = color;
+			y++;
 		}
 		if (all->algo.drawend < 0) 
 			all->algo.drawend = all->info.res.y;
 		y = all->algo.drawend;
 		while (y < all->info.res.y)
 		{  
-			mlx_pixel_put(all->mlx.ptr, all->mlx.winptr, x, y, all->info.c);
-			mlx_pixel_put(all->mlx.ptr, all->mlx.winptr, x, all->info.res.y - y - 1, all->info.f);
+			all->mlx.get_data[x + y * all->info.res.x] = all->info.c;
+			all->mlx.get_data[x + (all->info.res.y - y - 1) * all->info.res.x] = all->info.c;
 			y++;
 		}
 		x++;
 	}
+	mlx_put_image_to_window (all->mlx.ptr, all->mlx.winptr,  all->mlx.imgptr, 0, 0);
+	mlx_destroy_image(all->mlx.ptr, all->mlx.imgptr);
 }

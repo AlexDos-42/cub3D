@@ -6,7 +6,7 @@
 #    By: alesanto <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/09 17:02:25 by alesanto          #+#    #+#              #
-#    Updated: 2020/01/14 20:23:15 by alesanto         ###   ########.fr        #
+#    Updated: 2020/01/16 17:54:44 by alesanto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ LIBS = -lmlx -framework OpenGL -framework AppKit\
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME):
 	@echo "Compilation..."
 	@(make re -C libft/)
 	@(gcc $(FLAGS) $(SRCS) $(LIBS))

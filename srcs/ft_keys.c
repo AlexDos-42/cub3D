@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 19:52:22 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/15 22:19:52 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/16 18:03:59 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	set_ceil(t_all *all)
 	int i;
 	int j;
 
-	image = &all->mlx.get_data;
+	image = all->mlx.get_data;
 	i = 0;
 	while (i < all->info.res.y / 2)
 	{
@@ -39,7 +39,7 @@ static void	set_floor(t_all *all)
 	int i;
 	int j;
 
-	image = &all->mlx.get_data;
+	image = all->mlx.get_data;
 	i = all->info.res.y / 2;
 	while (i < all->info.res.y)
 	{
@@ -87,12 +87,14 @@ void ft_moveup(t_all *all)
 	printf("up\n");
 	if (all->mvt.up.x)
    	{
-		if (all->info.bufmap[(int)(all->cam.map.x + (int)(all->cam.ori.x * all->cam.speed))
-				+ (all->cam.map.y * all->info.maplen.x)] == 0)
+	printf("all->cam.pos.y %f\n", all->cam.pos.y);
+	if (all->info.bufmap[(int)(all->cam.map.x + (int)(all->cam.ori.x * all->cam.speed))
+			+ (all->cam.map.y * all->info.maplen.x)] == 0)
 			all->cam.pos.x += all->cam.ori.x * all->cam.speed;
-		if (all->info.bufmap[all->cam.map.x + ((int)(all->cam.map.y
+	if (all->info.bufmap[all->cam.map.x + ((int)(all->cam.map.y
 				+ all->cam.ori.y * all->cam.speed) * all->info.maplen.x)] == 0)
 			all->cam.pos.y += all->cam.ori.y * all->cam.speed;
+	printf("all->cam.pos.y %f\n", all->cam.pos.y);
 	}
 	if (all->mvt.up.y)
    	{
@@ -103,6 +105,7 @@ void ft_moveup(t_all *all)
 				- all->cam.ori.y * all->cam.speed) * all->info.maplen.x)] == 0)
 			all->cam.pos.y -= all->cam.ori.y * all->cam.speed;
 	}
+	return ;
 }
 
 int 	ft_push(int key, t_all *all)
@@ -145,12 +148,11 @@ int	 ft_depush(int key, t_all *all)
 int	ft_keys(t_all *all)
 {
 	printf("testkeys\n");
-		
-	if (all->mvt.up.x || all->mvt.up.y)
+	printf("all->mvt.up.x %d\n", all->mvt.up.x);
+	if (all->mvt.up.x == 1 || all->mvt.up.y == 1)
 		ft_moveup(all);
-	if (all->mvt.side.x || all->mvt.side.y)
+	else if (all->mvt.side.x == 1 || all->mvt.side.y == 1)
 		ft_moveside(all);
-	
 	printf("testkeys1\n");
 //	if (all->mvt.side.x || all->mvt.side.y)
 //		ft_moveside(key, all);
@@ -161,9 +163,8 @@ int	ft_keys(t_all *all)
 //	else if (key == 53)
 //		game_over();
 //	reset_image(all);
+	initmlx(all);
 	ft_reycasting(all);
-	printf("testkeys2\n");
-	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, all->mlx.imgptr,	0, 0);
 	printf("testkeys3\n");
 	return (0);
 }
