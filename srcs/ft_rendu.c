@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:33:50 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/16 18:01:25 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/17 13:42:01 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ void ft_reycasting(t_all *all)
 	int y;
 	x = 0;
 
+
+	printf("reycasting");
+	printf("all->cam.pos.x %f\n", all->cam.pos.x);
+	printf("all->cam.pos.y %f\n", all->cam.pos.y);
 	while (x < all->info.res.x)
 	{
 		all->algo.hit = 0;
@@ -112,6 +116,6 @@ void ft_reycasting(t_all *all)
 		}
 		x++;
 	}
-	mlx_put_image_to_window (all->mlx.ptr, all->mlx.winptr,  all->mlx.imgptr, 0, 0);
+	mlx_put_image_to_window (all->mlx.ptr, all->mlx.winptr, all->mlx.imgptr, 0, 0);
 	mlx_destroy_image(all->mlx.ptr, all->mlx.imgptr);
 }

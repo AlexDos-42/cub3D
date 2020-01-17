@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 19:52:22 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/16 18:03:59 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/17 21:51:53 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,51 +59,81 @@ void		reset_image(t_all *all)
 	set_ceil(all);
 }
 
+void	ft_moverot(t_all *all)
+{
+	double	oldorix;
+	double	oldplanex;
 
+	if (all->mvt.rot.x)
+	{
+		oldorix = all->cam.ori.x;
+		all->cam.ori.x = all->cam.ori.x * cos(-0.3) - all->cam.ori.y * sin(-0.3);
+		all->cam.ori.y = oldorix * sin(-0.3) + all->cam.ori.y * cos(-0.3);
+		oldplanex = all->algo.plane.x;
+		all->algo.plane.x = all->algo.plane.x * cos(-0.3) - all->algo.plane.y * sin(-0.3);
+		all->algo.plane.y = oldplanex * sin(-0.3) + all->algo.plane.y * cos(-0.3);
+	}
+	if (all->mvt.rot.y)
+	{
+		oldorix = all->cam.ori.x;
+		all->cam.ori.x = all->cam.ori.x * cos(0.3) - all->cam.ori.y * sin(0.3);
+		all->cam.ori.y = oldorix * sin(0.3) + all->cam.ori.y * cos(0.3);
+		oldplanex = all->algo.plane.x;
+		all->algo.plane.x = all->algo.plane.x * cos(0.3) - all->algo.plane.x * sin(0.3);
+		all->algo.plane.y = oldplanex * sin(0.3) + all->algo.plane.y * cos(0.3);
+	}
+}
 
 void	ft_moveside(t_all *all)
 {
+	double posetmpX;
+	double posetmpY;
+	posetmpX = all->cam.pos.x;
+	posetmpY = all->cam.pos.y;	
+
 	if (all->mvt.side.x)
    	{
-		if (all->info.bufmap[(int)(all->cam.map.x + (int)(all->cam.ori.x * all->cam.speed))
-				+ (all->cam.map.y * all->info.maplen.x)] == 0)
-			all->cam.pos.x += all->cam.ori.x * all->cam.speed;
-		if (all->info.bufmap[all->cam.map.x + ((int)(all->cam.map.y
-				+ all->cam.ori.y * all->cam.speed) * all->info.maplen.x)] == 0)
-			all->cam.pos.y += all->cam.ori.y * all->cam.speed;
+		all->cam.pos.x -= all->algo.plane.x * all->cam.speed;
+		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+			all->cam.pos.x = posetmpX;
+		all->cam.pos.y -= all->algo.plane.y * all->cam.speed;
+		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+			all->cam.pos.y = posetmpY;
 	}
 	if (all->mvt.side.y)
    	{
-		if (all->info.bufmap[(int)(all->cam.map.x - (int)(all->cam.ori.x * all->cam.speed))
-				+ (all->cam.map.y * all->info.maplen.x)] == 0)
-			all->cam.pos.x -= all->cam.ori.x * all->cam.speed;
-		if (all->info.bufmap[all->cam.map.x + ((int)(all->cam.map.y
-				- all->cam.ori.y * all->cam.speed) * all->info.maplen.x)] == 0)
-			all->cam.pos.y -= all->cam.ori.y * all->cam.speed;
+		all->cam.pos.x +=  all->algo.plane.x * all->cam.speed;
+		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == 'i')
+			all->cam.pos.x = posetmpX;
+		all->cam.pos.y += all->algo.plane.y * all->cam.speed;
+		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+			all->cam.pos.y = posetmpY;
 	}
 }
 void ft_moveup(t_all *all)
 {
-	printf("up\n");
+	double posetmpX;
+	double posetmpY;
+	posetmpX = all->cam.pos.x;
+	posetmpY = all->cam.pos.y;	
+
 	if (all->mvt.up.x)
    	{
-	printf("all->cam.pos.y %f\n", all->cam.pos.y);
-	if (all->info.bufmap[(int)(all->cam.map.x + (int)(all->cam.ori.x * all->cam.speed))
-			+ (all->cam.map.y * all->info.maplen.x)] == 0)
-			all->cam.pos.x += all->cam.ori.x * all->cam.speed;
-	if (all->info.bufmap[all->cam.map.x + ((int)(all->cam.map.y
-				+ all->cam.ori.y * all->cam.speed) * all->info.maplen.x)] == 0)
-			all->cam.pos.y += all->cam.ori.y * all->cam.speed;
-	printf("all->cam.pos.y %f\n", all->cam.pos.y);
+		all->cam.pos.x += all->cam.ori.x * all->cam.speed;
+		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+			all->cam.pos.x = posetmpX;
+		all->cam.pos.y += all->cam.ori.y * all->cam.speed;
+		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+			all->cam.pos.y = posetmpY;
 	}
 	if (all->mvt.up.y)
    	{
-		if (all->info.bufmap[(int)(all->cam.map.x - (int)(all->cam.ori.x * all->cam.speed))
-				+ (all->cam.map.y * all->info.maplen.x)] == 0)
-			all->cam.pos.x -= all->cam.ori.x * all->cam.speed;
-		if (all->info.bufmap[all->cam.map.x + ((int)(all->cam.map.y
-				- all->cam.ori.y * all->cam.speed) * all->info.maplen.x)] == 0)
-			all->cam.pos.y -= all->cam.ori.y * all->cam.speed;
+		all->cam.pos.x -= all->cam.ori.x * all->cam.speed;
+		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+			all->cam.pos.x = posetmpX;
+		all->cam.pos.y -= all->cam.ori.y * all->cam.speed;
+		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+			all->cam.pos.y = posetmpY;
 	}
 	return ;
 }
@@ -119,10 +149,10 @@ int 	ft_push(int key, t_all *all)
 		all->mvt.side.x = 1;
 	else if (key == 2)
 		all->mvt.side.y = 1;
-//	if (key == )
-//		all->mvt.rot.x = 1;
-//	else if (key ==  )
-//		all->mvt.rot.y = 1;
+	if (key == 12)
+		all->mvt.rot.x = 1;
+	else if (key == 14 )
+		all->mvt.rot.y = 1;
 	return (0);
 }
 
@@ -136,10 +166,10 @@ int	 ft_depush(int key, t_all *all)
 		all->mvt.side.x = 0;
 	else if (key == 2)
 		all->mvt.side.y = 0;
-//	else if (key == )
-//		all->mvt.rot.x = 0;
-//	else if (key == )
-//		all->mvt.rot.y = 0;
+	else if (key == 12)
+		all->mvt.rot.x = 0;
+	else if (key == 14)
+		all->mvt.rot.y = 0;
 //	else if (key == )
 //		return (exit_game(game, EXIT_SUCCESS));
 	return (0);
@@ -147,24 +177,28 @@ int	 ft_depush(int key, t_all *all)
 
 int	ft_keys(t_all *all)
 {
-	printf("testkeys\n");
 	printf("all->mvt.up.x %d\n", all->mvt.up.x);
+	double	tmp;
+	
+	tmp = all->cam.pos.x + all->cam.pos.y;
+	printf("tmp %f\n",tmp);
 	if (all->mvt.up.x == 1 || all->mvt.up.y == 1)
 		ft_moveup(all);
-	else if (all->mvt.side.x == 1 || all->mvt.side.y == 1)
+	if (all->mvt.side.x == 1 || all->mvt.side.y == 1)
 		ft_moveside(all);
-	printf("testkeys1\n");
-//	if (all->mvt.side.x || all->mvt.side.y)
-//		ft_moveside(key, all);
-//	if (all->mvt.rot.x || all->mvt.rot.y)
-//		ft_moverot(key, all);
+		printf("testkeys1\n");
+	if (all->mvt.rot.x  == 1|| all->mvt.rot.y == 1)
+		ft_moverot(all);
 //	else if (key == 123 || key == 124)
 //		ft_rotate(key, all);
 //	else if (key == 53)
 //		game_over();
-//	reset_image(all);
-	initmlx(all);
-	ft_reycasting(all);
-	printf("testkeys3\n");
+	printf("tmp %f\n",tmp);
+	if (tmp != (all->cam.pos.x + all->cam.pos.y))
+	{
+		printf("is tmp !=");
+		initmlx(all);
+		ft_reycasting(all);
+	}
 	return (0);
 }
