@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 19:11:46 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/13 21:20:00 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/18 16:16:58 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@
 # define ERROR_MAP "Error\nMap error : %c isn't valide\n"
 # define ERROR_PARS "Error\n%c isn't a correct information\n"
 # define ERROR_GNL "Error\n%retour du GNL = %d"
+# define ERROR_GO "GAME OVER"
+
 
 #endif

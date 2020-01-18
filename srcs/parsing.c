@@ -162,7 +162,7 @@ void     ft_parsing(char **argv, t_all *all)
 	int         fd;
 
 
-	if (!(fd = open(argv[1], O_RDONLY)))
+	if ((fd = open(argv[1], O_RDONLY)) == -1)
 	{
 		ft_printf(ERROR_FD);
 		ft_exit(all);

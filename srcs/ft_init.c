@@ -18,5 +18,5 @@ void	initmlx(t_all *all)
 void	initall(t_all *all)
 {
 	ft_memset(all, 0, sizeof(t_all));
-	all->cam.speed = 0.2;
+	all->cam.speed = 0.1;
 }
