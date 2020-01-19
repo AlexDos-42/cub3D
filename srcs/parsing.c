@@ -36,65 +36,59 @@ void	ft_bufmap(t_all *all, char *line)
 	all->info.maplen.y += 1;
 }
 
-void	ft_mlx_get_data_addr(unsigned int **atext, void *img, t_all *all)
-{
-	*atext = (unsigned int *)mlx_get_data_addr(img, &all->mlx.bits_per_pixel, &all->mlx.size_line, &all->mlx.endian);
-	free(img);
-	if (*atext == 0)
-	{
-		ft_printf(ERROR_TEXTURE);
-		ft_exit(all);
-	}
-}
-
-void     ft_mur(t_all *all, char **atext, char *line)
+char     *ft_mur(t_all *all, char *line)
 {
 	int		j;
 	char	**s;
-	//	int		width;
-	//	int		height;
-	//	void	*img;
+	char *atext;
 
 	if(!(s = ft_split(line, ' ')))
 	{
 		ft_printf(ERROR_MALLOC, "s in ft_split in ft_mur");
 		ft_exit(all);
 	}
-	if (!(*atext = ft_strdup(s[1])))
+	if (!(atext = ft_strdup(s[1])))
 	{
 		ft_printf(ERROR_MALLOC, "str in ft_mur");
 		ft_exit(all);
 	}
 	j = 0;
+	ft_printf("atext %s\n", atext );
 	while (s[j])
 		free(s[j++]);
 	free(s[j]);
-	free(s[j]);   
-	//	img = mlx_xpm_file_to_image(all->mlx.ptr, str, &width, &height);
-	//    return(ft_mlx_get_data_addr(atext, img, all));
+	free(s);   
+	return (atext);
 }
 
-void     ft_sol(unsigned int *str, char *line, t_all *all)
+int     ft_sol(char *line, t_all *all)
 {
 	int i;
+	unsigned int color;
+	int j;
 
 	i = 0;
 	ft_ifspace(line, &i);
 	i++;
-	*str = ft_atoi(&line[i]) * 256 * 256;
+	ft_ifspace(line, &i);
+	color = ft_atoi(&line[i]) * 256 * 256;
+	j = ft_isdigit(line[i]) ? 1 : 0;
 	while (ft_isdigit(line[i]))
 		i++;
 	i++;
-	*str += ft_atoi(&line[i]) * 256;
+	color += ft_atoi(&line[i]) * 256;
+	j += ft_isdigit(line[i]) ? 1 : 0;
 	while (ft_isdigit(line[i]))
 		i++;
 	i++;
-	*str += ft_atoi(&line[i]);
-	if (!*str)
+	color += ft_atoi(&line[i]);
+	j += ft_isdigit(line[i]) ? 1 : 0;
+	if (j !=3)
 	{
 		ft_printf(ERROR_COLOR);
 		ft_exit(all);
 	}
+	return(color);
 }
 
 void     ft_res(t_all *all, char *line)
@@ -133,19 +127,19 @@ void     ft_parsing_line(t_all *all, char *line)
 	if (line[i] == 'R' && line[i + 1] == ' ')
 		ft_res(all, line);
 	else if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
-		ft_mur(all, &all->info.n, line);
+		all->info.n = ft_mur(all, line);
 	else if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
-		ft_mur(all, &all->info.s, line);
+		all->info.s = ft_mur(all, line);
 	else if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
-		ft_mur(all, &all->info.w, line);
+		all->info.w = ft_mur(all, line);
 	else if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-		ft_mur(all, &all->info.e, line);
+		all->info.e = ft_mur(all, line);
 	else if (line[i] == 'S' && line[i + 1] == ' ')
-		ft_mur(all, &all->info.i, line);
+		all->info.i = ft_mur(all, line);
 	else if (line[i] == 'F' && line[i + 1] == ' ')
-		ft_sol(&all->info.f, line, all);
+		all->info.f = ft_sol(line, all);
 	else if (line[i] == 'C' && line[i + 1] == ' ')
-		ft_sol(&all->info.c, line, all);
+		all->info.c = ft_sol(line, all);
 	else if (line[i] == '1' && line[i + 1] == ' ')
 		ft_bufmap(all, line);
 	else if(*line != '\0')

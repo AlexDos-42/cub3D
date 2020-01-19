@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:06:07 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/17 13:28:49 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/19 15:07:56 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		main(int argc, char **argv)
 		ft_exit(&all);
 	}
 	initmlx(&all);
+	ft_textures(&all);
 	ft_reycasting(&all);
 	ft_keys(&all);
 	mlx_do_key_autorepeatoff(all.mlx.ptr);	

@@ -122,6 +122,12 @@ typedef struct		s_all
 	t_mlx           mlx;
 	t_cam           cam;
 	t_mvt			mvt;
+	t_texture		textureN;
+	t_texture		textureS;
+	t_texture		textureE;
+	t_texture		textureW;
+	t_texture		textureI;
+	t_texture		texture;
 }                   t_all;
 
 int		main(int argc, char **argv);
@@ -130,8 +136,8 @@ void    ft_parsing(char **argv, t_all *all);
 void    ft_parsing_line(t_all *all, char *line);
 void	ft_bufmap(t_all *all, char *line);
 void    ft_res(t_all *all, char *line);
-void    ft_sol(unsigned int *str, char *line, t_all *all);
-void    ft_mur(t_all *all, char **atext, char *line);
+int   	ft_sol(char *line, t_all *all);
+char    *ft_mur(t_all *all, char *line);
 
 void	verify_map(t_all *all);
 void    ft_checkline(char *line, int j, t_all *all);
@@ -155,6 +161,6 @@ int		ft_keys(t_all *all);
 void	ft_reycasting(t_all *all);
 
 void	ft_textures(t_all *all);
-void	ft_puttexture(t_texture *texture, char *texture_path);
+void	ft_puttexture(char *texture_path, t_texture *texture, t_all *all);
 
 #endif

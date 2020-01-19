@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:33:50 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/18 19:42:40 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/19 19:11:53 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,38 +64,39 @@ void ft_algo(t_all *all)
 				all->algo.len.y = (all->cam.map.y + 1.0 - all->cam.raypos.y) * all->algo.delta.y;
 		}
 }
-/*
-void	ft_puttexture(t_all *all)
+
+t_texture 	ft_mettretexture(t_all *all)
 {
 	if (all->cam.rayDir.x > 0)
 	{
 		if (all->algo.NSEO)
 		{
 			if (all->cam.rayDir.y < 0)
-				return (all->info.sotext);
-			return (all->info.notext);
+				return (all->textureS);
+			return (all->textureN);
 		}
-		return (all->info.etext);
+		return (all->textureE);
 	}
 	else
 	{
 		if (all->algo.NSEO)
 		{
 			if (all->cam.rayDir.x < 0)
-				return (all->info.sotext);
-			return (all->info.notext);
+				return (all->textureS);
+			return (all->textureN);
 		}
-		return (all->info.wtext);
+		return (all->textureW);
 	}
 }
-
-*/
-
 
 void ft_reycasting(t_all *all)
 {
 	int x;
 	int y;
+	double wallX; 
+	int	texX;
+	int	texY;
+	t_texture img;	
 
 	x = 0;
 	while (x < all->info.res.x)
@@ -117,13 +118,17 @@ void ft_reycasting(t_all *all)
 			all->algo.drawstart = 0;
 		if (all->algo.drawend >= all->info.res.y)
 			all->algo.drawend = all->info.res.y - 1;
-//		img = ft_puttexture(all);
+		img = ft_mettretexture(all);
+		if (all->algo.NSEO == 1)
+			wallX = all->cam.raypos.x + all->algo.pDist * all->cam.rayDir.x;
+   		else
+			wallX = all->cam.raypos.y + all->algo.pDist * all->cam.rayDir.y;
+		wallX -= floor(wallX);
+		texX = wallX * 64;
 		while (all->algo.drawstart < all->algo.drawend)
 	   	{
-		 	int color = 0xff0000;
-			if (all->algo.NSEO == 1)
-				color = 0x0000ff;
-			all->mlx.get_data[x + (int)all->algo.drawstart * (all->mlx.size_line / 4)] = color;
+			texY = (all->algo.drawstart - all->info.res.y / 2 + all->algo.hauteurLigne / 2) * 64 / all->algo.hauteurLigne;
+			all->mlx.get_data[x + (int)all->algo.drawstart * (all->mlx.size_line / 4)] = img.data[texX + texY * 64];
 			all->algo.drawstart++;
 		}
 		if (all->algo.drawend < 0) 
@@ -131,7 +136,7 @@ void ft_reycasting(t_all *all)
 		y = all->algo.drawend;
 		while (y < all->info.res.y)
 		{  
-			all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = all->info.c;
+			all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = all->info.f;
 			all->mlx.get_data[x + (all->info.res.y - y - 1) * (all->mlx.size_line / 4)] = all->info.c;
 			y++;
 		}

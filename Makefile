@@ -6,7 +6,7 @@
 #    By: alesanto <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/09 17:02:25 by alesanto          #+#    #+#              #
-#    Updated: 2020/01/16 17:54:44 by alesanto         ###   ########.fr        #
+#    Updated: 2020/01/19 13:40:32 by alesanto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC =		main.c \
 		ft_rendu.c \
 		ft_keys.c \
 		ft_utiles.c \
+		ft_texture.c \
 
 PATHSRCS = srcs
 

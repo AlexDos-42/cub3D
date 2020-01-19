@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 19:52:22 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/18 19:46:16 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/19 19:52:31 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_moverot(t_all *all)
 		all->algo.plane.x = all->algo.plane.x * cos(vitrot) - all->algo.plane.y * sin(vitrot);
 		all->algo.plane.y = oldplanex * sin(vitrot) + all->algo.plane.y * cos(vitrot);
 	}
-	printf("vitrot %f\n", vitrot);
 }
 
 void	ft_moveside(t_all *all)
@@ -96,7 +95,6 @@ void ft_moveup(t_all *all)
 
 int 	ft_push(int key, t_all *all)
 {
-	printf("push\n");
 	if (key == 13)
 		all->mvt.up.x = 1;
 	else if (key == 1)
@@ -136,24 +134,17 @@ int	 ft_depush(int key, t_all *all)
 
 int	ft_keys(t_all *all)
 {
-	printf("all->mvt.up.x %d\n", all->mvt.up.x);
 	double	tmp;
 	
 	tmp = all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x;
-	printf("tmp %f\n",tmp);
 	if (all->mvt.up.x == 1 || all->mvt.up.y == 1)
 		ft_moveup(all);
 	if (all->mvt.side.x == 1 || all->mvt.side.y == 1)
 		ft_moveside(all);
-		printf("testkeys1\n");
 	if (all->mvt.rot.x  == 1|| all->mvt.rot.y == 1)
 		ft_moverot(all);
-//	else if (key == 53)
-//		game_over();
-	printf("tmp %f\n",tmp);
 	if (tmp != (all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x))
 	{
-		printf("is tmp !=");
 		initmlx(all);
 		ft_reycasting(all);
 	}

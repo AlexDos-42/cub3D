@@ -1,11 +1,11 @@
 R 920 680
-NO ../textures/brick.xpm
-SO ../textures/brick.xpm
-WE ../textures/brick.xpm
-EA ../textures/brick.xpm
-S ./path_to_the_sprite_texture
-F 220,100,0
-C 225,30,0
+NO ./textures/brique.xpm
+SO ./textures/brique.xpm
+WE ./textures/brique.xpm
+EA ./textures/brique.xpm
+S ./textures/brique.xpm
+F 200,126,98
+C 105,105,230
 1 1 1 1 1 1 1 1 1 1 1 1 
 1 0 0 1 0 1 1 0 0 1 0 1
 1 0 0 1 0 1 1 0 0 1 0 1
