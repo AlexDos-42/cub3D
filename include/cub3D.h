@@ -130,6 +130,7 @@ typedef struct		s_all
 	t_texture		texture;
 }                   t_all;
 
+int     ft_redcross(t_all *all);
 int		main(int argc, char **argv);
 
 void    ft_parsing(char **argv, t_all *all);
@@ -144,10 +145,9 @@ void    ft_checkline(char *line, int j, t_all *all);
 void	posdepart(t_all *all, int x, int y, char dir);
 
 void	initmlx(t_all *all);
-void	initall(t_all *all);
-void    initallsuite(t_all *all);
-void    initcam(t_all *all);
-void	initinfo(t_all *all);
+void	initall(t_all *all, char **argv);
+void    ft_refresh(t_all *all);
+void	initwindow(t_all *all);
 
 void    ft_ifspace(char *line, int *i);
 void    ft_exit(t_all *all);

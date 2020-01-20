@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:33:50 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/19 19:11:53 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/20 20:23:02 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ t_texture 	ft_mettretexture(t_all *all)
 		if (all->algo.NSEO)
 		{
 			if (all->cam.rayDir.y < 0)
-				return (all->textureS);
-			return (all->textureN);
+				return (all->textureN);
+			return (all->textureS);
 		}
 		return (all->textureE);
 	}
@@ -81,13 +81,34 @@ t_texture 	ft_mettretexture(t_all *all)
 	{
 		if (all->algo.NSEO)
 		{
-			if (all->cam.rayDir.x < 0)
-				return (all->textureS);
-			return (all->textureN);
+			if (all->cam.rayDir.y < 0)
+				return (all->textureN);
+			return (all->textureS);
 		}
 		return (all->textureW);
 	}
 }
+
+void	ft_initray(t_all *all, int x)
+{
+		all->algo.hit = 0;
+		all->algo.colX = 2 * x / (double)all->info.res.x - 1;
+		all->cam.raypos = (t_dcoor){all->cam.pos.x, all->cam.pos.y};
+		all->cam.rayDir.x = all->cam.ori.x + all->algo.plane.x * all->algo.colX;
+		all->cam.rayDir.y = all->cam.ori.y + all->algo.plane.y * all->algo.colX;
+		all->cam.map = (t_coor){(all->cam.raypos.x), (all->cam.raypos.y)};
+		all->algo.delta.x = fabs(1 / all->cam.rayDir.x);
+		all->algo.delta.y = fabs(1 / all->cam.rayDir.y);
+		ft_algo(all);
+		ft_hit(all);
+		all->algo.drawstart = (-all->algo.hauteurLigne / 2 + all->info.res.y / 2);
+		all->algo.drawend = (all->algo.hauteurLigne / 2 + all->info.res.y / 2);
+		if (all->algo.drawstart < 0)
+			all->algo.drawstart = 0;
+		if (all->algo.drawend >= all->info.res.y)
+	 		all->algo.drawend = all->info.res.y - 1;
+}
+
 
 void ft_reycasting(t_all *all)
 {
@@ -101,23 +122,7 @@ void ft_reycasting(t_all *all)
 	x = 0;
 	while (x < all->info.res.x)
 	{
-		all->algo.hit = 0;
-		all->algo.colX = 2 * x / (double)all->info.res.x - 1;
-		all->cam.raypos = (t_dcoor){all->cam.pos.x, all->cam.pos.y};
-		all->cam.rayDir.x = all->cam.ori.x + all->algo.plane.x * all->algo.colX;
-		all->cam.rayDir.y = all->cam.ori.y + all->algo.plane.y * all->algo.colX;
-		all->cam.map = (t_coor){(all->cam.raypos.x), (all->cam.raypos.y)};
-		all->algo.delta.x = fabs(1 / all->cam.rayDir.x);
-		all->algo.delta.y = fabs(1 / all->cam.rayDir.y);
-		ft_algo(all);
-		ft_hit(all);
-		all->algo.drawstart = (-all->algo.hauteurLigne / 2 + all->info.res.y / 2);
-		all->algo.drawend = (all->algo.hauteurLigne / 2 + all->info.res.y / 2);
-		y = all->algo.drawstart;
-		if (all->algo.drawstart < 0)
-			all->algo.drawstart = 0;
-		if (all->algo.drawend >= all->info.res.y)
-			all->algo.drawend = all->info.res.y - 1;
+		ft_initray(all, x);
 		img = ft_mettretexture(all);
 		if (all->algo.NSEO == 1)
 			wallX = all->cam.raypos.x + all->algo.pDist * all->cam.rayDir.x;
@@ -142,6 +147,4 @@ void ft_reycasting(t_all *all)
 		}
 		x++;
 	}
-	mlx_put_image_to_window (all->mlx.ptr, all->mlx.winptr, all->mlx.imgptr, 0, 0);
-	mlx_destroy_image(all->mlx.ptr, all->mlx.imgptr);
 }

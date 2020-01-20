@@ -140,7 +140,7 @@ void     ft_parsing_line(t_all *all, char *line)
 		all->info.f = ft_sol(line, all);
 	else if (line[i] == 'C' && line[i + 1] == ' ')
 		all->info.c = ft_sol(line, all);
-	else if (line[i] == '1' && line[i + 1] == ' ')
+	else if (line[i] == '1')
 		ft_bufmap(all, line);
 	else if(*line != '\0')
 	{

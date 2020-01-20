@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 19:52:22 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/19 19:52:31 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/20 20:29:21 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ int 	ft_push(int key, t_all *all)
 		all->mvt.side.x = 1;
 	else if (key == 2)
 		all->mvt.side.y = 1;
-	if (key == 12)
+	if (key == 12 || key == 123)
 		all->mvt.rot.x = 1;
-	else if (key == 14 )
+	else if (key == 14 || key == 124)
 		all->mvt.rot.y = 1;
 	return (0);
 }
@@ -120,9 +120,9 @@ int	 ft_depush(int key, t_all *all)
 		all->mvt.side.x = 0;
 	else if (key == 2)
 		all->mvt.side.y = 0;
-	else if (key == 12)
+	else if (key == 12 || key == 123)
 		all->mvt.rot.x = 0;
-	else if (key == 14)
+	else if (key == 14 || key == 124)
 		all->mvt.rot.y = 0;
 	else if (key == 53)
 	{
@@ -144,9 +144,7 @@ int	ft_keys(t_all *all)
 	if (all->mvt.rot.x  == 1|| all->mvt.rot.y == 1)
 		ft_moverot(all);
 	if (tmp != (all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x))
-	{
-		initmlx(all);
-		ft_reycasting(all);
-	}
+		ft_refresh(all);
+
 	return (0);
 }
