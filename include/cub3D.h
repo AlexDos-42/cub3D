@@ -146,7 +146,7 @@ void	posdepart(t_all *all, int x, int y, char dir);
 
 void	initmlx(t_all *all);
 void	initall(t_all *all, char **argv);
-void    ft_refresh(t_all *all);
+void	ft_refresh(t_all *all);
 void	initwindow(t_all *all);
 
 void    ft_ifspace(char *line, int *i);
