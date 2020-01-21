@@ -44,6 +44,7 @@ void	ft_refresh(t_all *all)
 	int n = all->info.res.y / 30;
 	int o = all->info.res.y / 30;
 	char *test = mlx_xpm_file_to_image(all->mlx.ptr, "./objet/hand.xpm", &n , &o);
+	ft_sprites(all);
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, test, 50, all->info.res.y / 1.89);
 	mlx_destroy_image(all->mlx.ptr, all->mlx.imgptr);
 }

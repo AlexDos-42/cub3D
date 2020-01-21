@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:33:50 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/20 20:23:02 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:50:16 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_hit(t_all *all)
 {
-		while (all->algo.hit == 0)
+		while (1)
 	   	{
 			if (all->algo.len.x < all->algo.len.y)
 		   	{
@@ -30,7 +30,7 @@ void	ft_hit(t_all *all)
 			}
 			if (all->info.bufmap[all->cam.map.x +
 					(all->cam.map.y * all->info.maplen.x)] == '1')
-				all->algo.hit = 1;  
+				break;  
 		}
 		if (all->algo.NSEO == 0)
 			all->algo.pDist = (all->cam.map.x - all->cam.raypos.x
@@ -38,7 +38,7 @@ void	ft_hit(t_all *all)
 		else
 			all->algo.pDist = (all->cam.map.y - all->cam.raypos.y
 					+ (1 - all->algo.dir.y) / 2) / all->cam.rayDir.y;
-		all->algo.hauteurLigne = ((all->info.res.y / all->algo.pDist));
+		all->algo.hauteurLigne = (all->info.res.y  / all->algo.pDist);
 }
 
 void ft_algo(t_all *all)
@@ -91,7 +91,6 @@ t_texture 	ft_mettretexture(t_all *all)
 
 void	ft_initray(t_all *all, int x)
 {
-		all->algo.hit = 0;
 		all->algo.colX = 2 * x / (double)all->info.res.x - 1;
 		all->cam.raypos = (t_dcoor){all->cam.pos.x, all->cam.pos.y};
 		all->cam.rayDir.x = all->cam.ori.x + all->algo.plane.x * all->algo.colX;

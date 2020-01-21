@@ -28,13 +28,21 @@ void     ft_checkline(char *line, int j, t_all *all)
 		k = i + (j * all->info.maplen.x);
 		if (line[k] == 'N' || line[k] == 'S' || line[k] == 'W' || line[k] == 'E')
 			posdepart(all, i, j, line[k]);
-		else if (line[k] == '2')
-			all->info.nbbloc++;
+		else if (line[k] != '2')
+			all->info.nbsp++;
 		else if (line[k] != '1' && line[k] != '0')
 		{
 			printf(ERROR_MAP, line[k]);
 			ft_exit(all);
 		}
+	}
+	all->info.sprite = malloc(sizeof(*all->info.sprite) * all->info.nbsp);
+	all->info.sp_odre = malloc(sizeof(int) * all->info.nbsp);
+	all->info.sp_dist = malloc(sizeof(double) * all->info.nbsp);
+	if (all->info.nbsp && (!all->info.sprite || !all->info.sp_odre || !all->info.sp_dist))	
+	{
+			printf(ERROR_MALLOC, "malloc sprite");
+			ft_exit(all);
 	}
 }
 

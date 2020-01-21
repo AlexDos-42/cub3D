@@ -53,7 +53,6 @@ char     *ft_mur(t_all *all, char *line)
 		ft_exit(all);
 	}
 	j = 0;
-	ft_printf("atext %s\n", atext );
 	while (s[j])
 		free(s[j++]);
 	free(s[j]);

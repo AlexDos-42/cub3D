@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 19:52:22 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/20 20:29:21 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/21 21:00:17 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ft_moverot(t_all *all)
 		all->cam.ori.x = all->cam.ori.x * cos(-vitrot) - all->cam.ori.y * sin(-vitrot);
 		all->cam.ori.y = oldorix * sin(-vitrot) + all->cam.ori.y * cos(-vitrot);
 		oldplanex = all->algo.plane.x;
-		all->algo.plane.x = all->algo.plane.x * cos(-vitrot) - all->algo.plane.y * sin(-vitrot);
-		all->algo.plane.y = oldplanex * sin(-vitrot) + all->algo.plane.y * cos(-vitrot);
+		all->algo.plane.x = -0.66 * all->cam.ori.y;
+		all->algo.plane.y = 0.66 * all->cam.ori.x;
 	}
 	if (all->mvt.rot.y)
 	{
@@ -107,6 +107,13 @@ int 	ft_push(int key, t_all *all)
 		all->mvt.rot.x = 1;
 	else if (key == 14 || key == 124)
 		all->mvt.rot.y = 1;
+	if (key == 48)
+	{
+		if (all->mvt.hud == 0)
+			all->mvt.hud = 1;
+		else
+			all->mvt.hud = 0;
+	}
 	return (0);
 }
 
@@ -135,15 +142,19 @@ int	 ft_depush(int key, t_all *all)
 int	ft_keys(t_all *all)
 {
 	double	tmp;
-	
-	tmp = all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x;
+	int x;
+
+	x = 0;
+	tmp = all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x + x;
 	if (all->mvt.up.x == 1 || all->mvt.up.y == 1)
 		ft_moveup(all);
 	if (all->mvt.side.x == 1 || all->mvt.side.y == 1)
 		ft_moveside(all);
 	if (all->mvt.rot.x  == 1|| all->mvt.rot.y == 1)
 		ft_moverot(all);
-	if (tmp != (all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x))
+	if (all->mvt.hud == 1 && (x += 1))
+		ft_hud(all);
+	if (tmp != (all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x + x))
 		ft_refresh(all);
 
 	return (0);

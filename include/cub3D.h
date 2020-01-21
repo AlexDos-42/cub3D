@@ -39,50 +39,35 @@ typedef struct	s_mvt
 	t_coor			up;
 	t_coor			side;
 	t_coor			rot;
+	int				hud;
 }				t_mvt;
 
 typedef struct		s_cam
 {
-	// sur quelle case est la caméra
 	t_dcoor			pos;
-	// position de départ du rayon
 	t_dcoor			raypos;
-	// quelle case on regarde
 	t_coor			map;
-	// quelle est l'orientation de la caméra
 	t_dcoor			ori;
-	// direction du rayon
 	t_dcoor			rayDir;
-	// est ce que la cam est définie
 	int				isit;
 	double			speed;
 }					t_cam;
 
 typedef struct		s_algo
 {
-	// longueur du rayon
 	t_dcoor			len;
-	// longueur du rayon entre chaque intersection
 	t_dcoor			delta;
-	// direction du vecteur sur X et Y (+1 ou -1)
 	t_coor			dir;
-	//le rayon touche un mur ou pas
-	int				hit;
-	//quelle orientation à le mur (nord/sud ou est/ouest) dans la map
 	int				NSEO;
-	// distance corrigée du rayon
 	double			newlong;
-	//la hauteur de la ligne à tracer
 	double			hauteurLigne;
-	// vecteur du plan de projection
 	t_dcoor			plane;
-	// position de la colonne par rapport au centre de l’écran
 	double			colX;
-	// Calcule la distance corrigée pour la projection
 	double			pDist;
-	//Calcule les pixels max haut et max bas de la colonne à tracer
 	double			drawstart;
 	double			drawend;
+	t_dcoor			trans;
+	int				spscreen;
 }					t_algo;
 
 typedef struct		s_texture
@@ -96,23 +81,22 @@ typedef struct		s_texture
 
 typedef struct		s_info
 {
-	char	*n;
-	char	*s;
-	char	*e;
-	char	*w;
-	char	*i;
+	char			*n;
+	char			*s;
+	char			*e;
+	char			*w;
+	char			*i;
 	unsigned int	c;
 	unsigned int	f;
 	t_coor			res;
 	t_coor          maplen;
 	char            *bufmap;
-	t_coor          *bloc;
-	int 			nbbloc;
-	t_texture		notext;
-	t_texture		sotext;
-	t_texture		etext;
-	t_texture		wtext;
-	t_texture		stext;
+	t_coor 			*sprite;
+	int				nbsp;
+	int				*sp_odre;
+	double			*sp_dist;
+	t_dcoor			camsp;
+
 }                   t_info;
 
 typedef struct		s_all
@@ -163,4 +147,7 @@ void	ft_reycasting(t_all *all);
 void	ft_textures(t_all *all);
 void	ft_puttexture(char *texture_path, t_texture *texture, t_all *all);
 
+void    ft_sprites(t_all *all);
+
+void    ft_hud(t_all *all);
 #endif
