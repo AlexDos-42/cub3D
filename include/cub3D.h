@@ -40,6 +40,7 @@ typedef struct	s_mvt
 	t_coor			side;
 	t_coor			rot;
 	int				hud;
+	int				msc;
 }				t_mvt;
 
 typedef struct		s_cam
@@ -68,6 +69,11 @@ typedef struct		s_algo
 	double			drawend;
 	t_dcoor			trans;
 	int				spscreen;
+	t_coor			start;
+	t_coor			end;
+	int				spw;
+	int				sph;
+	int				texsp_x;
 }					t_algo;
 
 typedef struct		s_texture
@@ -77,6 +83,9 @@ typedef struct		s_texture
 	int				bpp;
 	int				line_size;
 	int				endian;
+	int				h;
+	int				w;
+	int				color;
 }		t_texture;
 
 typedef struct		s_info
@@ -91,13 +100,24 @@ typedef struct		s_info
 	t_coor			res;
 	t_coor          maplen;
 	char            *bufmap;
+}                   t_info;
+
+typedef struct		s_spr
+{
 	t_coor 			*sprite;
 	int				nbsp;
 	int				*sp_odre;
 	double			*sp_dist;
 	t_dcoor			camsp;
-
-}                   t_info;
+	t_dcoor			trans;
+	t_coor			start;
+	t_coor			end;
+	int				spscreen;
+	int				sph;
+	int				spw;
+	t_coor			texsp;
+	double			*distwall;
+}                   t_spr;
 
 typedef struct		s_all
 {
@@ -106,6 +126,7 @@ typedef struct		s_all
 	t_mlx           mlx;
 	t_cam           cam;
 	t_mvt			mvt;
+	t_spr			spr;
 	t_texture		textureN;
 	t_texture		textureS;
 	t_texture		textureE;

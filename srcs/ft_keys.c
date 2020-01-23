@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 19:52:22 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/21 21:00:17 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/23 14:20:35 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,23 @@ int 	ft_push(int key, t_all *all)
 			all->mvt.hud = 1;
 		else
 			all->mvt.hud = 0;
+	}
+	if (key == 46)
+	{
+		if (all->mvt.msc == 0)
+		{
+//			ft_music;
+			system("afplay objet/UltraInstinct.mp3&");
+			all->mvt.msc = 1;
+		}
+	}
+	if (key == 40)
+	{
+		if (all->mvt.msc == 1)
+		{
+			system("pkill afplay");
+			all->mvt.msc = 0;
+		}
 	}
 	return (0);
 }

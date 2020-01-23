@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 13:39:55 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/20 17:59:21 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:08:57 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 void	ft_puttexture(char *texture_addr, t_texture *texture, t_all *all)
 {	
- 	int h;
- 	int w;
-  
-  	h = 64;
-  	w = 64;
-	if (!(texture->ptr = mlx_xpm_file_to_image(all->mlx.ptr, texture_addr, &w, &h)))
+	if (!(texture->ptr = mlx_xpm_file_to_image(all->mlx.ptr, texture_addr, &all->texture.w, &all->texture.h)))
   	{
 		ft_printf("Error\nmlx_xpm_file_to_image");
 		ft_exit(all);
