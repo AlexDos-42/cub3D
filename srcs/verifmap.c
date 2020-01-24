@@ -36,8 +36,8 @@ void     ft_checkline(char *line, int j, t_all *all)
 			ft_exit(all);
 		}
 	}
-	all->spr.sprite = malloc(sizeof(*all->spr.sprite) * all->spr.nbsp);
-	all->spr.sp_odre = malloc(sizeof(int) * all->spr.nbsp);
+	all->spr.sprite = malloc(sizeof(t_coor) * all->spr.nbsp);
+	all->spr.sp_odre = malloc(sizeof(t_texture) * all->spr.nbsp);
 	all->spr.sp_dist = malloc(sizeof(double) * all->spr.nbsp);
 	if (all->spr.nbsp && (!all->spr.sprite || !all->spr.sp_odre || !all->spr.sp_dist))	
 	{

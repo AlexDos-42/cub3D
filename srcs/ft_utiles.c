@@ -20,8 +20,7 @@ t_coor	ft_coor(int x, int y)
 
 void     ft_exit(t_all *all)
 {
-	if (all->info.bufmap)
-		free(all->info.bufmap);
+	(void)all;
 	exit(0);
 }
 

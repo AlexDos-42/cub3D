@@ -42,13 +42,11 @@ void	ft_refresh(t_all *all)
 
 	initmlx(all);
 	ft_reycasting(all);
-	ft_printf("av sprites\n");
 	ft_sprites(all);
-	ft_printf("ap sprites\n");
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, all->mlx.imgptr, 0, 0);
-	test.data = mlx_xpm_file_to_image(all->mlx.ptr, "./objet/hand.xpm", &test.h , &test.w);
-	test.h = all->info.res.y / 300;
-	test.w = all->info.res.y / 300;
+	test.data = mlx_xpm_file_to_image(all->mlx.ptr, "./objet/hand.xpm", &(test.h) , &(test.w));
+	test.h = all->info.res.y / 3;
+	test.w = all->info.res.y / 3;
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, test.data, 50, all->info.res.y / 1.89);
 	mlx_destroy_image(all->mlx.ptr, all->mlx.imgptr);
 }
@@ -57,11 +55,6 @@ void	initall(t_all *all, char **argv)
 {
 	ft_memset(all, 0, sizeof(t_all));
 	all->cam.speed = 0.13;
-	if (!(all->spr.distwall = ft_calloc(sizeof(int*), all->info.res.x)))
-	{
-		 ft_printf(ERROR_MALLOC, "initall distwall");
-		 ft_exit(all);
-	}
 	ft_parsing(argv, all);
 	initwindow(all);
 	ft_textures(all);

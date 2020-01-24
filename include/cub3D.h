@@ -86,6 +86,7 @@ typedef struct		s_texture
 	int				h;
 	int				w;
 	int				color;
+	int				o;
 }		t_texture;
 
 typedef struct		s_info
@@ -106,7 +107,7 @@ typedef struct		s_spr
 {
 	t_coor 			*sprite;
 	int				nbsp;
-	int				*sp_odre;
+	t_texture		*sp_odre;
 	double			*sp_dist;
 	t_dcoor			camsp;
 	t_dcoor			trans;
