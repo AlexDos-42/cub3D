@@ -36,7 +36,7 @@ void	get_color(t_all *all, int x, int y, int i)
 	if (x >= 0 && x < all->spr.sp_odre[i].w && y >= 0 && y < all->spr.sp_odre[i].h)
 	{
 		all->spr.sp_odre[i].color = *(int*)(all->spr.sp_odre[i].ptr
-				+ (x * all->spr.sp_odre[i].bpp / 8 + y * all->spr.sp_odre[i].line_size));
+				+ (x * all->spr.sp_odre[i].bits_per_pixel / 8 + y * all->spr.sp_odre[i].size_line));
 	}
 	else
 		all->spr.sp_odre[i].color = 0x0;
@@ -47,9 +47,9 @@ void	color_dist(t_all *all, double dis, int i)
 	if (dis > 2.0)
 	{
 		all->spr.sp_odre[i].color = 
-		(((int)(((all->spr.sp_odre[i].color & 0xFF0000) >> 16) / (dis / 2.0)) << 16) |
-		((int)(((all->spr.sp_odre[i].color & 0x00FF00) >> 8) / (dis / 2.0)) << 8) |
-		(int)((all->spr.sp_odre[i].color & 0x0000FF) / (dis / 2.0)));
+		(((int)(((all->spr.sp_odre[i].color & 0xFF0000) >> 16) / 256) |
+		((int)(((all->spr.sp_odre[i].color & 0x00FF00) >> 8) / 256) |
+		(int)((all->spr.sp_odre[i].color & 0x0000FF) / 256))));
 	}
 }
 
@@ -57,8 +57,9 @@ void	draw_pix(t_all *all, int x, int y, int i)
 {
 
 	if (x >= 0 && x < all->info.res.x && y >= 0 && y < all->info.res.y)
-		*(int*)(all->mlx.imgptr + (all->info.res.x * y + x) *
-				all->mlx.bits_per_pixel / 8) = all->spr.sp_odre[i].color;
+//		*(int*)(all->mlx.imgptr + (all->info.res.x * y + x) *
+//				all->mlx.bits_per_pixel / 8) = all->spr.sp_odre[i].color;
+	all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = all->spr.sp_odre[i].color;
 //		all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = all->spr.sp_odre[i].data[all->spr.texsp.x + all->spr.texsp.y * all->texture.w];
 //	printf("all->spr.sp_odre[i].color%d\n", all->spr.sp_odre[i].color);
 }
@@ -75,9 +76,9 @@ void	sp_draw(t_all *all, int x, int i)
 		all->spr.texsp.y = (d * all->spr.sp_odre[i].h / all->spr.sph) / 256;
 		get_color(all, all->spr.texsp.x, all->spr.texsp.y, i);
 		color_dist(all, all->spr.sp_dist[i] / 4, i);
-//		if (all->spr.trans.y < all->spr.distwall[x])
+		if (all->spr.trans.y < all->spr.distwall[x])
 //			draw_pix(all, x, y, i);
-		all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = all->spr.sp_odre[i].color;
+			all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = all->spr.sp_odre[i].color;
 		y++;
 	}
 }
@@ -125,7 +126,8 @@ void	init_sprites(t_all *all)
 	i = 0;
 	while (i < all->spr.nbsp)
 	{
-		all->spr.sp_odre[i] = all->textureI;
+		all->spr.sp_odre[i].w = 64;
+		all->spr.sp_odre[i].h = 64;
 		sp_position(all, i);
 		sp_dimension(all);
 		x = all->spr.start.x;
@@ -149,7 +151,7 @@ void		ft_sprites(t_all *all)
 
 	y = 0;
 	i = 0;
-	printf("all->info.bufmap %s\n", all->info.bufmap);
+//	printf("all->info.bufmap %s\n", all->info.bufmap);
 	while (y < all->info.maplen.y)
 	{
 		x = 0;

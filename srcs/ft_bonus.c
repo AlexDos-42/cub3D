@@ -30,60 +30,50 @@ void	ft_hud(t_all *all)
 	}
 }
 
-t_image		*new_image(
-	t_window *win_infos,
-	int x_len,
-	int y_len)
+t_mlx		*new_image(t_all *all, int x_len, int y_len)
 {
-	t_image *img;
+	t_mlx *img;
 
-	if (!(img = malloc(sizeof(t_image))))
+	if (!(img = ft_calloc(sizeof(t_mlx), 1)))
+		ft_exit(all);
+	if (!(img->imgptr = mlx_new_image(all->mlx.ptr, x_len, y_len)))
 		return (void *)0;
-	ft_bzero(img, sizeof(t_image));
-	if (!(img->img_ptr = mlx_new_image(win_infos->mlx_ptr, x_len, y_len)))
-		return (void *)0;
-	img->data = mlx_get_data_addr(img->img_ptr, &img->bpp,
+	img->get_data = (int *)mlx_get_data_addr(img->imgptr, &img->bits_per_pixel,
 				&img->size_line, &img->endian);
-	img->width = x_len;
-	img->height = y_len;
+	img->w = x_len;
+	img->h = y_len;
 	return (img);
 }
 
-static void	health_img(
-	t_window *win_infos
-)
+void	vie_img(t_all *all)
 {
-	t_image	*img;
-	double	img_width;
+	t_mlx	*img;
+	double	img_w;
 	int		x;
 	int		y;
 
-	img_width = (int)(((double)191 / (double)20)
-		* (double)win_infos->player->health);
-	if (!(img = new_image(win_infos, (int)img_width, 30)))
-		leave(1, win_infos, "Error init image map");
-	img->width = (int)img_width;
-	img->height = 30;
-	y = 0;
-	while (y < img->height)
+	img_w = (int)(((double)191 / (double)20) * 20);
+	if (!(img = new_image(all, (int)img_w, 30)))
+		ft_exit(all);
+	img->w = (int)img_w;
+	img->h = 30;
+	x = 0;
+	while (x < img->w - (img->w * all->mvt.life))
 	{
-		x = 0;
-		while (x < img->width)
+		y = 0;
+		while (y < img->h)
 		{
-			pixel_put_to_image(0x00FF00, x, y, img);
-			x++;
+			img->get_data[x + y * (img->size_line / 4)] = 15940372;
+			y++;
 		}
-		y++;
+		x++;
 	}
-	mlx_put_image_to_window(win_infos->mlx_ptr, win_infos->win_ptr,
-		img->img_ptr, 85, 520);
+	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, img->imgptr, 85, 520);
 }
 
-void		draw_health(
-	t_window *win_infos
-)
+void		draw_vie(t_all *all)
 {
-	health_img(win_infos);
-	mlx_put_image_to_window(win_infos->mlx_ptr, win_infos->win_ptr,
-		win_infos->textures[4]->img_ptr, 40, 500);
+	vie_img(all);
+//	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr,
+//		./textures/health.xpm, 40, 500);
 }

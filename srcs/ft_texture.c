@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 13:39:55 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/24 19:39:06 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/25 20:38:34 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,32 @@ void	ft_puttexture(char *texture_addr, t_texture *texture, t_all *all)
 	}
 }
 
+//void	ft_texturespr(char *texture_addr, t_mlx *mlx, t_all *all)
+//{	
+//	if (!(mlx->imgptr = mlx_xpm_file_to_image(all->mlx.ptr, texture_addr, &all->mlx.w, &all->mlx.h)))
+ // 	{
+//		ft_printf("Error\nmlx_xpm_file_to_image");
+//		ft_exit(all);
+//	}
+//	if (!(mlx->get_data = (int *)mlx_get_data_addr(mlx->imgptr, &mlx->bits_per_pixel, &mlx->size_line, &mlx->endian)))
+//	{
+//		ft_printf("Error\nmlx_get_data_addr texture");
+//		ft_exit(all);
+//	}
+//}
+
 void	ft_textures(t_all *all)
 {
+	int i;
+
+	i = 0;
 	ft_puttexture(all->info.n, &all->textureN, all);
 	ft_puttexture(all->info.s, &all->textureS, all);
 	ft_puttexture(all->info.e, &all->textureE, all);
 	ft_puttexture(all->info.w, &all->textureW, all);
-	ft_puttexture(all->info.i, &all->textureI, all);
+//	while (i < all->spr.nbsp)
+//	{
+//		ft_texturespr(all->info.w, &all->spr.sp_odre[i], all);
+//		i++;
+//	}
 }

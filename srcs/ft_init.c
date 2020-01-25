@@ -38,22 +38,24 @@ void initwindow(t_all *all)
 
 void	ft_refresh(t_all *all)
 {
-	t_texture test;
+//	t_texture test;
 
 	initmlx(all);
 	ft_reycasting(all);
-	ft_sprites(all);
+//	ft_sprites(all);
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, all->mlx.imgptr, 0, 0);
-	test.data = mlx_xpm_file_to_image(all->mlx.ptr, "./objet/hand.xpm", &(test.h) , &(test.w));
-	test.h = all->info.res.y / 3;
-	test.w = all->info.res.y / 3;
-	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, test.data, 50, all->info.res.y / 1.89);
+//	test.data = mlx_xpm_file_to_image(all->mlx.ptr, "./objet/hand.xpm", &(test.h) , &(test.w));
+//	test.h = all->info.res.y / 3;
+//	test.w = all->info.res.y / 3;
+//	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, test.data, 50, all->info.res.y / 1.89);
+	draw_vie(all);
 	mlx_destroy_image(all->mlx.ptr, all->mlx.imgptr);
 }
 
 void	initall(t_all *all, char **argv)
 {
-	ft_memset(all, 0, sizeof(t_all));
+	all = ft_calloc(sizeof(t_all), 1);
+//	ft_memset(all, 0, sizeof(t_all));
 	all->cam.speed = 0.13;
 	ft_parsing(argv, all);
 	initwindow(all);

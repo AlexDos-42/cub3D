@@ -36,10 +36,15 @@ void     ft_checkline(char *line, int j, t_all *all)
 			ft_exit(all);
 		}
 	}
-	all->spr.sprite = malloc(sizeof(t_coor) * all->spr.nbsp);
-	all->spr.sp_odre = malloc(sizeof(t_texture) * all->spr.nbsp);
-	all->spr.sp_dist = malloc(sizeof(double) * all->spr.nbsp);
-	if (all->spr.nbsp && (!all->spr.sprite || !all->spr.sp_odre || !all->spr.sp_dist))	
+	t_spr *spr;
+	ft_memset(spr, 0, sizeof(t_spr));
+	spr = malloc(sizeof(t_spr));
+	spr->sprite = malloc(sizeof(t_coor) * spr->nbsp);
+	i = -1;
+	while (++i < all->spr.nbsp)
+		spr->sp_odre[i] = malloc(sizeof(t_mlx));
+	spr->sp_dist = malloc(sizeof(double) * spr->nbsp);
+	if (spr->nbsp && (!spr->sprite || !spr->sp_dist))	
 	{
 			printf(ERROR_MALLOC, "malloc sprite");
 			ft_exit(all);

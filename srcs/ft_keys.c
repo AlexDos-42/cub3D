@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 19:52:22 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/23 14:20:35 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/25 19:44:56 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ int 	ft_push(int key, t_all *all)
 	{
 		if (all->mvt.msc == 0)
 		{
-//			ft_music;
 			system("afplay objet/UltraInstinct.mp3&");
 			all->mvt.msc = 1;
 		}
@@ -130,6 +129,18 @@ int 	ft_push(int key, t_all *all)
 			system("pkill afplay");
 			all->mvt.msc = 0;
 		}
+	}
+	if (key == 32)
+	{
+		if (all->mvt.life != 1)
+		all->mvt.life += 0.25;
+		ft_refresh(all);
+	}
+	else if (key == 34)
+	{
+		if (all->mvt.life != 0)
+		all->mvt.life -= 0.25;
+		ft_refresh(all);
 	}
 	return (0);
 }
@@ -159,19 +170,17 @@ int	 ft_depush(int key, t_all *all)
 int	ft_keys(t_all *all)
 {
 	double	tmp;
-	int x;
 
-	x = 0;
-	tmp = all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x + x;
+	tmp = all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x;
 	if (all->mvt.up.x == 1 || all->mvt.up.y == 1)
 		ft_moveup(all);
 	if (all->mvt.side.x == 1 || all->mvt.side.y == 1)
 		ft_moveside(all);
 	if (all->mvt.rot.x  == 1|| all->mvt.rot.y == 1)
 		ft_moverot(all);
-	if (all->mvt.hud == 1 && (x += 1))
+	if (all->mvt.hud == 1)
 		ft_hud(all);
-	if (tmp != (all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x + x))
+	if (tmp != (all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x))
 		ft_refresh(all);
 
 	return (0);

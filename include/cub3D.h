@@ -32,6 +32,10 @@ typedef struct	s_mlx
 	int			size_line;
 	int			endian;
 	int			*get_data;
+	int			w;
+	int			h;
+	int			o;
+	int			color;
 }				t_mlx;
 
 typedef struct	s_mvt
@@ -41,6 +45,7 @@ typedef struct	s_mvt
 	t_coor			rot;
 	int				hud;
 	int				msc;
+	double			life;
 }				t_mvt;
 
 typedef struct		s_cam
@@ -86,7 +91,6 @@ typedef struct		s_texture
 	int				h;
 	int				w;
 	int				color;
-	int				o;
 }		t_texture;
 
 typedef struct		s_info
@@ -107,7 +111,7 @@ typedef struct		s_spr
 {
 	t_coor 			*sprite;
 	int				nbsp;
-	t_texture		*sp_odre;
+	t_mlx			*sp_odre;
 	double			*sp_dist;
 	t_dcoor			camsp;
 	t_dcoor			trans;
@@ -132,7 +136,8 @@ typedef struct		s_all
 	t_texture		textureS;
 	t_texture		textureE;
 	t_texture		textureW;
-	t_texture		textureI;
+	t_mlx			textureI;
+	t_texture		textureh;
 	t_texture		texture;
 }                   t_all;
 
@@ -171,5 +176,6 @@ void	ft_puttexture(char *texture_path, t_texture *texture, t_all *all);
 
 void    ft_sprites(t_all *all);
 
+void    draw_vie(t_all *all);
 void    ft_hud(t_all *all);
 #endif
