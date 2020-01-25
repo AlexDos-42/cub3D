@@ -54,8 +54,7 @@ void	ft_refresh(t_all *all)
 
 void	initall(t_all *all, char **argv)
 {
-	all = ft_calloc(sizeof(t_all), 1);
-//	ft_memset(all, 0, sizeof(t_all));
+	ft_memset(all, 0, sizeof(t_all));
 	all->cam.speed = 0.13;
 	ft_parsing(argv, all);
 	initwindow(all);
