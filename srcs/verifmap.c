@@ -17,41 +17,29 @@ void		posdepart(t_all *all, int x, int y, char dir)
 	all->cam.isit++;
 }
 
-void     ft_checkline(char *line, int j, t_all *all)
+void     ft_checkline(char *line, int j, t_all *all, t_spr *spr)
 {;
 	int			i;
 	int			k;
 
 	i = -1;
+ 	spr = calloc(sizeof(t_spr), 1);
 	while (++i < all->info.maplen.x)
 	{
 		k = i + (j * all->info.maplen.x);
 		if (line[k] == 'N' || line[k] == 'S' || line[k] == 'W' || line[k] == 'E')
 			posdepart(all, i, j, line[k]);
 		else if (line[k] == '2')
-			all->spr.nbsp++;
+			spr.nbsp++;
 		else if (line[k] != '1' && line[k] != '0')
 		{
 			printf(ERROR_MAP, line[k]);
 			ft_exit(all);
 		}
 	}
-	t_spr *spr;
-	ft_memset(spr, 0, sizeof(t_spr));
-	spr = malloc(sizeof(t_spr));
-	spr->sprite = malloc(sizeof(t_coor) * spr->nbsp);
-	i = -1;
-	while (++i < all->spr.nbsp)
-		spr->sp_odre[i] = malloc(sizeof(t_mlx));
-	spr->sp_dist = malloc(sizeof(double) * spr->nbsp);
-	if (spr->nbsp && (!spr->sprite || !spr->sp_dist))	
-	{
-			printf(ERROR_MALLOC, "malloc sprite");
-			ft_exit(all);
-	}
 }
 
-void	verify_map(t_all *all)
+void	verify_map(t_all *all, t_spr *spr)
 {
     int		j;
     char *tmp;
@@ -60,4 +48,14 @@ void	verify_map(t_all *all)
 	tmp = all->info.bufmap;
     while (++j < all->info.maplen.y)
 		ft_checkline(tmp, j, all);
+    spr->sprite = malloc(sizeof(t_coor) * spr->nbsp);
+    j = -1;
+    while (++j < spr->nbsp)
+	spr->sp_odre[j] = malloc(sizeof(t_mlx));
+    spr->sp_dist = malloc(sizeof(double) * spr->nbsp);
+    if (spr->nbsp && (!spr->sprite || !spr->sp_dist))	
+    {
+	printf(ERROR_MALLOC, "malloc sprite");
+	ft_exit(all);
+    }    
 }
