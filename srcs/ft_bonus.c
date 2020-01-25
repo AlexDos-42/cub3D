@@ -29,3 +29,61 @@ void	ft_hud(t_all *all)
 			"ESC : Game Over");
 	}
 }
+
+t_image		*new_image(
+	t_window *win_infos,
+	int x_len,
+	int y_len)
+{
+	t_image *img;
+
+	if (!(img = malloc(sizeof(t_image))))
+		return (void *)0;
+	ft_bzero(img, sizeof(t_image));
+	if (!(img->img_ptr = mlx_new_image(win_infos->mlx_ptr, x_len, y_len)))
+		return (void *)0;
+	img->data = mlx_get_data_addr(img->img_ptr, &img->bpp,
+				&img->size_line, &img->endian);
+	img->width = x_len;
+	img->height = y_len;
+	return (img);
+}
+
+static void	health_img(
+	t_window *win_infos
+)
+{
+	t_image	*img;
+	double	img_width;
+	int		x;
+	int		y;
+
+	img_width = (int)(((double)191 / (double)20)
+		* (double)win_infos->player->health);
+	if (!(img = new_image(win_infos, (int)img_width, 30)))
+		leave(1, win_infos, "Error init image map");
+	img->width = (int)img_width;
+	img->height = 30;
+	y = 0;
+	while (y < img->height)
+	{
+		x = 0;
+		while (x < img->width)
+		{
+			pixel_put_to_image(0x00FF00, x, y, img);
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window(win_infos->mlx_ptr, win_infos->win_ptr,
+		img->img_ptr, 85, 520);
+}
+
+void		draw_health(
+	t_window *win_infos
+)
+{
+	health_img(win_infos);
+	mlx_put_image_to_window(win_infos->mlx_ptr, win_infos->win_ptr,
+		win_infos->textures[4]->img_ptr, 40, 500);
+}
