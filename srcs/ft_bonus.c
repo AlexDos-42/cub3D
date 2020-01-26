@@ -52,7 +52,7 @@ void	vie_img(t_all *all)
 	int		x;
 	int		y;
 
-	img_w = (int)(((double)191 / (double)20) * 20);
+	img_w = (int)(all->info.res.x / 5);
 	if (!(img = new_image(all, (int)img_w, 30)))
 		ft_exit(all);
 	img->w = (int)img_w;
@@ -70,7 +70,7 @@ void	vie_img(t_all *all)
 		color++;
 		x++;
 	}
-	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, img->imgptr, 85, 520);
+	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, img->imgptr, all->info.res.x / 10, all->info.res.y * 0.8);
 }
 
 void		draw_vie(t_all *all)

@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:33:50 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/26 17:52:33 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/26 21:06:32 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void ft_drawall(t_all *all, int x)
 	else
 		wallX = all->cam.raypos.y + all->algo.pDist * all->cam.rayDir.y;
 	wallX -= floor(wallX);
-	texX = wallX * all->texture.w;
+	texX = wallX * 64;
 	while (all->algo.drawstart < all->algo.drawend)
 	{
 		texY = (all->algo.drawstart - all->info.res.y / 2 +
@@ -151,7 +151,7 @@ void ft_reycasting(t_all *all)
 				* (all->mlx.size_line / 4)] = all->info.c;
 			y++;
 		}
-	all->spr.distwall[x] = all->algo.pDist;
+		all->spr.distwall[x] = all->algo.pDist;
 		x++;
 	}
 }

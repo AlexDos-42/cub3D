@@ -38,16 +38,16 @@ void initwindow(t_all *all)
 
 void	ft_refresh(t_all *all)
 {
-//	t_texture test;
+	t_mlx test;
 
 	initmlx(all);
 	ft_reycasting(all);
 	ft_sprites(all);
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, all->mlx.imgptr, 0, 0);
-//	test.data = mlx_xpm_file_to_image(all->mlx.ptr, "./objet/hand.xpm", &(test.h) , &(test.w));
-//	test.h = all->info.res.y / 3;
-//	test.w = all->info.res.y / 3;
-//	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, test.data, 50, all->info.res.y / 1.89);
+	test.get_data = mlx_xpm_file_to_image(all->mlx.ptr, "./objet/hand.xpm", &test.h , &test.w);
+	test.h = all->info.res.y / 1;
+	test.w = all->info.res.y / 1;
+	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, test.get_data, 50, all->info.res.y / 1.89);
 	draw_vie(all);
 	mlx_destroy_image(all->mlx.ptr, all->mlx.imgptr);
 }
