@@ -1,149 +1,149 @@
 # include "../include/cub3D.h"
 
-void	sp_position(t_all *all, int i)
+void	sp_position(t_all *all, int i, t_spr *spr)
 {
 	double invdet;
 
-	all->spr.camsp.x = all->spr.sprite[all->spr.sp_odre[i].o].x - all->cam.pos.x;
-	all->spr.camsp.y = all->spr.sprite[all->spr.sp_odre[i].o].y - all->cam.pos.y;
+	spr->camsp.x = spr->sprite[all->spr.sp_odre[i].o].x - all->cam.pos.x;
+	spr->camsp.y = spr->sprite[all->spr.sp_odre[i].o].y - all->cam.pos.y;
 	invdet = 1.0 / (all->algo.plane.x * all->cam.ori.y - all->algo.plane.y * all->cam.ori.x);
 	all->spr.trans.x = invdet * (all->cam.ori.y * all->spr.camsp.x - all->cam.ori.x * all->spr.camsp.y);
 	all->spr.trans.y = invdet * (-all->algo.plane.y * all->spr.camsp.x + all->algo.plane.x * all->spr.camsp.y);
 	all->spr.spscreen = (int)((all->info.res.x / 2) * (1.0 + all->spr.trans.x / all->spr.trans.y));
 }
 
-void	sp_dimension(t_all *all)
+void	sp_dimension(t_all *all, t_spr *spr)
 {
 
-	all->spr.sph = abs((int)(all->info.res.y / all->spr.trans.y));
-	all->spr.start.y = -all->spr.sph / 2 + all->info.res.y / 2;
-	if (all->spr.start.y < 0)
-		all->spr.start.y = 0;
-	all->spr.end.y = all->spr.sph / 2 + all->info.res.y / 2;
-	if (all->spr.end.y >= all->info.res.y)
-		all->spr.end.y = all->info.res.y - 1;
-	all->spr.spw = abs((int)(all->info.res.y / all->spr.trans.y));
-	all->spr.start.x = -all->spr.spw / 2 + all->spr.spscreen;
-	if (all->spr.start.x < 0)
-		all->spr.start.x = 0;
-	all->spr.end.x = all->spr.spw / 2 + all->spr.spscreen;
-	if (all->spr.end.x >= all->info.res.x)
-		all->spr.end.x = all->info.res.x - 1;
+	spr->sph = abs((int)(all->info.res.y / spr->trans.y));
+	spr->start.y = -spr->sph / 2 + all->info.res.y / 2;
+	if (spr->start.y < 0)
+		spr->start.y = 0;
+	spr->end.y = spr->sph / 2 + all->info.res.y / 2;
+	if (spr->end.y >= all->info.res.y)
+		spr->end.y = all->info.res.y - 1;
+	spr->spw = abs((int)(all->info.res.y / spr->trans.y));
+	spr->start.x = -spr->spw / 2 + spr->spscreen;
+	if (spr->start.x < 0)
+		spr->start.x = 0;
+	spr->end.x = spr->spw / 2 + spr->spscreen;
+	if (spr->end.x >= all->info.res.x)
+		spr->end.x = all->info.res.x - 1;
 }
 
-void	get_color(t_all *all, int x, int y, int i)
+void	get_color(t_all *all, int x, int y, int i, t_spr *spr)
 {
-	if (x >= 0 && x < all->spr.sp_odre[i].w && y >= 0 && y < all->spr.sp_odre[i].h)
+	if (x >= 0 && x < spr->sp_odre[i].w && y >= 0 && y < spr->sp_odre[i].h)
 	{
-		all->spr.sp_odre[i].color = *(int*)(all->spr.sp_odre[i].ptr
-				+ (x * all->spr.sp_odre[i].bits_per_pixel / 8 + y * all->spr.sp_odre[i].size_line));
+		spr->sp_odre[i].color = *(int*)(spr->sp_odre[i].ptr
+				+ (x * spr->sp_odre[i].bits_per_pixel / 8 + y * spr->sp_odre[i].size_line));
 	}
 	else
-		all->spr.sp_odre[i].color = 0x0;
+		spr->sp_odre[i].color = 0x0;
 }
 
-void	color_dist(t_all *all, double dis, int i)
+void	color_dist(t_all *all, double dis, int i, t_spr *spr)
 {
 	if (dis > 2.0)
 	{
 		all->spr.sp_odre[i].color = 
-		(((int)(((all->spr.sp_odre[i].color & 0xFF0000) >> 16) / 256) |
-		((int)(((all->spr.sp_odre[i].color & 0x00FF00) >> 8) / 256) |
-		(int)((all->spr.sp_odre[i].color & 0x0000FF) / 256))));
+		(((int)(((spr->sp_odre[i].color & 0xFF0000) >> 16) / 256) |
+		((int)(((spr->sp_odre[i].color & 0x00FF00) >> 8) / 256) |
+		(int)((spr->sp_odre[i].color & 0x0000FF) / 256))));
 	}
 }
 
-void	draw_pix(t_all *all, int x, int y, int i)
+void	draw_pix(t_all *all, int x, int y, int i, t_spr *spr)
 {
 
 	if (x >= 0 && x < all->info.res.x && y >= 0 && y < all->info.res.y)
 //		*(int*)(all->mlx.imgptr + (all->info.res.x * y + x) *
-//				all->mlx.bits_per_pixel / 8) = all->spr.sp_odre[i].color;
+//				all->mlx.bits_per_pixel / 8) = spr->sp_odre[i].color;
 	all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = all->spr.sp_odre[i].color;
-//		all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = all->spr.sp_odre[i].data[all->spr.texsp.x + all->spr.texsp.y * all->texture.w];
-//	printf("all->spr.sp_odre[i].color%d\n", all->spr.sp_odre[i].color);
+//		all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = spr->sp_odre[i].data[spr->texsp.x + spr->texsp.y * all->texture.w];
+//	printf("spr->sp_odre[i].color%d\n", spr->sp_odre[i].color);
 }
 
-void	sp_draw(t_all *all, int x, int i)
+void	sp_draw(t_all *all, int x, int i, t_spr spr*)
 {
 	int y;
 	int d;
 
-	y = all->spr.start.y;
-	while (y < all->spr.end.y)
+	y = spr->start.y;
+	while (y < spr->end.y)
 	{
-		d = (y * 256 - all->info.res.y * 128 + all->spr.sph * 128);
-		all->spr.texsp.y = (d * all->spr.sp_odre[i].h / all->spr.sph) / 256;
-		get_color(all, all->spr.texsp.x, all->spr.texsp.y, i);
-		color_dist(all, all->spr.sp_dist[i] / 4, i);
-		if (all->spr.trans.y < all->spr.distwall[x])
-//			draw_pix(all, x, y, i);
-			all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = all->spr.sp_odre[i].color;
+		d = (y * 256 - all->info.res.y * 128 + spr->sph * 128);
+		spr->texsp.y = (d * spr->sp_odre[i].h / spr->sph) / 256;
+		get_color(all, spr->texsp.x, spr->texsp.y, i, spr);
+		color_dist(all, spr->sp_dist[i] / 4, i, spr);
+		if (spr->trans.y < spr->distwall[x])
+//			draw_pix(all, x, y, i, spr);
+			all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = spr->sp_odre[i].color;
 		y++;
 	}
 }
 
-void		ft_sort(t_all *all)
+void		ft_sort(t_all *all, t_spr *spr)
 {
 	int i;
 
 	i = 0;
 	while (i < all->spr.nbsp)
 	{
-		all->spr.sp_odre[i].o = i;
-		all->spr.sp_dist[i] = ft_power(all->cam.pos.x - all->spr.sprite[i].x, 2)
-			+ ft_power(all->cam.pos.y - all->spr.sprite[i].y, 2);
+		spr->sp_odre[i].o = i;
+		spr->sp_dist[i] = ft_power(all->cam.pos.x - spr->sprite[i].x, 2)
+			+ ft_power(all->cam.pos.y - spr->sprite[i].y, 2);
 		i++;
 	}
 }
 
-void		ft_sort_sp(t_all *all)
+void		ft_sort_sp(t_all *all, t_spr *spr->)
 {
 	int tmp;
 	int i;
 
 	i = 0;
-	while (i + 1 < all->spr.nbsp)
+	while (i + 1 < spr->nbsp)
 	{
-		if (all->spr.sp_dist[all->spr.sp_odre[i].o] < all->spr.sp_dist[all->spr.sp_odre[i + 1].o])
+		if (spr->sp_dist[spr->sp_odre[i].o] < spr->sp_dist[spr->sp_odre[i + 1].o])
 		{
-			tmp = all->spr.sp_odre[i].o;
-			all->spr.sp_odre[i].o = all->spr.sp_odre[i + 1].o;
-			all->spr.sp_odre[i + 1].o = tmp;
-			ft_sort_sp(all);
+			tmp = spr->sp_odre[i].o;
+			spr->sp_odre[i].o = spr->sp_odre[i + 1].o;
+			spr->sp_odre[i + 1].o = tmp;
+			ft_sort_sp(all, spr);
 		}
 		i++;	
 	}
 }
 
-void	init_sprites(t_all *all)
+void	init_sprites(t_all *all, spr)
 {
 	int i;
 	int x;
 
-	ft_sort(all);
-	ft_sort_sp(all);
+	ft_sort(all, spr);
+	ft_sort_sp(all, spr);
 	i = 0;
-	while (i < all->spr.nbsp)
+	while (i < spr->nbsp)
 	{
-		all->spr.sp_odre[i].w = 64;
-		all->spr.sp_odre[i].h = 64;
-		sp_position(all, i);
-		sp_dimension(all);
-		x = all->spr.start.x;
-		while (x < all->spr.end.x && x < all->info.res.x)
+		//spr->sp_odre[i].w = 64;
+		//spr->sp_odre[i].h = 64;
+		sp_position(all, i, spr);
+		sp_dimension(all, spr);
+		x = spr->start.x;
+		while (x < spr->end.x && x < all->info.res.x)
 		{
-			all->spr.texsp.x = (int)(256 * (x - (-all->spr.spw / 2 + all->spr.spscreen)) *
-					all->spr.sp_odre[i].w / all->spr.spw) / 256;
-			if (all->spr.trans.y > 0)
-				sp_draw(all, x, i);
+			spr->texsp.x = (int)(256 * (x - (-spr->spw / 2 + spr->spscreen)) *
+					spr->sp_odre[i].w / spr->spw) / 256;
+			if (spr->trans.y > 0)
+				sp_draw(all, x, i, spr);
 			x++;
 		}
 		i++;
 	}
 }
 
-void		ft_sprites(t_all *all)
+void		ft_sprites(t_all *all, t_spr *spr)
 {
 	int x;
 	int y;
@@ -159,12 +159,12 @@ void		ft_sprites(t_all *all)
 		{
 			if (all->info.bufmap[x + (y * all->info.maplen.x)] == '2')
 			{
-				all->spr.sprite[i] = (t_coor){x + 0.5, y + 0.5};
+				spr->sprite[i] = (t_coor){x + 0.5, y + 0.5};
 				i++;
 			}
 			x++;
 		}
 		y++;
 	}
-	init_sprites(all);
+	init_sprites(all, spr);
 }
