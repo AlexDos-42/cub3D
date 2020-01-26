@@ -36,13 +36,13 @@ void initwindow(t_all *all)
 	}
 }
 
-void	ft_refresh(t_all *all, t_spr *spr)
+void	ft_refresh(t_all *all)
 {
 //	t_texture test;
 
 	initmlx(all);
-	ft_reycasting(all, spr);
-	ft_sprites(all, spr);
+	ft_reycasting(all);
+	ft_sprites(all);
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, all->mlx.imgptr, 0, 0);
 //	test.data = mlx_xpm_file_to_image(all->mlx.ptr, "./objet/hand.xpm", &(test.h) , &(test.w));
 //	test.h = all->info.res.y / 3;
@@ -54,13 +54,10 @@ void	ft_refresh(t_all *all, t_spr *spr)
 
 void	initall(t_all *all, char **argv)
 {
-	t_spr spr;
-	
 	ft_memset(all, 0, sizeof(t_all));
 	all->cam.speed = 0.13;
-	ft_memset(&spr, 0, sizeof(t_spr));
-	ft_parsing(argv, all, &spr);
+	ft_parsing(argv, all);
 	initwindow(all);
-	ft_textures(all, &spr);
-	ft_refresh(all, &spr);
+	ft_textures(all);
+	ft_refresh(all);
 }

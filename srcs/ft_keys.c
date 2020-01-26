@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 19:52:22 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/26 13:00:04 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/26 18:08:47 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int 	ft_push(int key, t_all *all)
 		{
 			system("afplay objet/UltraInstinct.mp3&");
 			all->mvt.msc = 1;
+		ft_refresh(all);
 		}
 	}
 	if (key == 40)
@@ -128,17 +129,20 @@ int 	ft_push(int key, t_all *all)
 		{
 			system("pkill afplay");
 			all->mvt.msc = 0;
+		ft_refresh(all);
 		}
 	}
 	if (key == 32)
 	{
 		if (all->mvt.life != 1)
 		all->mvt.life += 0.25;
+		ft_refresh(all);
 	}
 	else if (key == 34)
 	{
 		if (all->mvt.life != 0)
 		all->mvt.life -= 0.25;
+		ft_refresh(all);
 	}
 	return (0);
 }
@@ -165,7 +169,7 @@ int	 ft_depush(int key, t_all *all)
 	return (0);
 }
 
-int	ft_keys(t_all *all, t_spr *spr)
+int	ft_keys(t_all *all)
 {
 	double	tmp;
 
@@ -179,7 +183,7 @@ int	ft_keys(t_all *all, t_spr *spr)
 	if (all->mvt.hud == 1)
 		ft_hud(all);
 	if (tmp != (all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x))
-		ft_refresh(all, spr);
+		ft_refresh(all);
 
 	return (0);
 }

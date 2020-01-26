@@ -17,7 +17,7 @@ void		posdepart(t_all *all, int x, int y, char dir)
 	all->cam.isit++;
 }
 
-void     ft_checkline(char *line, int j, t_all *all, t_spr *spr)
+void     ft_checkline(char *line, int j, t_all *all)
 {;
 	int			i;
 	int			k;
@@ -29,7 +29,7 @@ void     ft_checkline(char *line, int j, t_all *all, t_spr *spr)
 		if (line[k] == 'N' || line[k] == 'S' || line[k] == 'W' || line[k] == 'E')
 			posdepart(all, i, j, line[k]);
 		else if (line[k] == '2')
-			spr->nbsp++;
+			all->spr.nbsp++;
 		else if (line[k] != '1' && line[k] != '0')
 		{
 			printf(ERROR_MAP, line[k]);
@@ -38,7 +38,7 @@ void     ft_checkline(char *line, int j, t_all *all, t_spr *spr)
 	}
 }
 
-void	verify_map(t_all *all, t_spr *spr)
+void	verify_map(t_all *all)
 {
     int		j;
     char *tmp;
@@ -46,6 +46,7 @@ void	verify_map(t_all *all, t_spr *spr)
     j = -1;
 	tmp = all->info.bufmap;
     while (++j < all->info.maplen.y)
-		ft_checkline(tmp, j, all, spr);
-    all->sprites = (t_sprites*)ft_calloc(sizeof(t_sprites), spr->nbsp);
+		ft_checkline(tmp, j, all);
+    all->sprites = (t_sprites*)ft_calloc(sizeof(t_sprites), all->spr.nbsp);
+	all->spr.distwall = ft_calloc(sizeof(double*), all->info.res.x);
 }

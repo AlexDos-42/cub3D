@@ -151,20 +151,20 @@ typedef struct		s_all
 int     ft_redcross(t_all *all);
 int		main(int argc, char **argv);
 
-void    ft_parsing(char **argv, t_all *all, t_spr *spr);
+void    ft_parsing(char **argv, t_all *all);
 void    ft_parsing_line(t_all *all, char *line);
 void	ft_bufmap(t_all *all, char *line);
 void    ft_res(t_all *all, char *line);
 int   	ft_sol(char *line, t_all *all);
 char    *ft_mur(t_all *all, char *line);
 
-void	verify_map(t_all *all, t_spr *spr);
-void    ft_checkline(char *line, int j, t_all *all, t_spr *spr);
+void	verify_map(t_all *all);
+void    ft_checkline(char *line, int j, t_all *all);
 void	posdepart(t_all *all, int x, int y, char dir);
 
 void	initmlx(t_all *all);
 void	initall(t_all *all, char **argv);
-void	ft_refresh(t_all *all, t_spr *spr);
+void	ft_refresh(t_all *all);
 void	initwindow(t_all *all);
 
 void    ft_ifspace(char *line, int *i);
@@ -174,14 +174,14 @@ t_coor  ft_coor(int x, int y);
 
 int		ft_push(int key, t_all *all);
 int		ft_depush(int key, t_all *all);
-int		ft_keys(t_all *all, t_spr *spr);
+int		ft_keys(t_all *all);
 
-void	ft_reycasting(t_all *all, t_spr *spr);
+void	ft_reycasting(t_all *all);
 
-void	ft_textures(t_all *all, t_spr *spr);
+void	ft_textures(t_all *all);
 void	ft_puttexture(char *texture_path, t_texture *texture, t_all *all);
 
-void    ft_sprites(t_all *all, t_spr *spr);
+void    ft_sprites(t_all *all);
 
 void    draw_vie(t_all *all);
 void    ft_hud(t_all *all);

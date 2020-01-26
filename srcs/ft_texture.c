@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 13:39:55 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/26 15:45:12 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/26 18:07:55 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_texturespr(char *texture_addr, t_mlx *mlx, t_all *all)
 	}
 }
 
-void	ft_textures(t_all *all, t_spr *spr)
+void	ft_textures(t_all *all)
 {
 	int i;
 
@@ -49,7 +49,7 @@ void	ft_textures(t_all *all, t_spr *spr)
 	ft_puttexture(all->info.s, &all->textureS, all);
 	ft_puttexture(all->info.e, &all->textureE, all);
 	ft_puttexture(all->info.w, &all->textureW, all);
-	while (i < spr->nbsp)
+	while (i < all->spr.nbsp)
 	{
 		ft_texturespr(all->info.w, &all->sprites[i].img, all);
 		i++;
