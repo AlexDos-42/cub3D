@@ -4,12 +4,12 @@ void	sp_position(t_all *all, int i, t_spr *spr)
 {
 	double invdet;
 
-	spr->camsp.x = spr->sprite[all->spr.sp_odre[i].o].x - all->cam.pos.x;
-	spr->camsp.y = spr->sprite[all->spr.sp_odre[i].o].y - all->cam.pos.y;
+	spr->camsp.x = spr->sprite[spr->sp_odre[i].o].x - all->cam.pos.x;
+	spr->camsp.y = spr->sprite[spr->sp_odre[i].o].y - all->cam.pos.y;
 	invdet = 1.0 / (all->algo.plane.x * all->cam.ori.y - all->algo.plane.y * all->cam.ori.x);
-	all->spr.trans.x = invdet * (all->cam.ori.y * all->spr.camsp.x - all->cam.ori.x * all->spr.camsp.y);
-	all->spr.trans.y = invdet * (-all->algo.plane.y * all->spr.camsp.x + all->algo.plane.x * all->spr.camsp.y);
-	all->spr.spscreen = (int)((all->info.res.x / 2) * (1.0 + all->spr.trans.x / all->spr.trans.y));
+	spr->trans.x = invdet * (all->cam.ori.y * spr->camsp.x - all->cam.ori.x * spr->camsp.y);
+	spr->trans.y = invdet * (-all->algo.plane.y * spr->camsp.x + all->algo.plane.x * spr->camsp.y);
+	spr->spscreen = (int)((all->info.res.x / 2) * (1.0 + spr->trans.x / spr->trans.y));
 }
 
 void	sp_dimension(t_all *all, t_spr *spr)
