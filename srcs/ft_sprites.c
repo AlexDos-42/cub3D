@@ -78,7 +78,7 @@ void	sp_draw(t_all *all, int x, int i, t_spr spr*)
 		color_dist(all, spr->sp_dist[i] / 4, i, spr);
 		if (spr->trans.y < spr->distwall[x])
 //			draw_pix(all, x, y, i, spr);
-			all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = spr->sp_odre[i].color;
+			spr->sp_odre.get_data[x + y * (all->mlx.size_line / 4)] = spr->sp_odre[i].color;
 		y++;
 	}
 }
