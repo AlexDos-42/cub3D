@@ -58,7 +58,7 @@ void	initall(t_all *all, char **argv)
 	
 	ft_memset(all, 0, sizeof(t_all));
 	all->cam.speed = 0.13;
-	spr = calloc(sizeof(t_spr), 1);
+	ft_memset(&spr, 0, sizeof(t_spr));
 	ft_parsing(argv, all, &spr);
 	initwindow(all);
 	ft_textures(all, &spr);

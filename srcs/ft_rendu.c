@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:33:50 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/25 18:30:37 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/26 12:58:33 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,12 @@ void ft_drawall(t_all *all, int x)
 	}
 }
 
-void ft_reycasting(t_all *all)
+void ft_reycasting(t_all *all, t_spr *spr)
 {
 	int x;
 	int y;
 
-	all->spr.distwall = ft_calloc(sizeof(double*), all->info.res.x);
+	spr->distwall = ft_calloc(sizeof(double*), all->info.res.x);
 	x = 0;
 	while (x < all->info.res.x)
 	{
@@ -152,7 +152,7 @@ void ft_reycasting(t_all *all)
 				* (all->mlx.size_line / 4)] = all->info.c;
 			y++;
 		}
-		all->spr.distwall[x] = all->algo.pDist;
+		spr->distwall[x] = all->algo.pDist;
 		x++;
 	}
 }

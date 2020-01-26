@@ -23,14 +23,13 @@ void     ft_checkline(char *line, int j, t_all *all, t_spr *spr)
 	int			k;
 
 	i = -1;
- 	spr = calloc(sizeof(t_spr), 1);
 	while (++i < all->info.maplen.x)
 	{
 		k = i + (j * all->info.maplen.x);
 		if (line[k] == 'N' || line[k] == 'S' || line[k] == 'W' || line[k] == 'E')
 			posdepart(all, i, j, line[k]);
 		else if (line[k] == '2')
-			spr.nbsp++;
+			spr->nbsp++;
 		else if (line[k] != '1' && line[k] != '0')
 		{
 			printf(ERROR_MAP, line[k]);
@@ -47,15 +46,6 @@ void	verify_map(t_all *all, t_spr *spr)
     j = -1;
 	tmp = all->info.bufmap;
     while (++j < all->info.maplen.y)
-		ft_checkline(tmp, j, all);
-    spr->sprite = malloc(sizeof(t_coor) * spr->nbsp);
-    j = -1;
-    while (++j < spr->nbsp)
-	spr->sp_odre[j] = malloc(sizeof(t_mlx));
-    spr->sp_dist = malloc(sizeof(double) * spr->nbsp);
-    if (spr->nbsp && (!spr->sprite || !spr->sp_dist))	
-    {
-	printf(ERROR_MALLOC, "malloc sprite");
-	ft_exit(all);
-    }    
+		ft_checkline(tmp, j, all, spr);
+    all->sprites = (t_sprites*)ft_calloc(sizeof(t_sprites), spr->nbsp);
 }

@@ -6,7 +6,7 @@
 #    By: alesanto <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/09 17:02:25 by alesanto          #+#    #+#              #
-#    Updated: 2020/01/24 21:40:36 by alesanto         ###   ########.fr        #
+#    Updated: 2020/01/26 16:28:24 by alesanto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ PATHSRCS = srcs
 
 HEADERS = ./include
 
-FLAGS = -Wall -Wextra -Werror -g  #DEBUG
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g  #DEBUG
 
 SRCS = $(addprefix $(PATHSRCS)/,$(SRC))
 LIBS = -lmlx -framework OpenGL -framework AppKit\

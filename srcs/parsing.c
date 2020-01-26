@@ -148,18 +148,21 @@ void     ft_parsing_line(t_all *all, char *line)
 	}
 }
 
-void     ft_parsing(char **argv, t_all *all)
+void     ft_parsing(char **argv, t_all *all, t_spr *spr)
 {
 	int         ret;
 	char        *line;
 	int         fd;
 
+	printf("1\n");
+	printf("argv[1]%s\n", argv[1]);
 
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 	{
 		ft_printf(ERROR_FD);
 		ft_exit(all);
 	}
+	printf("2\n");
 	line = NULL;
 	ret = 1;
 	while ((ret = get_next_line(fd, &line)) == 1)
@@ -173,5 +176,5 @@ void     ft_parsing(char **argv, t_all *all)
 		ft_strdel(&line);
 	}
 	close(fd);
-	verify_map(all);
+	verify_map(all, spr);
 }

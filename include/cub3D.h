@@ -34,7 +34,7 @@ typedef struct	s_mlx
 	int			*get_data;
 	int			w;
 	int			h;
-	int			o;
+//	int			o;
 	int			color;
 }				t_mlx;
 
@@ -107,12 +107,18 @@ typedef struct		s_info
 	char            *bufmap;
 }                   t_info;
 
+typedef struct	 s_sprites
+{
+	t_coor coor;
+	double dist;
+	int		ordre;
+	t_mlx img;
+
+}				 t_sprites;
+
 typedef struct		s_spr
 {
-	t_coor 			*sprite;
 	int				nbsp;
-	t_mlx			*sp_odre;
-	double			*sp_dist;
 	t_dcoor			camsp;
 	t_dcoor			trans;
 	t_coor			start;
@@ -131,7 +137,7 @@ typedef struct		s_all
 	t_mlx           mlx;
 	t_cam           cam;
 	t_mvt			mvt;
-	t_spr			spr;
+	t_spr			spr;	
 	t_texture		textureN;
 	t_texture		textureS;
 	t_texture		textureE;
@@ -139,25 +145,26 @@ typedef struct		s_all
 	t_mlx			textureI;
 	t_texture		textureh;
 	t_texture		texture;
+	t_sprites       *sprites;
 }                   t_all;
 
 int     ft_redcross(t_all *all);
 int		main(int argc, char **argv);
 
-void    ft_parsing(char **argv, t_all *all);
+void    ft_parsing(char **argv, t_all *all, t_spr *spr);
 void    ft_parsing_line(t_all *all, char *line);
 void	ft_bufmap(t_all *all, char *line);
 void    ft_res(t_all *all, char *line);
 int   	ft_sol(char *line, t_all *all);
 char    *ft_mur(t_all *all, char *line);
 
-void	verify_map(t_all *all);
-void    ft_checkline(char *line, int j, t_all *all);
+void	verify_map(t_all *all, t_spr *spr);
+void    ft_checkline(char *line, int j, t_all *all, t_spr *spr);
 void	posdepart(t_all *all, int x, int y, char dir);
 
 void	initmlx(t_all *all);
 void	initall(t_all *all, char **argv);
-void	ft_refresh(t_all *all);
+void	ft_refresh(t_all *all, t_spr *spr);
 void	initwindow(t_all *all);
 
 void    ft_ifspace(char *line, int *i);
@@ -167,14 +174,14 @@ t_coor  ft_coor(int x, int y);
 
 int		ft_push(int key, t_all *all);
 int		ft_depush(int key, t_all *all);
-int		ft_keys(t_all *all);
+int		ft_keys(t_all *all, t_spr *spr);
 
-void	ft_reycasting(t_all *all);
+void	ft_reycasting(t_all *all, t_spr *spr);
 
-void	ft_textures(t_all *all);
+void	ft_textures(t_all *all, t_spr *spr);
 void	ft_puttexture(char *texture_path, t_texture *texture, t_all *all);
 
-void    ft_sprites(t_all *all);
+void    ft_sprites(t_all *all, t_spr *spr);
 
 void    draw_vie(t_all *all);
 void    ft_hud(t_all *all);

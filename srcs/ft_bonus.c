@@ -58,14 +58,16 @@ void	vie_img(t_all *all)
 	img->w = (int)img_w;
 	img->h = 30;
 	x = 0;
+	int color = 15940372;
 	while (x < img->w - (img->w * all->mvt.life))
 	{
 		y = 0;
 		while (y < img->h)
 		{
-			img->get_data[x + y * (img->size_line / 4)] = 15940372;
+			img->get_data[x + y * (img->size_line / 4)] = color ;
 			y++;
 		}
+		color++;
 		x++;
 	}
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, img->imgptr, 85, 520);

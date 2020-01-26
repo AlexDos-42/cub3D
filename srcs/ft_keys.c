@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 19:52:22 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/25 19:44:56 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/26 13:00:04 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,13 +134,11 @@ int 	ft_push(int key, t_all *all)
 	{
 		if (all->mvt.life != 1)
 		all->mvt.life += 0.25;
-		ft_refresh(all);
 	}
 	else if (key == 34)
 	{
 		if (all->mvt.life != 0)
 		all->mvt.life -= 0.25;
-		ft_refresh(all);
 	}
 	return (0);
 }
@@ -167,7 +165,7 @@ int	 ft_depush(int key, t_all *all)
 	return (0);
 }
 
-int	ft_keys(t_all *all)
+int	ft_keys(t_all *all, t_spr *spr)
 {
 	double	tmp;
 
@@ -181,7 +179,7 @@ int	ft_keys(t_all *all)
 	if (all->mvt.hud == 1)
 		ft_hud(all);
 	if (tmp != (all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x))
-		ft_refresh(all);
+		ft_refresh(all, spr);
 
 	return (0);
 }

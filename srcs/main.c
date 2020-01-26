@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:06:07 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/25 17:56:01 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/26 15:29:28 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		main(int argc, char **argv)
 		ft_printf(ERROR_ARGC, argc);
 		ft_exit(&all);
 	}
+	printf("argv[1]%s\n", argv[1]);
 	initall(&all, argv);
 	mlx_do_key_autorepeatoff(all.mlx.ptr);	
 	mlx_hook(all.mlx.winptr, 2, (1L << 0), &ft_push, &all);
