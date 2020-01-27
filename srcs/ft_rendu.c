@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:33:50 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/26 21:06:32 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/27 13:09:48 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,13 @@ void ft_drawall(t_all *all, int x)
 	else
 		wallX = all->cam.raypos.y + all->algo.pDist * all->cam.rayDir.y;
 	wallX -= floor(wallX);
-	texX = wallX * 64;
+	texX = wallX * (double)img.w;
 	while (all->algo.drawstart < all->algo.drawend)
 	{
 		texY = (all->algo.drawstart - all->info.res.y / 2 +
-				all->algo.hauteurLigne / 2) * all->texture.h / all->algo.hauteurLigne;
+				all->algo.hauteurLigne / 2) * img.h / all->algo.hauteurLigne;
 		all->mlx.get_data[x + (int)all->algo.drawstart
-			* (all->mlx.size_line / 4)] = img.data[texX + texY * all->texture.w];
+			* (all->mlx.size_line / 4)] = img.data[texX + texY * img.w];
 		all->algo.drawstart++;
 	}
 }

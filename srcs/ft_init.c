@@ -44,10 +44,10 @@ void	ft_refresh(t_all *all)
 	ft_reycasting(all);
 	ft_sprites(all);
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, all->mlx.imgptr, 0, 0);
-	test.get_data = mlx_xpm_file_to_image(all->mlx.ptr, "./objet/hand.xpm", &test.h , &test.w);
+	test.get_data = mlx_xpm_file_to_image(all->mlx.ptr, "./objet/handsim.xpm", &test.h , &test.w);
 	test.h = all->info.res.y / 1;
 	test.w = all->info.res.y / 1;
-	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, test.get_data, 50, all->info.res.y / 1.89);
+	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, test.get_data, (all->info.res.y / 3) * 2, (all->info.res.y / 7) * 3);
 	draw_vie(all);
 	mlx_destroy_image(all->mlx.ptr, all->mlx.imgptr);
 }

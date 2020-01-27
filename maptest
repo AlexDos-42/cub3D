@@ -3,7 +3,7 @@ NO ./textures/murNord.xpm
 SO ./textures/murSud.xpm
 WE ./textures/murOuest.xpm
 EA ./textures/brique.xpm
-S ./textures/chest.xpm
+S ./textures/burns.xpm
 F 200,126,98
 C 105,105,230
 1 1 1 1 1 1 1 1 1 1 1 1 
@@ -11,6 +11,12 @@ C 105,105,230
 1 0 0 1 0 1 1 0 0 1 0 1
 1 0 0 0 0 2 0 0 0 0 0 1
 1 0 0 0 2 0 0 1 1 1 0 1
+1 0 0 1 0 0 0 0 0 0 0 1
+1 0 0 1 0 0 0 0 0 0 0 1
+1 0 2 1 0 0 0 0 0 0 0 1
+1 0 0 0 0 0 0 0 0 0 0 1
+1 0 2 1 0 0 0 0 2 0 0 1
+1 0 0 1 0 0 0 0 0 0 0 1
 1 0 0 1 1 0 0 0 E 0 2 1
 1 0 0 0 0 0 1 0 0 1 0 1
 1 2 0 0 0 2 0 1 0 1 0 1

@@ -34,7 +34,6 @@ typedef struct	s_mlx
 	int			*get_data;
 	int			w;
 	int			h;
-//	int			o;
 	int			color;
 }				t_mlx;
 
@@ -76,8 +75,6 @@ typedef struct		s_algo
 	int				spscreen;
 	t_coor			start;
 	t_coor			end;
-	int				spw;
-	int				sph;
 	int				texsp_x;
 }					t_algo;
 
@@ -109,7 +106,7 @@ typedef struct		s_info
 
 typedef struct	 s_sprites
 {
-	t_coor coor;
+	t_dcoor coor;
 	double dist;
 	int		ordre;
 	t_mlx img;
@@ -142,9 +139,7 @@ typedef struct		s_all
 	t_texture		textureS;
 	t_texture		textureE;
 	t_texture		textureW;
-	t_mlx			textureI;
 	t_texture		textureh;
-	t_texture		texture;
 	t_sprites       *sprites;
 }                   t_all;
 
@@ -179,7 +174,6 @@ int		ft_keys(t_all *all);
 void	ft_reycasting(t_all *all);
 
 void	ft_textures(t_all *all);
-void	ft_puttexture(char *texture_path, t_texture *texture, t_all *all);
 
 void    ft_sprites(t_all *all);
 

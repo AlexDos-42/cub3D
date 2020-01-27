@@ -70,12 +70,17 @@ void	vie_img(t_all *all)
 		color++;
 		x++;
 	}
-	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, img->imgptr, all->info.res.x / 10, all->info.res.y * 0.8);
+	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr,
+			img->imgptr, all->info.res.x / 10, all->info.res.y * 0.8);
 }
 
 void		draw_vie(t_all *all)
 {
 	vie_img(all);
-//	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr,
-//		./textures/health.xpm, 40, 500);
+	if ((int)all->mvt.life == 1)
+	{
+		 ft_printf(ERROR_GO);
+		 system("afplay objet/homer6.mp3&");
+		 ft_exit(all);
+	}
 }

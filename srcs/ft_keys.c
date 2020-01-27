@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 19:52:22 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/26 18:08:47 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/27 22:29:53 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,23 @@ void	ft_moverot(t_all *all)
 	}
 }
 
+int ft_block(t_all *all)
+{
+		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+			return (1);
+		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '2')
+		{
+			if (all->mvt.life <= 1)
+			{
+			all->mvt.life += 0.05;
+			ft_refresh(all);
+			}
+			return(1);
+		}
+		return (0);
+}
+
+
 void	ft_moveside(t_all *all)
 {
 	double posetmpX;
@@ -49,19 +66,19 @@ void	ft_moveside(t_all *all)
 	if (all->mvt.side.x)
    	{
 		all->cam.pos.x -= all->algo.plane.x * all->cam.speed;
-		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+		if (ft_block(all) == 1)
 			all->cam.pos.x = posetmpX;
 		all->cam.pos.y -= all->algo.plane.y * all->cam.speed;
-		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+		if (ft_block(all) == 1)
 			all->cam.pos.y = posetmpY;
 	}
 	if (all->mvt.side.y)
    	{
 		all->cam.pos.x +=  all->algo.plane.x * all->cam.speed;
-		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+		if (ft_block(all) == 1)
 			all->cam.pos.x = posetmpX;
 		all->cam.pos.y += all->algo.plane.y * all->cam.speed;
-		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+		if (ft_block(all) == 1)
 			all->cam.pos.y = posetmpY;
 	}
 }
@@ -69,28 +86,27 @@ void ft_moveup(t_all *all)
 {
 	double posetmpX;
 	double posetmpY;
+
 	posetmpX = all->cam.pos.x;
 	posetmpY = all->cam.pos.y;	
-
 	if (all->mvt.up.x)
    	{
 		all->cam.pos.x += all->cam.ori.x * all->cam.speed;
-		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+		if (ft_block(all) == 1)
 			all->cam.pos.x = posetmpX;
 		all->cam.pos.y += all->cam.ori.y * all->cam.speed;
-		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+		if (ft_block(all) == 1)
 			all->cam.pos.y = posetmpY;
 	}
 	if (all->mvt.up.y)
    	{
 		all->cam.pos.x -= all->cam.ori.x * all->cam.speed;
-		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+		if (ft_block(all) == 1)
 			all->cam.pos.x = posetmpX;
 		all->cam.pos.y -= all->cam.ori.y * all->cam.speed;
-		if (all->info.bufmap[(int)all->cam.pos.x + ((int)all->cam.pos.y * all->info.maplen.x)] == '1')
+		if (ft_block(all) == 1)
 			all->cam.pos.y = posetmpY;
 	}
-	return ;
 }
 
 int 	ft_push(int key, t_all *all)
@@ -118,7 +134,7 @@ int 	ft_push(int key, t_all *all)
 	{
 		if (all->mvt.msc == 0)
 		{
-			system("afplay objet/UltraInstinct.mp3&");
+			system("afplay objet/simpson.mp3&");
 			all->mvt.msc = 1;
 		ft_refresh(all);
 		}
@@ -129,20 +145,26 @@ int 	ft_push(int key, t_all *all)
 		{
 			system("pkill afplay");
 			all->mvt.msc = 0;
-		ft_refresh(all);
+			ft_refresh(all);
 		}
 	}
 	if (key == 32)
 	{
-		if (all->mvt.life != 1)
-		all->mvt.life += 0.25;
-		ft_refresh(all);
+		if (all->mvt.life <= 1)
+		{
+			all->mvt.life += 0.25;
+			ft_refresh(all);
+			all->mvt.msc = 0;
+		}
 	}
 	else if (key == 34)
 	{
 		if (all->mvt.life != 0)
-		all->mvt.life -= 0.25;
+		{
+		system("afplay objet/donuts.wav&");
+		all->mvt.life = 0; 
 		ft_refresh(all);
+		}
 	}
 	return (0);
 }

@@ -19,7 +19,7 @@ void	sp_dimension(t_all *all)
 	all->spr.start.y = -all->spr.sph / 2 + all->info.res.y / 2;
 	if (all->spr.start.y < 0)
 		all->spr.start.y = 0;
-	all->spr.end.y = all->spr.sph / 2 + all->info.res.y / 2;
+	all->spr.end.y = all->spr.sph / 2 + all->info.res.y / 2 ;
 	if (all->spr.end.y >= all->info.res.y)
 		all->spr.end.y = all->info.res.y - 1;
 	all->spr.spw = abs((int)(all->info.res.y / all->spr.trans.y));
@@ -31,23 +31,15 @@ void	sp_dimension(t_all *all)
 		all->spr.end.x = all->info.res.x - 1;
 }
 
-void	get_color(t_all *all, int x, int y, int i)
+void	get_color(t_all *all, int i)
 {
-	if (x >= 0 && x < all->sprites[i].img.w && y >= 0 && y < all->sprites[i].img.h)
-		all->sprites[i].img.color = all->sprites[i].img.get_data[all->spr.texsp.x + all->spr.texsp.y * all->sprites[i].img.w];
+	if (all->sprites[i].img.get_data[all->spr.texsp.x
+			+ all->spr.texsp.y * all->sprites[i].img.w] != -16777216)
+			all->sprites[i].img.color =
+				all->sprites[i].img.get_data[all->spr.texsp.x
+				+ all->spr.texsp.y * all->sprites[i].img.w];
 	else
-		all->sprites[i].img.color = 0x0;
-}
-
-void	color_dist(t_all *all, double dis, int i)
-{
-	if (dis > 2.0)
-	{
-		all->sprites[i].img.color = 
-		(((int)(((all->sprites[i].img.color & 0xFF0000) >> 16) / (dis / 2.0)) << 16) |
-		((int)(((all->sprites[i].img.color & 0x00FF00) >> 8) / (dis / 2.0)) << 8) |
-		(int)((all->sprites[i].img.color & 0x0000FF) / (dis / 2.0)));
-	}
+		all->sprites[i].img.color = 0xBFD195;
 }
 
 void	sp_draw(t_all *all, int x, int i)
@@ -60,9 +52,8 @@ void	sp_draw(t_all *all, int x, int i)
 	{
 		d = (y * 256 - all->info.res.y * 128 + all->spr.sph * 128);
 		all->spr.texsp.y = (d * all->sprites[i].img.h / all->spr.sph) / 256;
-		get_color(all, all->spr.texsp.x, all->spr.texsp.y, i);
-		color_dist(all, all->sprites[i].dist / 4, i);
-		if (all->sprites[i].img.color != 0x0 && all->spr.trans.y < all->spr.distwall[x])
+		get_color(all, i);
+		if (all->sprites[i].img.color != 0xBFD195 && all->spr.trans.y < all->spr.distwall[x])
 		{
 			if (x >= 0 && x < all->info.res.x && y >= 0 && y < all->info.res.y)
 				all->mlx.get_data[x + y * (all->mlx.size_line / 4)] = all->sprites[i].img.color;
@@ -144,7 +135,7 @@ void		ft_sprites(t_all *all)
 		{
 			if (all->info.bufmap[x + (y * all->info.maplen.x)] == '2')
 			{
-				all->sprites[i].coor = (t_coor){x + 0.5, y + 0.5};
+				all->sprites[i].coor = (t_dcoor){x + 0.5, y + 0.5};
 				i++;
 			}
 			x++;
