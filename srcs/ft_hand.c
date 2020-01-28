@@ -28,16 +28,11 @@ t_mlx			resize_image(t_all *all, int width, int height)
 	return (tmp);
 }
 
-void	load_data(t_all *all)
-{
-	all->hand.imgptr = mlx_xpm_file_to_image(all->mlx.ptr, "./objet/handsim.xpm", &all->hand.h , &all->hand.w);
-}
-
 void			load_textures(t_all *all)
 {
 	t_mlx tmp;
 
-	load_data(all);
+	all->hand.imgptr = mlx_xpm_file_to_image(all->mlx.ptr, "./objet/handsim.xpm", &all->hand.h , &all->hand.w);
 	tmp = resize_image(all, all->info.res.x * 0.6, all->info.res.x * 0.6);
 	mlx_destroy_image(all->mlx.ptr, all->hand.imgptr);
 	all->hand = tmp;
