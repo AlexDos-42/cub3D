@@ -1,16 +1,5 @@
 # include "../include/cub3D.h"
-/*
-void hands(t_all *all)
-{
 
-
-	while ( all->info.res.y - 100 < all->info.res.y)
-	{
-		all->mlx.get_data[x + (int)all->algo.drawstart * (all->mlx.size_line / 4)] = img.data[texX + texY * 64];
-		all->algo.drawstart++;
-	}
-}
-*/
 void	ft_hud(t_all *all)
 {
 	if (all->mvt.hud == 1)
