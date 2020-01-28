@@ -1,8 +1,8 @@
-R 400 480
-NO ./textures/murNord.xpm
-SO ./textures/murSud.xpm
-WE ./textures/murOuest.xpm
-EA ./textures/brique.xpm
+R 900 780
+NO ./textures/nukeNORD.xpm
+SO ./textures/nukeSUD.xpm
+WE ./textures/nukeOuest.xpm
+EA ./textures/nukeEST.xpm
 S ./textures/burns.xpm
 F 200,126,98
 C 105,105,230

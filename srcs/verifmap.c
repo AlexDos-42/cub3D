@@ -1,30 +1,27 @@
 # include "../include/cub3D.h"
 
-void	check_edges(t_all *all)
+void	ft_checkones(t_all *all)
 {
 	int x;
 	int y;
 
+	x = -1;
+	while (++x < all->info.maplen.x)
+	{
+		if (all->info.bufmap[x] != '1' || all->info.bufmap[x + (all->info.maplen.x * all->info.maplen.y) - all->info.maplen.x] != '1' )
+		{
+			printf("Error map ; Only '1' on the edges of your map");
+			ft_exit(all);
+		}
+	}
 	x = 0;
 	y = 0;
-	while (x < all->info.map.x)
-	{
-		if (all->info.bufmap[x] != '1' || all->info.bufmap[x + info.map.x * info.map.y] != '1' )
-		{ 
-      ft_exit(all);
-    }
-		x++;
-	}
-  x = 0;
-	y = 0;
-	while (y < all->info.map.x)
-	{
-		if (all->info.bufmap[x] \
-			|| cub->map[x][ft_strlen(cub->map[x]) - 1] != '1')
-			return (0);
-		x++;
-	}
-	return (1);
+//	while (y < all->info.maplen.y)
+//	{
+//		if (all->info.bufmap[x] || all->info.bufmap[x][ft_strlen(all->info.bufmap[x]) - 1] != '1')
+//			ft_exit(all);
+//		y++;
+//	}
 }
 
 void		posdepart(t_all *all, int x, int y, char dir)
@@ -67,13 +64,12 @@ void     ft_checkline(char *line, int j, t_all *all)
 
 void	verify_map(t_all *all)
 {
-    int		j;
-    char *tmp;
+	int		j;
 
-    j = -1;
-	tmp = all->info.bufmap;
-    while (++j < all->info.maplen.y)
-		ft_checkline(tmp, j, all);
-    all->sprites = (t_sprites*)ft_calloc(sizeof(t_sprites), all->spr.nbsp);
+	j = -1;
+	while (++j < all->info.maplen.y)
+		ft_checkline(all->info.bufmap, j, all);
+	ft_checkones(all);
+	all->sprites = (t_sprites*)ft_calloc(sizeof(t_sprites), all->spr.nbsp);
 	all->spr.distwall = ft_calloc(sizeof(double*), all->info.res.x);
 }

@@ -51,7 +51,7 @@ void	ft_refresh(t_all *all)
 void	initall(t_all *all, char **argv)
 {
 	ft_memset(all, 0, sizeof(t_all));
-	all->cam.speed = 0.13;
+	all->cam.speed = 0.2;
 	ft_parsing(argv, all);
 	initwindow(all);
 	ft_textures(all);
