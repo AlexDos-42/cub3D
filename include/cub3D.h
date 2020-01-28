@@ -179,4 +179,13 @@ void    ft_sprites(t_all *all);
 
 void    draw_vie(t_all *all);
 void    ft_hud(t_all *all);
+
+/*
+** --FT_HAND--
+*/
+
+void	ft_draw_hand(t_all *all);
+void	load_textures(t_all *all);
+t_mlx	resize_image(t_all *all, int width, int height);
+
 #endif
