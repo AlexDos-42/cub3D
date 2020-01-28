@@ -37,7 +37,7 @@ t_mlx		*new_image(t_all *all, int x_len, int y_len)
 	if (!(img = ft_calloc(sizeof(t_mlx), 1)))
 		ft_exit(all);
 	if (!(img->imgptr = mlx_new_image(all->mlx.ptr, x_len, y_len)))
-		return (void *)0;
+		ft_exit(all);
 	img->get_data = (int *)mlx_get_data_addr(img->imgptr, &img->bits_per_pixel,
 				&img->size_line, &img->endian);
 	img->w = x_len;
@@ -80,7 +80,7 @@ void		draw_vie(t_all *all)
 	if ((int)all->mvt.life == 1)
 	{
 		 ft_printf(ERROR_GO);
-		 system("afplay objet/homer6.mp3&");
+		 system("afplay objet/homer.wav&");
 		 ft_exit(all);
 	}
 }

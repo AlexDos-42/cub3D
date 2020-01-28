@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:06:07 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/26 16:38:44 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/28 17:46:44 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		main(int argc, char **argv)
 	mlx_hook(all.mlx.winptr, 3, (1L << 1), &ft_depush, &all);
 	mlx_hook(all.mlx.winptr, 17, 0, &ft_redcross, &all);
 	mlx_loop_hook(all.mlx.ptr, &ft_keys, &all);
-	mlx_loop(all.mlx.ptr);	
+//	system("leaks a.out");	
+	mlx_loop(all.mlx.ptr);
 	return (0);
 }

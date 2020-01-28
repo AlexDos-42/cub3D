@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:33:50 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/27 13:09:48 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/28 18:33:51 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	ft_initray(t_all *all, int x)
 	if (all->algo.drawstart < 0)
 		all->algo.drawstart = 0;
 	if (all->algo.drawend >= all->info.res.y)
-		all->algo.drawend = all->info.res.y - 1;
+		all->algo.drawend = all->info.res.y;
 }
 
 void ft_drawall(t_all *all, int x)

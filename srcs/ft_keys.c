@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 19:52:22 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/27 22:29:53 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/28 14:38:59 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,21 @@ void ft_moveup(t_all *all)
 
 int 	ft_push(int key, t_all *all)
 {
+	int i;
+
+	i = 0;
+	if (key == 48)
+	{
+		if (all->mvt.hud == 0)
+		{
+			i = 1;
+			all->mvt.hud = 1;
+		}
+		else
+			i = 0;
+	}
+	if	(all->mvt.hud == 0)
+	{
 	if (key == 13)
 		all->mvt.up.x = 1;
 	else if (key == 1)
@@ -123,13 +138,6 @@ int 	ft_push(int key, t_all *all)
 		all->mvt.rot.x = 1;
 	else if (key == 14 || key == 124)
 		all->mvt.rot.y = 1;
-	if (key == 48)
-	{
-		if (all->mvt.hud == 0)
-			all->mvt.hud = 1;
-		else
-			all->mvt.hud = 0;
-	}
 	if (key == 46)
 	{
 		if (all->mvt.msc == 0)
@@ -161,10 +169,11 @@ int 	ft_push(int key, t_all *all)
 	{
 		if (all->mvt.life != 0)
 		{
-		system("afplay objet/donuts.wav&");
+		system("afplay objet/donuts.mp3&");
 		all->mvt.life = 0; 
 		ft_refresh(all);
 		}
+	}
 	}
 	return (0);
 }
@@ -203,7 +212,10 @@ int	ft_keys(t_all *all)
 	if (all->mvt.rot.x  == 1|| all->mvt.rot.y == 1)
 		ft_moverot(all);
 	if (all->mvt.hud == 1)
+	{
 		ft_hud(all);
+		all->mvt.hud = 0;
+	}
 	if (tmp != (all->cam.pos.x + all->cam.pos.y + all->cam.ori.x + all->cam.ori.y + all->algo.plane.x))
 		ft_refresh(all);
 

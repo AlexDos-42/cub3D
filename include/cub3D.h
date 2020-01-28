@@ -139,7 +139,7 @@ typedef struct		s_all
 	t_texture		textureS;
 	t_texture		textureE;
 	t_texture		textureW;
-	t_texture		textureh;
+	t_mlx			hand;
 	t_sprites       *sprites;
 }                   t_all;
 
