@@ -144,8 +144,13 @@ typedef struct		s_all
 	t_sprites       *sprites;
 }                   t_all;
 
+/*
+** --MAIN--
+*/
+
 int     ft_redcross(t_all *all);
-int		main(int argc, char **argv);
+int	main(int argc, char **argv);
+void	ft_cub(char *argv);
 
 void    ft_parsing(char **argv, t_all *all);
 void    ft_parsing_line(t_all *all, char *line);
@@ -170,21 +175,54 @@ void	initwindow(t_all *all);
 
 void    ft_ifspace(char *line, int *i);
 void    ft_exit(t_all *all);
-t_dcoor ft_dcoor(double x, double y);
-t_coor  ft_coor(int x, int y);
-
-int		ft_push(int key, t_all *all);
-int		ft_depush(int key, t_all *all);
-int		ft_keys(t_all *all);
 
 void	ft_reycasting(t_all *all);
 
+
+/*
+** --FT_TEXTURES--
+*/
+
 void	ft_textures(t_all *all);
+t_texture	ft_puttexture(char *texture_addr, t_all *all);
+t_mlx	ft_texturespr(char *texture_addr, t_all *all);
+
+/*
+** --FT_SPRITES--
+*/
 
 void    ft_sprites(t_all *all);
+void	get_color(t_all *all, int i);
+void	sp_draw(t_all *all, int x, int i);
+void	init_sprites(t_all *all);
 
-void    draw_vie(t_all *all);
-void    ft_hud(t_all *all);
+/*
+** --FT_SPRITESPOS--
+*/
+
+void		ft_sort(t_all *all);
+void		ft_sort_sp(t_all *all);
+void	sp_position(t_all *all, int i);
+void	sp_dimension(t_all *all);
+
+/*
+** --FT_KEYS--
+*/
+
+int		ft_keys(t_all *all);
+void	ft_moverot(t_all *all);
+int ft_block(t_all *all);
+void	ft_moveside(t_all *all);
+void ft_moveup(t_all *all);
+
+/*
+** --FT_PUSH--
+*/
+
+void 	ft_pushlife(int key, t_all *all);
+void 	ft_pushmsc(int key, t_all *all);
+int 	ft_push(int key, t_all *all);
+int 	ft_push(int key, t_all *all);
 
 /*
 ** --FT_HAND--
@@ -201,5 +239,13 @@ t_mlx	resize_image(t_all *all, int width, int height);
 void	ft_draw_hud(t_all *all);
 void	load_hudtex(t_all *all);
 t_mlx	resize_imagehud(t_all *all, int width, int height);
+
+/*
+** --FT_BONUS--
+*/
+
+t_mlx		*new_image(t_all *all, int x_len, int y_len);
+void	vie_img(t_all *all);
+void		draw_vie(t_all *all)
 
 #endif
