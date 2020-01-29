@@ -42,6 +42,7 @@ void     ft_parsing_line(t_all *all, char *line)
 
 	i = 0;
 	ft_ifspace(line, &i);
+	ft_firstcheck(all, line[i]);
 	if (line[i] == 'R' && line[i + 1] == ' ')
 		ft_res(all, line);
 	else if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
