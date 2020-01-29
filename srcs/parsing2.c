@@ -1,3 +1,5 @@
+# include "../include/cub3D.h"
+
 char     *ft_mur(t_all *all, char *line)
 {
 	int		j;
