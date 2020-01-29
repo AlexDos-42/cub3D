@@ -6,13 +6,13 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 13:33:50 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/28 18:33:51 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/29 21:44:29 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/cub3D.h"
+#include "../include/cub3D.h"
 
-void	ft_hl(t_all *all)
+void		ft_hl(t_all *all)
 {
 	while (1)
 	{
@@ -30,7 +30,7 @@ void	ft_hl(t_all *all)
 		}
 		if (all->info.bufmap[all->cam.map.x +
 				(all->cam.map.y * all->info.maplen.x)] == '1')
-			break;  
+			break ;
 	}
 	if (all->algo.NSEO == 0)
 		all->algo.pDist = (all->cam.map.x - all->cam.raypos.x
@@ -41,31 +41,35 @@ void	ft_hl(t_all *all)
 	all->algo.hauteurLigne = (all->info.res.y / all->algo.pDist);
 }
 
-void ft_algo(t_all *all)
+void		ft_algo(t_all *all)
 {
 	if (all->cam.rayDir.x < 0)
 	{
 		all->algo.dir.x = -1;
-		all->algo.len.x = (all->cam.raypos.x - all->cam.map.x) * all->algo.delta.x;
+		all->algo.len.x = (all->cam.raypos.x
+			- all->cam.map.x) * all->algo.delta.x;
 	}
 	else
 	{
 		all->algo.dir.x = 1;
-		all->algo.len.x = (all->cam.map.x + 1.0 - all->cam.raypos.x ) * all->algo.delta.x;
+		all->algo.len.x = (all->cam.map.x + 1.0
+			- all->cam.raypos.x) * all->algo.delta.x;
 	}
 	if (all->cam.rayDir.y < 0)
 	{
 		all->algo.dir.y = -1;
-		all->algo.len.y = (all->cam.raypos.y - all->cam.map.y) * all->algo.delta.y;
+		all->algo.len.y = (all->cam.raypos.y
+			- all->cam.map.y) * all->algo.delta.y;
 	}
 	else
 	{
 		all->algo.dir.y = 1;
-		all->algo.len.y = (all->cam.map.y + 1.0 - all->cam.raypos.y) * all->algo.delta.y;
+		all->algo.len.y = (all->cam.map.y + 1.0
+			- all->cam.raypos.y) * all->algo.delta.y;
 	}
 }
 
-void	ft_initray(t_all *all, int x)
+void		ft_initray(t_all *all, int x)
 {
 	all->algo.colX = 2 * x / (double)all->info.res.x - 1;
 	all->cam.raypos = (t_dcoor){all->cam.pos.x, all->cam.pos.y};
@@ -84,7 +88,7 @@ void	ft_initray(t_all *all, int x)
 		all->algo.drawend = all->info.res.y;
 }
 
-void ft_reycasting(t_all *all)
+void		ft_reycasting(t_all *all)
 {
 	int x;
 	int y;
@@ -96,7 +100,7 @@ void ft_reycasting(t_all *all)
 		ft_drawall(all, x);
 		y = all->algo.drawend;
 		while (y < all->info.res.y)
-		{ 
+		{
 			all->mlx.get_data[x + y *
 				(all->mlx.size_line / 4)] = all->info.f;
 			all->mlx.get_data[x + (all->info.res.y - y - 1)

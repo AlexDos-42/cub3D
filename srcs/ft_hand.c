@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 20:53:56 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 15:32:40 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/29 19:42:50 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ void			ft_draw_hand(t_all *all)
 		text.x += taille.x;
 	}
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr,
-			all->hand.imgptr, all->info.res.x / 2, all->info.res.y - all->hand.h * 0.95);
+			all->hand.imgptr, all->info.res.x / 2,
+			all->info.res.y - all->hand.h * 0.95);
 }

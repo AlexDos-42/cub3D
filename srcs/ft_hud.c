@@ -6,11 +6,11 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:51:07 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 15:31:24 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/29 19:43:16 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/cub3D.h"
+#include "../include/cub3D.h"
 
 t_mlx			resize_imagehud(t_all *all, int width, int height)
 {
@@ -44,6 +44,7 @@ t_mlx			resize_imagehud(t_all *all, int width, int height)
 void			load_hudtex(t_all *all)
 {
 	t_mlx tmp;
+
 	all->hud.imgptr = mlx_xpm_file_to_image(all->mlx.ptr,
 			"./objet/hud.xpm", &all->hud.h, &all->hud.w);
 	tmp = resize_imagehud(all, all->info.res.x + 2, all->info.res.y * 0.38);

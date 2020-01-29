@@ -1,6 +1,18 @@
-# include "../include/cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/29 20:28:56 by alesanto          #+#    #+#             */
+/*   Updated: 2020/01/29 23:02:29 by alesanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	ft_bufmap(t_all *all, char *line)
+#include "../include/cub3D.h"
+
+void		ft_bufmap(t_all *all, char *line)
 {
 	char	*newline;
 
@@ -23,7 +35,8 @@ void	ft_bufmap(t_all *all, char *line)
 	{
 		if (all->info.maplen.x != ft_strlen(newline))
 		{
-			ft_printf(ERROR_LENLINE, all->info.maplen.x, ++all->info.maplen.y, ft_strlen(newline));
+			ft_printf(ERROR_LENLINE, ++all->info.maplen.y,
+				ft_strlen(newline), all->info.maplen.x);
 			ft_exit(all);
 		}
 		if (!(all->info.bufmap = ft_strjoin(all->info.bufmap, newline, 1)))
@@ -36,13 +49,45 @@ void	ft_bufmap(t_all *all, char *line)
 	all->info.maplen.y += 1;
 }
 
-void     ft_parsing_line(t_all *all, char *line)
+void		ft_firstcheck(t_all *all, char c, char d)
+{
+	if (!c)
+		return ;
+	if (c == 'S' && d == 'O')
+		c = 'U';
+	if (all->info.test[(int)c] == 0) 
+		all->info.test[(int)c] += 1;
+	else if (c != '1')
+	{
+			ft_printf(ERROR_DOUBLE, c);
+			ft_exit(all);
+	}
+	if (c == '1')
+	{
+		if (!(all->info.test[(int)'N'] == 1 && all->info.test[(int)'U']
+			== 1 && all->info.test[(int)'W'] == 1 && all->info.test[(int)'E']
+			== 1 && all->info.test[(int)'S'] == 1 && all->info.test[(int)('F')]
+			== 1 && all->info.test[(int)'C'] == 1))
+		{	
+			ft_printf(ERROR_MAPP);
+			ft_exit(all);
+		}
+	}		
+	if (c != '1' && (all->info.test[(int)'1'] == 1))
+	{	
+		ft_printf(ERROR_MAPLAST);
+		ft_exit(all);
+	}
+
+}
+
+void		ft_parsing_line(t_all *all, char *line)
 {
 	int		i;
 
 	i = 0;
 	ft_ifspace(line, &i);
-//	ft_firstcheck(all, line[i]);
+	ft_firstcheck(all, line[i], line[i + 1]);
 	if (line[i] == 'R' && line[i + 1] == ' ')
 		ft_res(all, line);
 	else if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
@@ -59,20 +104,22 @@ void     ft_parsing_line(t_all *all, char *line)
 		all->info.f = ft_sol(line, all);
 	else if (line[i] == 'C' && line[i + 1] == ' ')
 		all->info.c = ft_sol(line, all);
+	else if (!line[i])
+		;
 	else if (line[i] == '1')
 		ft_bufmap(all, line);
-	else if(*line != '\0')
+	else if (line != '\0')
 	{
-		ft_printf(ERROR_PARS, line[i]);
+		ft_printf(ERROR_PARS);
 		ft_exit(all);
 	}
 }
 
-void     ft_parsing(char **argv, t_all *all)
+void		ft_parsing(char **argv, t_all *all)
 {
-	int         ret;
-	char        *line;
-	int         fd;
+	int			ret;
+	char		*line;
+	int			fd;
 
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 	{

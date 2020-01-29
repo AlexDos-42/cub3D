@@ -6,7 +6,7 @@
 #    By: alesanto <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/09 17:02:25 by alesanto          #+#    #+#              #
-#    Updated: 2020/01/29 14:49:23 by alesanto         ###   ########.fr        #
+#    Updated: 2020/01/29 21:14:40 by alesanto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC =		main.c \
 		verifmap.c \
 		ft_init.c \
 		ft_rendu.c \
+		ft_drawmap.c \
 		ft_keys.c \
 		ft_push.c \
 		ft_utiles.c \
@@ -32,9 +33,7 @@ PATHSRCS = srcs
 
 HEADERS = ./include
 
-FLAGS = -Wall -Wextra -Werror 
-
-// -fsanitize=address -g  #DEBUG
+FLAGS = -Wall -Wextra -Werror  -g  #DEBUG
 
 SRCS = $(addprefix $(PATHSRCS)/,$(SRC))
 LIBS = -lmlx -framework OpenGL -framework AppKit\

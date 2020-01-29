@@ -6,13 +6,13 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 16:55:02 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/10 18:18:37 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/29 22:50:41 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_suprspace(char *str)
+char	*ft_suprspace(char *str)
 {
 	int		i;
 	char	*tmp;

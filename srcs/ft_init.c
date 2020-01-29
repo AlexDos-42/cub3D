@@ -6,13 +6,13 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:51:15 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 17:32:13 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/29 21:54:39 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/cub3D.h"
+#include "../include/cub3D.h"
 
-void	initmlx(t_all *all)
+void		initmlx(t_all *all)
 {
 	if (!(all->mlx.imgptr = mlx_new_image(all->mlx.ptr,
 			all->info.res.x, all->info.res.y)))
@@ -28,12 +28,12 @@ void	initmlx(t_all *all)
 	}
 }
 
-void initwindow(t_all *all)
+void		initwindow(t_all *all)
 {
 	if ((all->cam.isit != 1))
 	{
-		 ft_printf(ERROR_PLAYER, all->cam.isit);
-		 ft_exit(all);
+		ft_printf(ERROR_PLAYER, all->cam.isit);
+		ft_exit(all);
 	}
 	if (!(all->mlx.ptr = mlx_init()))
 	{
@@ -48,13 +48,14 @@ void initwindow(t_all *all)
 	}
 }
 
-void	ft_refresh(t_all *all)
+void		ft_refresh(t_all *all)
 {
 	initmlx(all);
 	ft_reycasting(all);
 	ft_sprites(all);
-	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, all->mlx.imgptr, 0, 0);
- 	load_textures(all);
+	mlx_put_image_to_window(all->mlx.ptr,
+		all->mlx.winptr, all->mlx.imgptr, 0, 0);
+	load_textures(all);
 	ft_draw_hand(all);
 	load_hudtex(all);
 	ft_draw_hud(all);
@@ -62,10 +63,11 @@ void	ft_refresh(t_all *all)
 	mlx_destroy_image(all->mlx.ptr, all->mlx.imgptr);
 }
 
-void	initall(t_all *all, char **argv)
+void		initall(t_all *all, char **argv)
 {
 	ft_memset(all, 0, sizeof(t_all));
 	all->cam.speed = 0.333;
+	all->cam.vitrot = 0.1;
 	ft_parsing(argv, all);
 	initwindow(all);
 	ft_textures(all);

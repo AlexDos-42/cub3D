@@ -4,7 +4,6 @@ SO ./textures/nukeSUD.xpm
 WE ./textures/nukeOuest.xpm
 EA ./textures/nukeEST.xpm
 S ./textures/burns.xpm
-
 F 178,186,187
 C 105,105,230
 1 1 1 1 1 1 1 1 1 1 1 1 
@@ -24,4 +23,3 @@ C 105,105,230
 1 0 0 1 0 1 1 1 0 1 0 1
 1 0 0 1 0 0 0 0 0 0 0 1
 1 1 1 1 1 1 1 1 1 1 1 1
-

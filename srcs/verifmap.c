@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   verifmap.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/29 19:11:44 by alesanto          #+#    #+#             */
+/*   Updated: 2020/01/29 19:12:15 by alesanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 # include "../include/cub3D.h"
 
 void	ft_checkones(t_all *all)
@@ -10,7 +22,7 @@ void	ft_checkones(t_all *all)
 	{
 		if (all->info.bufmap[x] != '1' || all->info.bufmap[x + (all->info.maplen.x * all->info.maplen.y) - all->info.maplen.x] != '1' )
 		{
-			printf("Error map ; Only '1' on the edges of your map");
+			ft_printf("Error map ; Only '1' on the edges of your map");
 			ft_exit(all);
 		}
 	}
@@ -56,7 +68,7 @@ void     ft_checkline(char *line, int j, t_all *all)
 			all->spr.nbsp++;
 		else if (line[k] != '1' && line[k] != '0')
 		{
-			printf(ERROR_MAP, line[k]);
+			ft_printf(ERROR_MAP, line[k]);
 			ft_exit(all);
 		}
 	}

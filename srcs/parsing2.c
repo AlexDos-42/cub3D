@@ -1,12 +1,24 @@
-# include "../include/cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/29 20:31:28 by alesanto          #+#    #+#             */
+/*   Updated: 2020/01/29 20:34:29 by alesanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char     *ft_mur(t_all *all, char *line)
+#include "../include/cub3D.h"
+
+char		*ft_mur(t_all *all, char *line)
 {
-	int		j;
-	char	**s;
-	char *atext;
+	int			j;
+	char		**s;
+	char		*atext;
 
-	if(!(s = ft_split(line, ' ')))
+	if (!(s = ft_split(line, ' ')))
 	{
 		ft_printf(ERROR_MALLOC, "s in ft_split in ft_mur");
 		ft_exit(all);
@@ -20,15 +32,15 @@ char     *ft_mur(t_all *all, char *line)
 	while (s[j])
 		free(s[j++]);
 	free(s[j]);
-	free(s);   
+	free(s);
 	return (atext);
 }
 
-int     ft_sol(char *line, t_all *all)
+int			ft_sol(char *line, t_all *all)
 {
-	int i;
-	unsigned int color;
-	int j;
+	int				i;
+	unsigned int	color;
+	int				j;
 
 	i = 0;
 	ft_ifspace(line, &i);
@@ -38,23 +50,21 @@ int     ft_sol(char *line, t_all *all)
 	j = ft_isdigit(line[i]) ? 1 : 0;
 	while (ft_isdigit(line[i]))
 		i++;
-	i++;
-	color += ft_atoi(&line[i]) * 256;
+	color += ft_atoi(&line[++i]) * 256;
 	j += ft_isdigit(line[i]) ? 1 : 0;
 	while (ft_isdigit(line[i]))
 		i++;
-	i++;
-	color += ft_atoi(&line[i]);
+	color += ft_atoi(&line[++i]);
 	j += ft_isdigit(line[i]) ? 1 : 0;
-	if (j !=3)
+	if (j != 3)
 	{
 		ft_printf(ERROR_COLOR);
 		ft_exit(all);
 	}
-	return(color);
+	return (color);
 }
 
-void     ft_res(t_all *all, char *line)
+void		ft_res(t_all *all, char *line)
 {
 	int i;
 

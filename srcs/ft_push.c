@@ -1,6 +1,18 @@
-# include "../include/cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_push.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/29 20:08:44 by alesanto          #+#    #+#             */
+/*   Updated: 2020/01/29 20:08:47 by alesanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void 	ft_pushlife(int key, t_all *all)
+#include "../include/cub3D.h"
+
+void		ft_pushlife(int key, t_all *all)
 {
 	if (key == 32)
 	{
@@ -15,14 +27,14 @@ void 	ft_pushlife(int key, t_all *all)
 	{
 		if (all->mvt.life != 0)
 		{
-		system("afplay objet/donuts.mp3&");
-		all->mvt.life = 0; 
-		ft_refresh(all);
+			system("afplay objet/donuts.mp3&");
+			all->mvt.life = 0;
+			ft_refresh(all);
 		}
 	}
 }
 
-void 	ft_pushmsc(int key, t_all *all)
+void		ft_pushmsc(int key, t_all *all)
 {
 	if (key == 46)
 	{
@@ -30,7 +42,7 @@ void 	ft_pushmsc(int key, t_all *all)
 		{
 			system("afplay objet/simpson.mp3&");
 			all->mvt.msc = 1;
-		ft_refresh(all);
+			ft_refresh(all);
 		}
 	}
 	if (key == 40)
@@ -44,7 +56,7 @@ void 	ft_pushmsc(int key, t_all *all)
 	}
 }
 
-int 	ft_push(int key, t_all *all)
+int			ft_push(int key, t_all *all)
 {
 	if (key == 13)
 		all->mvt.up.x = 1;
@@ -61,11 +73,11 @@ int 	ft_push(int key, t_all *all)
 	if (key == 257)
 		all->cam.speed = 0.6;
 	ft_pushmsc(key, all);
-	ft_pushlife(key,all);
+	ft_pushlife(key, all);
 	return (0);
 }
 
-int	 ft_depush(int key, t_all *all)
+int			ft_depush(int key, t_all *all)
 {
 	if (key == 13)
 		all->mvt.up.x = 0;
@@ -75,7 +87,7 @@ int	 ft_depush(int key, t_all *all)
 		all->mvt.side.x = 0;
 	else if (key == 2)
 		all->mvt.side.y = 0;
-	 if (key == 12 || key == 123)
+	if (key == 12 || key == 123)
 		all->mvt.rot.x = 0;
 	else if (key == 14 || key == 124)
 		all->mvt.rot.y = 0;

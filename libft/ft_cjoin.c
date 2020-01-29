@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 17:00:30 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/10 17:00:36 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/29 22:47:22 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ char		*ft_cjoin(char const *s1, char c, int f)
 		free((char*)s1);
 	return (str);
 }
-

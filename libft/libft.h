@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 12:51:23 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/21 17:40:42 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/29 22:48:51 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ typedef struct			s_list
 	struct s_list		*next;
 }						t_list;
 
-typedef struct		s_parsing
+typedef struct			s_parsing
 {
-	int				flagstiret;
-	int				precision;
-	char			*aff;
-	int				flags0;
-	int				c;
-	int				w;
-	int				z;
-	int				neg;
-}					t_parsing;
+	int					flagstiret;
+	int					precision;
+	char				*aff;
+	int					flags0;
+	int					c;
+	int					w;
+	int					z;
+	int					neg;
+}						t_parsing;
 
 char					*ft_strtrim(char const *str, char const *set);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -97,7 +97,7 @@ void					ft_putstr(char const *s);
 int						get_next_line(int fd, char **line);
 void					ft_strdel(char **str);
 char					*ft_suprspace(char *str);
-char	 				*ft_cjoin(char const *s1, char c, int f);
+char					*ft_cjoin(char const *s1, char c, int f);
 int						ft_power(int nb, int power);
 
 /*
@@ -106,14 +106,16 @@ int						ft_power(int nb, int power);
 
 int						ft_printf(const char *format, ...);
 int						ft_boucle(char *arg, va_list *va);
-int						ft_parsingpf(char *arg, va_list *va, t_parsing *parsing);
+int						ft_parsingpf(char *arg,
+							va_list *va, t_parsing *parsing);
 void					ft_init_parsing(t_parsing *parsing);
 void					ft_init_parsing(t_parsing *parsing);
 
 int						ft_flags(char *arg, t_parsing *parsing);
 int						ft_width(char *arg, va_list *va, t_parsing *parsing);
 int						ft_width2(char *arg, t_parsing *parsing, int i);
-int						ft_precision(char *arg, va_list *va, t_parsing *parsing);
+int						ft_precision(char *arg,
+							va_list *va, t_parsing *parsing);
 int						ft_lenght(char *arg, t_parsing *parsing);
 
 void					ft_flagsapp(t_parsing *parsing, char arg);

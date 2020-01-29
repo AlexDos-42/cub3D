@@ -1,12 +1,24 @@
-# include "../include/cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_utiles.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/29 20:26:25 by alesanto          #+#    #+#             */
+/*   Updated: 2020/01/29 20:26:27 by alesanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void     ft_exit(t_all *all)
+#include "../include/cub3D.h"
+
+void		ft_exit(t_all *all)
 {
 	(void)all;
 	exit(0);
 }
 
-void     ft_ifspace(char *line, int *i)
+void		ft_ifspace(char *line, int *i)
 {
 	while ((line[*i] == ' ' || line[*i] == '\t' || line[*i] == '\n')
 			|| (line[*i] == '\r' || line[*i] == '\v' || line[*i] == '\f'))
