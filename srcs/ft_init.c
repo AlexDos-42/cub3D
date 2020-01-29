@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/29 14:51:15 by alesanto          #+#    #+#             */
+/*   Updated: 2020/01/29 17:32:13 by alesanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 # include "../include/cub3D.h"
 
 void	initmlx(t_all *all)
@@ -42,21 +54,20 @@ void	ft_refresh(t_all *all)
 	ft_reycasting(all);
 	ft_sprites(all);
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, all->mlx.imgptr, 0, 0);
-	draw_vie(all);
  	load_textures(all);
-//	ft_draw_hand(all);
-	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr,
-              all->hand.imgptr, all->info.res.x / 2, all->info.res.y - all->hand.h * 0.8);
+	ft_draw_hand(all);
+	load_hudtex(all);
+	ft_draw_hud(all);
+	draw_vie(all);
 	mlx_destroy_image(all->mlx.ptr, all->mlx.imgptr);
 }
 
 void	initall(t_all *all, char **argv)
 {
 	ft_memset(all, 0, sizeof(t_all));
-	all->cam.speed = 0.2;
+	all->cam.speed = 0.333;
 	ft_parsing(argv, all);
 	initwindow(all);
 	ft_textures(all);
-	ft_draw_hand(all);
 	ft_refresh(all);
 }

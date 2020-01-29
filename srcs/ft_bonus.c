@@ -1,23 +1,16 @@
-# include "../include/cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bonus.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/29 15:43:34 by alesanto          #+#    #+#             */
+/*   Updated: 2020/01/29 15:49:45 by alesanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	ft_hud(t_all *all)
-{
-	if (all->mvt.hud == 1)
-	{
-		mlx_string_put(all->mlx.ptr, all->mlx.winptr, all->info.res.x / 2, all->info.res.x / 2, 0xFFFFFF, 
-			"-- PAUSE --");
-		mlx_string_put(all->mlx.ptr, all->mlx.winptr, 20, 10, 0xFFFFFF, 
-			"W, A, S, D : move");
-		mlx_string_put(all->mlx.ptr, all->mlx.winptr, 20, 30, 0xFFFFFF, 
-			"<-, -> : Rotate");
-		mlx_string_put(all->mlx.ptr, all->mlx.winptr, 20, 50, 0xFFFFFF, 
-			"SHIFT : Sprint");
-		mlx_string_put(all->mlx.ptr, all->mlx.winptr, 20, 70, 0xFFFFFF, 
-			"Tab: Help");
-		mlx_string_put(all->mlx.ptr, all->mlx.winptr, 20, 90, 0xFFFFFF, 
-			"ESC : Game Over");
-	}
-}
+# include "../include/cub3D.h"
 
 t_mlx		*new_image(t_all *all, int x_len, int y_len)
 {
@@ -37,17 +30,16 @@ t_mlx		*new_image(t_all *all, int x_len, int y_len)
 void	vie_img(t_all *all)
 {
 	t_mlx	*img;
-	double	img_w;
 	int		x;
 	int		y;
+	int color;;
 
-	img_w = (int)(all->info.res.x / 5);
-	if (!(img = new_image(all, (int)img_w, 30)))
+	if (!(img = new_image(all,  all->info.res.x * 0.2 , all->info.res.y * 0.04)))
 		ft_exit(all);
-	img->w = (int)img_w;
-	img->h = 30;
+	img->w = all->info.res.x * 0.2;
+	img->h = all->info.res.y * 0.04 ;
 	x = 0;
-	int color = 15940372;
+	color = 16770102;
 	while (x < img->w - (img->w * all->mvt.life))
 	{
 		y = 0;
@@ -60,7 +52,7 @@ void	vie_img(t_all *all)
 		x++;
 	}
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr,
-			img->imgptr, all->info.res.x / 10, all->info.res.y * 0.8);
+			img->imgptr, all->info.res.x * 0.2, all->info.res.y * 0.92);
 }
 
 void		draw_vie(t_all *all)

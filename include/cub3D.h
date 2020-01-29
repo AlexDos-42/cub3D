@@ -140,6 +140,7 @@ typedef struct		s_all
 	t_texture		textureE;
 	t_texture		textureW;
 	t_mlx			hand;
+	t_mlx			hud;
 	t_sprites       *sprites;
 }                   t_all;
 
@@ -192,5 +193,13 @@ void    ft_hud(t_all *all);
 void	ft_draw_hand(t_all *all);
 void	load_textures(t_all *all);
 t_mlx	resize_image(t_all *all, int width, int height);
+
+/*
+** --FT_HUD--
+*/
+
+void	ft_draw_hud(t_all *all);
+void	load_hudtex(t_all *all);
+t_mlx	resize_imagehud(t_all *all, int width, int height);
 
 #endif

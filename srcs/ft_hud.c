@@ -1,4 +1,18 @@
-t_mlx			resize_image(t_all *all, int width, int height)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_hud.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/29 14:51:07 by alesanto          #+#    #+#             */
+/*   Updated: 2020/01/29 15:31:24 by alesanto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+# include "../include/cub3D.h"
+
+t_mlx			resize_imagehud(t_all *all, int width, int height)
 {
 	t_mlx	tmp;
 	double	size_x;
@@ -27,13 +41,12 @@ t_mlx			resize_image(t_all *all, int width, int height)
 	return (tmp);
 }
 
-void			load_textures(t_all *all)
+void			load_hudtex(t_all *all)
 {
 	t_mlx tmp;
-
 	all->hud.imgptr = mlx_xpm_file_to_image(all->mlx.ptr,
 			"./objet/hud.xpm", &all->hud.h, &all->hud.w);
-	tmp = resize_image(all, all->info.res.x * 0.6, all->info.res.x * 0.6);
+	tmp = resize_imagehud(all, all->info.res.x + 2, all->info.res.y * 0.38);
 	mlx_destroy_image(all->mlx.ptr, all->hud.imgptr);
 	all->hud = tmp;
 }
@@ -63,5 +76,5 @@ void			ft_draw_hud(t_all *all)
 		text.x += taille.x;
 	}
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr,
-			all->hud.imgptr, all->info.res.x * 0.5, all->info.res.y * 0.36);
+			all->hud.imgptr, -2, all->info.res.y * 0.63);
 }
