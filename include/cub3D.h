@@ -222,7 +222,7 @@ void ft_moveup(t_all *all);
 void 	ft_pushlife(int key, t_all *all);
 void 	ft_pushmsc(int key, t_all *all);
 int 	ft_push(int key, t_all *all);
-int 	ft_push(int key, t_all *all);
+int 	ft_depush(int key, t_all *all);
 
 /*
 ** --FT_HAND--
@@ -246,6 +246,6 @@ t_mlx	resize_imagehud(t_all *all, int width, int height);
 
 t_mlx		*new_image(t_all *all, int x_len, int y_len);
 void	vie_img(t_all *all);
-void		draw_vie(t_all *all)
+void		draw_vie(t_all *all);
 
 #endif
