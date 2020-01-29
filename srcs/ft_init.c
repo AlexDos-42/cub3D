@@ -44,7 +44,9 @@ void	ft_refresh(t_all *all)
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr, all->mlx.imgptr, 0, 0);
 	draw_vie(all);
  	load_textures(all);
-	ft_draw_hand(all);
+//	ft_draw_hand(all);
+	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr,
+              all->hand.imgptr, all->info.res.x / 2, all->info.res.y - all->hand.h * 0.8);
 	mlx_destroy_image(all->mlx.ptr, all->mlx.imgptr);
 }
 
@@ -55,5 +57,6 @@ void	initall(t_all *all, char **argv)
 	ft_parsing(argv, all);
 	initwindow(all);
 	ft_textures(all);
+	ft_draw_hand(all);
 	ft_refresh(all);
 }

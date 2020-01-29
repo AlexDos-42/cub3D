@@ -6,7 +6,7 @@
 #    By: alesanto <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/09 17:02:25 by alesanto          #+#    #+#              #
-#    Updated: 2020/01/28 22:04:39 by alesanto         ###   ########.fr        #
+#    Updated: 2020/01/29 12:19:33 by alesanto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = Cub3D
 
 SRC =		main.c \
 		parsing.c \
+		parsing2.c \
 		verifmap.c \
 		ft_init.c \
 		ft_rendu.c \

@@ -1,9 +1,10 @@
-R 900 780
+R 500 500
 NO ./textures/nukeNORD.xpm
 SO ./textures/nukeSUD.xpm
 WE ./textures/nukeOuest.xpm
 EA ./textures/nukeEST.xpm
 S ./textures/burns.xpm
+
 F 200,126,98
 C 105,105,230
 1 1 1 1 1 1 1 1 1 1 1 1 

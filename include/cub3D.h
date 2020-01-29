@@ -156,6 +156,11 @@ char    *ft_mur(t_all *all, char *line);
 void	verify_map(t_all *all);
 void    ft_checkline(char *line, int j, t_all *all);
 void	posdepart(t_all *all, int x, int y, char dir);
+void	ft_firstcheck(t_all *all, char c);
+
+char     *ft_mur(t_all *all, char *line);
+int     ft_sol(char *line, t_all *all);
+int     ft_sol(char *line, t_all *all);
 
 void	initmlx(t_all *all);
 void	initall(t_all *all, char **argv);
