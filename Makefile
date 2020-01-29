@@ -19,9 +19,11 @@ SRC =		main.c \
 		ft_init.c \
 		ft_rendu.c \
 		ft_keys.c \
+		ft_push.c \
 		ft_utiles.c \
 		ft_texture.c \
 		ft_sprites.c \
+		ft_spritespos.c \
 		ft_bonus.c \
 		ft_hand.c \
 		ft_hud.c \
