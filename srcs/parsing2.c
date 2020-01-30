@@ -95,8 +95,7 @@ void		ft_res(t_all *all, char *line)
 
 	i = 0;
 	ft_ifspace(line, &i);
-	i++;
-	all->info.res.x = ft_atoi(&line[i]);
+	all->info.res.x = ft_atoi(&line[++i]);
 	i++;
 	while (ft_isdigit(line[i]))
 		i++;
