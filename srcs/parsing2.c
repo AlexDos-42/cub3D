@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 20:31:28 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 20:34:29 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/30 16:42:14 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char		*ft_mur(t_all *all, char *line)
 	{
 		ft_printf(ERROR_MUR);
 		ft_exit(all);
-	}	
+	}
 	j = 0;
 	while (s[j])
 		free(s[j++]);
@@ -41,44 +41,45 @@ char		*ft_mur(t_all *all, char *line)
 	return (atext);
 }
 
-void ft_solcheck(t_all *qll,char *line)
+void		ft_solcheck(t_all *all, char *line, int i)
 {
+	int j;
+
 	j = ft_isdigit(line[i]) ? 1 : 0;
-	if (ft_atoi(line[i]) < 0 || ft_atoi(line[i]) > 255)
+	if (ft_atoi(&line[i]) < 0 || ft_atoi(&line[i]) > 255)
 		j--;
 	while (ft_isdigit(line[i]))
 		i++;
 	j += line[i] == ',' ? 1 : 0;
 	j += ft_isdigit(line[++i]) ? 1 : 0;
-	if (ft_atoi(line[i]) < 0 || ft_atoi(line[i]) > 255)
+	if (ft_atoi(&line[i]) < 0 || ft_atoi(&line[i]) > 255)
 		j--;
 	while (ft_isdigit(line[i]))
 		i++;
 	j += line[i] == ',' ? 1 : 0;
 	j += ft_isdigit(line[++i]) ? 1 : 0;
-	if (ft_atoi(line[i]) < 0 || ft_atoi(line[i]) > 255)
+	if (ft_atoi(&line[i]) < 0 || ft_atoi(&line[i]) > 255)
 		j--;
 	while (ft_isdigit(line[i]))
 		i++;
 	ft_ifspace(line, &i);
 	j -= line[i] != '\0' ? 1 : 0;
 	if (j != 5)
-	{
 		ft_printf(ERROR_COLOR);
+	if (j != 5)
 		ft_exit(all);
-	}
 }
 
 int			ft_sol(char *line, t_all *all)
 {
 	int				i;
 	unsigned int	color;
-	int				j;
 
 	i = 0;
 	ft_ifspace(line, &i);
 	i++;
 	ft_ifspace(line, &i);
+	ft_solcheck(all, line, i);
 	color = ft_atoi(&line[i]) * 256 * 256;
 	while (ft_isdigit(line[i]))
 		i++;
@@ -99,7 +100,7 @@ void		ft_res(t_all *all, char *line)
 	i++;
 	while (ft_isdigit(line[i]))
 		i++;
-	all->info.res.y = ft_atoi(&line[i]);
+	all->info.res.y = ft_atoi(&line[i++]);
 	if (all->info.res.x <= 0 || all->info.res.y <= 0)
 	{
 		ft_printf(ERROR_RES, all->info.res.x, all->info.res.y);

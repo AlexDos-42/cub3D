@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 20:08:44 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 20:08:47 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:35:28 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,13 @@ int			ft_push(int key, t_all *all)
 	else if (key == 14 || key == 124)
 		all->mvt.rot.y = 1;
 	if (key == 257)
-		all->cam.speed = 0.6;
+		all->cam.speed = 0.5;
+	if (key == 35)
+	{
+		all->mvt.diffsp = all->mvt.diffsp == 0 ? 1 : 0;
+		ft_textures(all);
+		ft_refresh(all);
+	}
 	ft_pushmsc(key, all);
 	ft_pushlife(key, all);
 	return (0);
@@ -97,6 +103,6 @@ int			ft_depush(int key, t_all *all)
 		ft_exit(all);
 	}
 	if (key == 257)
-		all->cam.speed = 0.333;
+		all->cam.speed = 0.15;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 20:15:02 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 20:17:06 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:19:31 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void		init_sprites(t_all *all)
 	int i;
 	int x;
 
-	ft_sort(all);
-	ft_sort_sp(all);
 	i = 0;
 	while (i < all->spr.nbsp)
 	{
@@ -93,5 +91,6 @@ void		ft_sprites(t_all *all)
 		}
 		y++;
 	}
-	init_sprites(all);
+	ft_sort(all);
+	ft_sort_sp(all);
 }

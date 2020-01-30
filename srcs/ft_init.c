@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:51:15 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 21:54:39 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/30 15:39:33 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void		initwindow(t_all *all)
 		ft_printf("Error\nmlx_init");
 		ft_exit(all);
 	}
+	ft_textures(all);
+	ft_sprites(all);
 	if (!(all->mlx.winptr = mlx_new_window(all->mlx.ptr,
 			all->info.res.x, all->info.res.y, "cub3D")))
 	{
@@ -52,7 +54,7 @@ void		ft_refresh(t_all *all)
 {
 	initmlx(all);
 	ft_reycasting(all);
-	ft_sprites(all);
+	init_sprites(all);
 	mlx_put_image_to_window(all->mlx.ptr,
 		all->mlx.winptr, all->mlx.imgptr, 0, 0);
 	load_textures(all);
@@ -66,7 +68,7 @@ void		ft_refresh(t_all *all)
 void		initall(t_all *all, char **argv)
 {
 	ft_memset(all, 0, sizeof(t_all));
-	all->cam.speed = 0.333;
+	all->cam.speed = 0.15;
 	all->cam.vitrot = 0.1;
 	ft_parsing(argv, all);
 	if (all->info.res.x > 2560)
@@ -78,6 +80,5 @@ void		initall(t_all *all, char **argv)
 	else if (all->info.res.y < 100)
 		all->info.res.y = 100;
 	initwindow(all);
-	ft_textures(all);
 	ft_refresh(all);
 }

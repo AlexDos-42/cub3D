@@ -6,13 +6,13 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 19:11:44 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 19:12:15 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/30 16:32:41 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/cub3D.h"
+#include "../include/cub3D.h"
 
-void	ft_checkones(t_all *all)
+void		ft_checkones(t_all *all)
 {
 	int x;
 	int y;
@@ -20,20 +20,25 @@ void	ft_checkones(t_all *all)
 	x = -1;
 	while (++x < all->info.maplen.x)
 	{
-		if (all->info.bufmap[x] != '1' || all->info.bufmap[x + (all->info.maplen.x * all->info.maplen.y) - all->info.maplen.x] != '1' )
+		if (all->info.bufmap[x] != '1' || all->info.bufmap[x +
+			(all->info.maplen.x * all->info.maplen.y)
+			- all->info.maplen.x] != '1')
 		{
-			ft_printf("Error map ; Only '1' on the edges of your map");
+			ft_printf("Error map\nOnly '1' on the edges of your map");
 			ft_exit(all);
 		}
 	}
-	x = 0;
-	y = 0;
-//	while (y < all->info.maplen.y)
-//	{
-//		if (all->info.bufmap[x] || all->info.bufmap[x][ft_strlen(all->info.bufmap[x]) - 1] != '1')
-//			ft_exit(all);
-//		y++;
-//	}
+	y = -1;
+	while (++y < all->info.maplen.y)
+	{
+		if (all->info.bufmap[(y * all->info.maplen.x)] != '1'
+			|| all->info.bufmap[(all->info.maplen.x +
+			y * all->info.maplen.x) - 1] != '1')
+		{
+			ft_printf("Error map\nOnly '1' on the edges of your map");
+			ft_exit(all);
+		}
+	}
 }
 
 void		posdepart(t_all *all, int x, int y, char dir)
@@ -53,8 +58,8 @@ void		posdepart(t_all *all, int x, int y, char dir)
 	all->cam.isit++;
 }
 
-void     ft_checkline(char *line, int j, t_all *all)
-{;
+void		ft_checkline(char *line, int j, t_all *all)
+{
 	int			i;
 	int			k;
 
@@ -62,7 +67,8 @@ void     ft_checkline(char *line, int j, t_all *all)
 	while (++i < all->info.maplen.x)
 	{
 		k = i + (j * all->info.maplen.x);
-		if (line[k] == 'N' || line[k] == 'S' || line[k] == 'W' || line[k] == 'E')
+		if (line[k] == 'N' || line[k] == 'S' ||
+				line[k] == 'W' || line[k] == 'E')
 			posdepart(all, i, j, line[k]);
 		else if (line[k] == '2')
 			all->spr.nbsp++;
@@ -74,7 +80,7 @@ void     ft_checkline(char *line, int j, t_all *all)
 	}
 }
 
-void	verify_map(t_all *all)
+void		verify_map(t_all *all)
 {
 	int		j;
 

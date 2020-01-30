@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 19:39:46 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 23:07:30 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/01/30 18:00:11 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 t_texture		ft_mettretexture(t_all *all)
 {
-	if (all->cam.rayDir.x > 0)
+	if (all->cam.raydir.x > 0)
 	{
-		if (all->algo.NSEO)
+		if (all->algo.nseo)
 		{
-			if (all->cam.rayDir.y < 0)
+			if (all->cam.raydir.y < 0)
 				return (all->texturen);
 			return (all->textures);
 		}
@@ -26,9 +26,9 @@ t_texture		ft_mettretexture(t_all *all)
 	}
 	else
 	{
-		if (all->algo.NSEO)
+		if (all->algo.nseo)
 		{
-			if (all->cam.rayDir.y < 0)
+			if (all->cam.raydir.y < 0)
 				return (all->texturen);
 			return (all->textures);
 		}
@@ -44,16 +44,16 @@ void			ft_drawall(t_all *all, int x)
 	t_texture	img;
 
 	img = ft_mettretexture(all);
-	if (all->algo.NSEO == 1)
-		wallx = all->cam.raypos.x + all->algo.pDist * all->cam.rayDir.x;
+	if (all->algo.nseo == 1)
+		wallx = all->cam.raypos.x + all->algo.pdist * all->cam.raydir.x;
 	else
-		wallx = all->cam.raypos.y + all->algo.pDist * all->cam.rayDir.y;
+		wallx = all->cam.raypos.y + all->algo.pdist * all->cam.raydir.y;
 	wallx -= floor(wallx);
 	texx = wallx * (double)img.w;
 	while (all->algo.drawstart < all->algo.drawend)
 	{
 		texy = (all->algo.drawstart - all->info.res.y / 2 +
-				all->algo.hauteurLigne / 2) * img.h / all->algo.hauteurLigne;
+				all->algo.hauteurligne / 2) * img.h / all->algo.hauteurligne;
 		all->mlx.get_data[x + (int)all->algo.drawstart
 			* (all->mlx.size_line / 4)] = img.data[texx + texy * img.w];
 		all->algo.drawstart++;
