@@ -69,6 +69,14 @@ void		initall(t_all *all, char **argv)
 	all->cam.speed = 0.333;
 	all->cam.vitrot = 0.1;
 	ft_parsing(argv, all);
+	if (all->info.res.x > 2560)
+		all->info.res.x = 2560;
+	else if (all->info.res.x < 100)
+		all->info.res.x = 100;
+	if (all->info.res.y > 1440)
+		all->info.res.y = 1440;
+	else if (all->info.res.y < 100)
+		all->info.res.y = 100;
 	initwindow(all);
 	ft_textures(all);
 	ft_refresh(all);
