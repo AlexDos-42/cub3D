@@ -28,12 +28,45 @@ char		*ft_mur(t_all *all, char *line)
 		ft_printf(ERROR_MALLOC, "str in ft_mur");
 		ft_exit(all);
 	}
+	if (s[2])
+	{
+		ft_printf(ERROR_RESO);
+		ft_exit(all);
+	}	
 	j = 0;
 	while (s[j])
 		free(s[j++]);
 	free(s[j]);
 	free(s);
 	return (atext);
+}
+
+void ft_solcheck(t_all *qll,char *line)
+{
+	j = ft_isdigit(line[i]) ? 1 : 0;
+	if (ft_atoi(line[i]) < 0 || ft_atoi(line[i]) > 255)
+		j--;
+	while (ft_isdigit(line[i]))
+		i++;
+	j += line[i] == ',' ? 1 : 0;
+	j += ft_isdigit(line[++i]) ? 1 : 0;
+	if (ft_atoi(line[i]) < 0 || ft_atoi(line[i]) > 255)
+		j--;
+	while (ft_isdigit(line[i]))
+		i++;
+	j += line[i] == ',' ? 1 : 0;
+	j += ft_isdigit(line[++i]) ? 1 : 0;
+	if (ft_atoi(line[i]) < 0 || ft_atoi(line[i]) > 255)
+		j--;
+	while (ft_isdigit(line[i]))
+		i++;
+	ft_ifspace(line, &i);
+	j -= line[i] != '\0' ? 1 : 0;
+	if (j != 5)
+	{
+		ft_printf(ERROR_COLOR);
+		ft_exit(all);
+	}
 }
 
 int			ft_sol(char *line, t_all *all)
@@ -47,20 +80,12 @@ int			ft_sol(char *line, t_all *all)
 	i++;
 	ft_ifspace(line, &i);
 	color = ft_atoi(&line[i]) * 256 * 256;
-	j = ft_isdigit(line[i]) ? 1 : 0;
 	while (ft_isdigit(line[i]))
 		i++;
 	color += ft_atoi(&line[++i]) * 256;
-	j += ft_isdigit(line[i]) ? 1 : 0;
 	while (ft_isdigit(line[i]))
 		i++;
 	color += ft_atoi(&line[++i]);
-	j += ft_isdigit(line[i]) ? 1 : 0;
-	if (j != 3)
-	{
-		ft_printf(ERROR_COLOR);
-		ft_exit(all);
-	}
 	return (color);
 }
 
