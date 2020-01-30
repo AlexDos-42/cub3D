@@ -30,7 +30,7 @@ char		*ft_mur(t_all *all, char *line)
 	}
 	if (s[2])
 	{
-		ft_printf(ERROR_RESO);
+		ft_printf(ERROR_MUR);
 		ft_exit(all);
 	}	
 	j = 0;
@@ -100,17 +100,17 @@ void		ft_res(t_all *all, char *line)
 	while (ft_isdigit(line[i]))
 		i++;
 	all->info.res.y = ft_atoi(&line[i]);
-	if (all->info.res.x == 0 || all->info.res.y == 0)
+	if (all->info.res.x <= 0 || all->info.res.y <= 0)
 	{
 		ft_printf(ERROR_RES, all->info.res.x, all->info.res.y);
 		ft_exit(all);
 	}
-	if (all->info.res.x > 2560)
-		all->info.res.x = 2560;
-	else if (all->info.res.x < 100)
-		all->info.res.x = 100;
-	if (all->info.res.y > 1440)
-		all->info.res.y = 1440;
-	else if (all->info.res.y < 100)
-		all->info.res.y = 100;
+	while (ft_isdigit(line[i]))
+		i++;
+	ft_ifspace(line, &i);
+	if (line[i])
+	{
+		ft_printf(ERROR_RESO);
+		ft_exit(all);
+	}
 }
