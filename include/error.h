@@ -15,6 +15,7 @@
 
 # define ERROR_PLAYER "Error\nNumbre of players on map : %d\n"
 # define ERROR_RES "Error\nRES GOES WRONG : x %d: y %d\n"
+# define ERROR_RESO "Error\nResolution isn't correct"
 # define ERROR_COLOR "Error\nCOLOR GOES WRONG\n"
 # define ERROR_TEXTURE "Error\nTEXTURE GOES WRONG\n"
 # define ERROR_FD "Error\nFD GOES WRONG\n"
