@@ -23,7 +23,7 @@ void	ft_cub(char *argv)
 		len = len - 4;
 	if ((ft_strncmp(argv + len, ".cub", 4)))
 	{
-		ft_printf("Invalide map file : file extention isn't .cub");
+		ft_printf("Error\nInvalide map file : file extention isn't .cub");
 		exit(0);
 	}
 }
