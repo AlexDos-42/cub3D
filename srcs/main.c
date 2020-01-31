@@ -38,7 +38,9 @@ int		ft_redcross(t_all *all)
 int		main(int argc, char **argv)
 {
 	t_all	all;
-
+	
+	if (argc == 3 && !ft_strcmp(argv[2], "--save"))
+		ft_bmpinit;
 	if (argc < 2 || argc > 3)
 	{
 		ft_printf(ERROR_ARGC, argc);
