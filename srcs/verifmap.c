@@ -88,6 +88,14 @@ void		verify_map(t_all *all)
 	while (++j < all->info.maplen.y)
 		ft_checkline(all->info.bufmap, j, all);
 	ft_checkones(all);
-	all->sprites = (t_sprites*)ft_calloc(sizeof(t_sprites), all->spr.nbsp);
-	all->spr.distwall = ft_calloc(sizeof(double*), all->info.res.x);
+	if (!(all->sprites = (t_sprites*)ft_calloc(sizeof(t_sprites), all->spr.nbsp)))
+	{
+		ft_printf(ERROR_MALLOC, "all->sprites");
+		ft_exit(all);
+	}
+	if (!(all->spr.distwall = ft_calloc(sizeof(double*), all->info.res.x)))
+	{
+		ft_printf(ERROR_MALLOC, "all->spr.distwall");
+		ft_exit(all);
+	}
 }
