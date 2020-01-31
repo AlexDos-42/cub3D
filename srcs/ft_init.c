@@ -23,7 +23,7 @@ void		initmlx(t_all *all)
 	if (!(all->mlx.get_data = (int *)mlx_get_data_addr(all->mlx.imgptr,
 			&all->mlx.bits_per_pixel, &all->mlx.size_line, &all->mlx.endian)))
 	{
-		ft_printf("mlx_get_data_addr");
+		ft_printf("Error\nmlx_get_data_addr");
 		ft_exit(all);
 	}
 }
