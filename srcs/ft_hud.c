@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../include/cub3d.h"
 
 t_mlx			resize_imagehud(t_all *all, int width, int height)
 {
