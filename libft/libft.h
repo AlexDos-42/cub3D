@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 12:51:23 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 22:48:51 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 19:16:39 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int						get_next_line(int fd, char **line);
 void					ft_strdel(char **str);
 char					*ft_suprspace(char *str);
 char					*ft_cjoin(char const *s1, char c, int f);
-int						ft_power(int nb, int power);
+float					ft_fpower(float nb, int power);
 
 /*
 ** ft_printf

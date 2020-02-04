@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:51:15 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/30 15:39:33 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 19:33:53 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		initmlx(t_all *all)
 	}
 }
 
-void		initwindow(t_all *all)
+void		initwindow(t_all *all, char **argv)
 {
 	if ((all->cam.isit != 1))
 	{
@@ -40,8 +40,15 @@ void		initwindow(t_all *all)
 		ft_printf("Error\nmlx_init");
 		ft_exit(all);
 	}
-	ft_textures(all);
 	ft_sprites(all);
+	ft_textures(all);
+	if (argv[2] && !ft_strncmp(argv[2], "--save", 10))
+		ft_bmpinit(all);
+	else if (argv[2])
+	{
+		ft_printf("Error\nyou're second argument isn't --save");
+		ft_exit(all);
+	}
 	if (!(all->mlx.winptr = mlx_new_window(all->mlx.ptr,
 			all->info.res.x, all->info.res.y, "cub3D")))
 	{
@@ -79,6 +86,6 @@ void		initall(t_all *all, char **argv)
 		all->info.res.y = 1440;
 	else if (all->info.res.y < 100)
 		all->info.res.y = 100;
-	initwindow(all);
+	initwindow(all, argv);
 	ft_refresh(all);
 }

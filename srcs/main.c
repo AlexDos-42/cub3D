@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:06:07 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/28 20:46:24 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:54:37 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,19 @@ int		ft_redcross(t_all *all)
 	return (0);
 }
 
+void	ft_bmpinit(t_all *all)
+{
+	initmlx(all);
+	ft_reycasting(all);
+	init_sprites(all);
+	ft_bmp(all);
+	ft_exit(all);
+}
+
 int		main(int argc, char **argv)
 {
 	t_all	all;
-	
-	if (argc == 3 && !ft_strcmp(argv[2], "--save"))
-		ft_bmpinit;
+
 	if (argc < 2 || argc > 3)
 	{
 		ft_printf(ERROR_ARGC, argc);

@@ -6,7 +6,7 @@
 #    By: alesanto <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/09 17:02:25 by alesanto          #+#    #+#              #
-#    Updated: 2020/01/29 21:14:40 by alesanto         ###   ########.fr        #
+#    Updated: 2020/02/04 18:02:09 by alesanto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,13 @@ SRC =		main.c \
 		ft_bonus.c \
 		ft_hand.c \
 		ft_hud.c \
+		ft_bmp.c \
 
 PATHSRCS = srcs
 
 HEADERS = ./include
 
-FLAGS = -Wall -Wextra -Werror  -g  #DEBUG
+FLAGS = -Wall -Wextra -Werror 
 
 SRCS = $(addprefix $(PATHSRCS)/,$(SRC))
 LIBS = -lmlx -framework OpenGL -framework AppKit\

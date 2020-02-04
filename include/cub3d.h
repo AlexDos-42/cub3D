@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 17:44:34 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/30 17:58:58 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 18:00:21 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@ typedef struct		s_dcoor
 	double			x;
 	double			y;
 }					t_dcoor;
+
+typedef struct		s_bmp
+{
+	int				size;
+	char			*img;
+	unsigned char	header[14];
+	unsigned char	info[40];
+	unsigned char	pad[3];
+	int				color;
+	int				fd;
+}					t_bmp;
 
 typedef struct		s_mlx
 {
@@ -164,7 +175,7 @@ typedef struct		s_all
 int					ft_redcross(t_all *all);
 int					main(int argc, char **argv);
 void				ft_cub(char *argv);
-
+void				ft_bmpinit(t_all *all);
 /*
 ** --FT_INIT--
 */
@@ -172,7 +183,7 @@ void				ft_cub(char *argv);
 void				initmlx(t_all *all);
 void				initall(t_all *all, char **argv);
 void				ft_refresh(t_all *all);
-void				initwindow(t_all *all);
+void				initwindow(t_all *all, char **argv);
 
 /*
 ** --PARSING--
@@ -208,6 +219,15 @@ void				ft_reycasting(t_all *all);
 void				ft_drawall(t_all *all, int x);
 t_texture			ft_mettretexture(t_all *all);
 void				ft_drawall(t_all *all, int x);
+
+/*
+** --FT_BMP--
+*/
+
+void				ft_bmp(t_all *all);
+void				ft_header(t_all *all, t_bmp *bmp);
+void				imgbmp(t_all *all, t_bmp *bmp);
+void				set_header(unsigned char *header, int param);
 
 /*
 ** --FT_VERIF_MAP--

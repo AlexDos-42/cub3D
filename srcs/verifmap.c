@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 19:11:44 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/30 16:32:41 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:55:12 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ void		verify_map(t_all *all)
 	while (++j < all->info.maplen.y)
 		ft_checkline(all->info.bufmap, j, all);
 	ft_checkones(all);
-	if (!(all->sprites = (t_sprites*)ft_calloc(sizeof(t_sprites), all->spr.nbsp)))
+	if (!(all->sprites =
+		(t_sprites*)ft_calloc(sizeof(t_sprites), all->spr.nbsp)))
 	{
 		ft_printf(ERROR_MALLOC, "all->sprites");
 		ft_exit(all);

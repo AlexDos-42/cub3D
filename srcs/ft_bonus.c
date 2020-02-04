@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:43:34 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 19:38:51 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:55:45 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_mlx		*new_image(t_all *all, int x_len, int y_len)
 		ft_printf("Error\nmlx_new_image in ft_bonus");
 		ft_exit(all);
 	}
-	img->get_data = (int *)mlx_get_data_addr(img->imgptr, &img->bits_per_pixel,
-				&img->size_line, &img->endian);
+	if (!(img->get_data = (int *)mlx_get_data_addr(img->imgptr,
+		&img->bits_per_pixel, &img->size_line, &img->endian)))
 	{
 		ft_printf("Error\nmlx_get_data_addr");
 		ft_exit(all);

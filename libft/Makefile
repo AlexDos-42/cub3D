@@ -47,7 +47,7 @@ SRCS = ft_atoi.c \
        ft_strdel.c \
        ft_suprspace.c \
        ft_cjoin.c \
-	   ft_power.c \
+	   ft_fpower.c \
        ft_printf/ft_utile.c \
        ft_printf/ft_printf.c \
        ft_printf/ft_parsing.c \
