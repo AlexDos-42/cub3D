@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:51:15 by alesanto          #+#    #+#             */
-/*   Updated: 2020/02/04 19:33:53 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 21:27:59 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void		initwindow(t_all *all, char **argv)
 void		ft_refresh(t_all *all)
 {
 	initmlx(all);
+	if (!(all->spr.distwall = ft_calloc(sizeof(double*), all->info.res.x)))
+	{
+		ft_printf(ERROR_MALLOC, "all->spr.distwall");
+		ft_exit(all);
+	}
 	ft_reycasting(all);
 	init_sprites(all);
 	mlx_put_image_to_window(all->mlx.ptr,

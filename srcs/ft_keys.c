@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 19:52:22 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 20:06:34 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 21:12:19 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void		ft_moverot(t_all *all)
 {
 	double	oldorix;
-	double	oldplanex;
 
 	if (all->mvt.rot.x)
 	{
@@ -24,7 +23,6 @@ void		ft_moverot(t_all *all)
 			- all->cam.ori.y * sin(-all->cam.vitrot);
 		all->cam.ori.y = oldorix * sin(-all->cam.vitrot) +
 			all->cam.ori.y * cos(-all->cam.vitrot);
-		oldplanex = all->algo.plane.x;
 		all->algo.plane.x = -0.66 * all->cam.ori.y;
 		all->algo.plane.y = 0.66 * all->cam.ori.x;
 	}
@@ -35,7 +33,6 @@ void		ft_moverot(t_all *all)
 			- all->cam.ori.y * sin(all->cam.vitrot);
 		all->cam.ori.y = oldorix * sin(all->cam.vitrot)
 			+ all->cam.ori.y * cos(all->cam.vitrot);
-		oldplanex = all->algo.plane.x;
 		all->algo.plane.x = -0.66 * all->cam.ori.y;
 		all->algo.plane.y = 0.66 * all->cam.ori.x;
 	}

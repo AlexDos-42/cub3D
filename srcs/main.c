@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/11 20:06:07 by alesanto          #+#    #+#             */
-/*   Updated: 2020/02/04 17:54:37 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 20:53:13 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ int		ft_redcross(t_all *all)
 void	ft_bmpinit(t_all *all)
 {
 	initmlx(all);
+	if (!(all->spr.distwall = ft_calloc(sizeof(double*), all->info.res.x)))
+	{
+		ft_printf(ERROR_MALLOC, "all->spr.distwall");
+		ft_exit(all);
+	}
 	ft_reycasting(all);
 	init_sprites(all);
 	ft_bmp(all);

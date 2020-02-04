@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:51:07 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/29 19:43:16 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 20:57:14 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,5 @@ void			ft_draw_hud(t_all *all)
 	}
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr,
 			all->hud.imgptr, -2, all->info.res.y * 0.63);
+	mlx_destroy_image(all->mlx.ptr, all->hud.imgptr);
 }

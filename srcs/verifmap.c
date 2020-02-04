@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 19:11:44 by alesanto          #+#    #+#             */
-/*   Updated: 2020/02/04 17:55:12 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 21:23:50 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,6 @@ void		verify_map(t_all *all)
 		(t_sprites*)ft_calloc(sizeof(t_sprites), all->spr.nbsp)))
 	{
 		ft_printf(ERROR_MALLOC, "all->sprites");
-		ft_exit(all);
-	}
-	if (!(all->spr.distwall = ft_calloc(sizeof(double*), all->info.res.x)))
-	{
-		ft_printf(ERROR_MALLOC, "all->spr.distwall");
 		ft_exit(all);
 	}
 }

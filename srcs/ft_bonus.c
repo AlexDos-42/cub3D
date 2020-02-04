@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:43:34 by alesanto          #+#    #+#             */
-/*   Updated: 2020/02/04 17:55:45 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 21:10:44 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void		vie_img(t_all *all)
 	}
 	mlx_put_image_to_window(all->mlx.ptr, all->mlx.winptr,
 			img->imgptr, all->info.res.x * 0.2, all->info.res.y * 0.92);
+	mlx_destroy_image(all->mlx.ptr, img->imgptr);
+	free(img);
 }
 
 void		draw_vie(t_all *all)

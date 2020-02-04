@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 13:39:55 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/30 18:00:43 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/04 21:25:43 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ void			ft_textures(t_all *all)
 	while (++i < all->spr.nbsp)
 	{
 		text = all->info.i;
-		if (all->mvt.diffsp == 1)
-		{
-			if (i % 2 == 1)
-				text = "./objet/KODOS.xpm";
-		}
+//		if (all->mvt.diffsp == 1)
+//		{
+//			if (i % 2 == 1)
+//				text = "./objet/KODOS.xpm";
+//		}
 		all->sprites[i].img = ft_texturespr(text, all);
 	}
 }
