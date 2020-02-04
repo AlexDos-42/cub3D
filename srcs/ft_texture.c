@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../include/cub3d.h"
 
 t_texture		ft_puttexture(char *texture_addr, t_all *all)
 {
