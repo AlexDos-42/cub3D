@@ -3,9 +3,10 @@ NO ./textures/nukeNORD.xpm
 SO ./textures/nukeSUD.xpm
 WE ./textures/nukeOuest.xpm
 EA ./textures/nukeEST.xpm
-S ./textures/burns.xpm
+S ./objet/KODOS.xpm
 F 101,154,182
 C 105,105,230
+
 1 1 1 1 1 1 1 1 1 1 1 1 
 1 0 2 1 0 0 0 0 0 0 0 1
 1 0 0 0 0 1 1 0 1 1 0 1
@@ -14,7 +15,7 @@ C 105,105,230
 1 0 1 1 0 2 2 0 0 0 0 1
 1 0 0 0 0 2 2 0 1 1 0 1
 1 1 2 1 0 0 0 0 1 0 0 1
-1 0 0 0 0 0 0 N 1 0 1 1
+1 0 0 0 N 0 0 0 1 0 1 1
 1 0 2 1 0 1 2 0 2 0 0 1
 1 0 0 1 0 1 0 0 0 0 0 1
 1 0 0 1 1 0 0 0 0 0 2 1

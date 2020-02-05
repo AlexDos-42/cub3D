@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 13:39:55 by alesanto          #+#    #+#             */
-/*   Updated: 2020/02/04 21:25:43 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/05 12:49:01 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_texture		ft_puttexture(char *texture_addr, t_all *all)
 	if (!(texture.ptr = mlx_xpm_file_to_image(all->mlx.ptr,
 		texture_addr, &texture.w, &texture.h)))
 	{
-		ft_printf("Error\nmlx_xpm_file_to_image");
+		ft_printf("Error\nThe texture path isn't correct");
 		ft_exit(all);
 	}
 	if (!(texture.data = (int *)mlx_get_data_addr(texture.ptr,
@@ -38,7 +38,7 @@ t_mlx			ft_texturespr(char *texture_addr, t_all *all)
 	if (!(texture.ptr = mlx_xpm_file_to_image(all->mlx.ptr,
 		texture_addr, &texture.w, &texture.h)))
 	{
-		ft_printf("Error\nmlx_xpm_file_to_image");
+		ft_printf("Error\nThe sprite texture path isn't correct");
 		ft_exit(all);
 	}
 	if (!(texture.get_data = (int *)mlx_get_data_addr(texture.ptr,
@@ -63,11 +63,6 @@ void			ft_textures(t_all *all)
 	while (++i < all->spr.nbsp)
 	{
 		text = all->info.i;
-//		if (all->mvt.diffsp == 1)
-//		{
-//			if (i % 2 == 1)
-//				text = "./objet/KODOS.xpm";
-//		}
 		all->sprites[i].img = ft_texturespr(text, all);
 	}
 }

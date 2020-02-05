@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 14:51:15 by alesanto          #+#    #+#             */
-/*   Updated: 2020/02/04 21:27:59 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/05 14:20:06 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,15 @@ void		initall(t_all *all, char **argv)
 	all->cam.speed = 0.15;
 	all->cam.vitrot = 0.1;
 	ft_parsing(argv, all);
+	if ((!(all->info.test[(int)'N'] == 1 && all->info.test[(int)'U']
+			== 1 && all->info.test[(int)'W'] == 1 && all->info.test[(int)'E']
+			== 1 && all->info.test[(int)'S'] == 1 && all->info.test[(int)('F')]
+			== 1 && all->info.test[(int)'C'] == 1)))
+	{
+		ft_printf(ERROR_MISS, all->cam.isit);
+		ft_exit(all);
+	}
+	verify_map(all);
 	if (all->info.res.x > 2560)
 		all->info.res.x = 2560;
 	else if (all->info.res.x < 100)

@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 20:15:02 by alesanto          #+#    #+#             */
-/*   Updated: 2020/02/04 21:24:03 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/05 13:01:07 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void		ft_free(t_all *all)
 	if (all->spr.distwall)
 		free(all->spr.distwall);
 }
-
 
 void		init_sprites(t_all *all)
 {

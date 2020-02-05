@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 20:17:25 by alesanto          #+#    #+#             */
-/*   Updated: 2020/02/04 20:24:37 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/05 14:01:34 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ void		ft_sort(t_all *all)
 	while (i < all->spr.nbsp)
 	{
 		all->sprites[i].ordre = i;
-		all->sprites[all->sprites[i].ordre].dist = ft_fpower(all->cam.pos.x - all->sprites[all->sprites[i].ordre].coor.x,
-				2) + ft_fpower(all->cam.pos.y - all->sprites[all->sprites[i].ordre].coor.y, 2);
+		all->sprites[all->sprites[i].ordre].dist = ft_fpower(all->cam.pos.x
+			- all->sprites[all->sprites[i].ordre].coor.x, 2) +
+			ft_fpower(all->cam.pos.y -
+			all->sprites[all->sprites[i].ordre].coor.y, 2);
 		i++;
 	}
 }
-#include <stdio.h>
+
 void		ft_sort_sp(t_all *all)
 {
 	int tmp;

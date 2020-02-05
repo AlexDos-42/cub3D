@@ -6,7 +6,7 @@
 /*   By: alesanto <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 20:28:56 by alesanto          #+#    #+#             */
-/*   Updated: 2020/01/30 17:43:52 by alesanto         ###   ########.fr       */
+/*   Updated: 2020/02/05 13:05:13 by alesanto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,6 @@ void		ft_parsing(char **argv, t_all *all)
 		ft_parsing_line(all, line, i);
 		ft_strdel(&line);
 	}
+	ft_strdel(&line);
 	close(fd);
-	verify_map(all);
 }
