@@ -20,10 +20,10 @@ make re && ./Cub3D maptest.cub --save
 
 ## Instructions
 
-* WASD to move
-* QE or Left/Right directional keys to rotate camera
-* M to play the soundtrack, K to stop it
-* I to eat a Donut and heal yourself
-* SHIFT to run
-* ESC to quit
+* ```WASD``` to move
+* ```QE``` or ```Left/Right``` directional keys to rotate camera
+* ```M``` to play the soundtrack, ```K``` to stop it
+* ```I``` to eat a Donut and heal yourself
+* ```SHIFT``` to run
+* ```ESC``` to quit
 
