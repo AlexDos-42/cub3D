@@ -1,4 +1,4 @@
-# Cub3D
+# Cub3D [![jaeskim's 42Project Score](https://badge42.herokuapp.com/api/project/alesanto/cub3d)](https://github.com/JaeSeoKim/badge42)
 
 This project is inspired by Wolfenstein 3D, which was the first FPS ever.
 It will enable you to explore ray-casting.
